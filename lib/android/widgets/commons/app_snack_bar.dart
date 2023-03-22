@@ -14,7 +14,7 @@ class AppSnackBar {
 
   SnackBar snack(BuildContext context) {
     return SnackBar(
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 3),
       backgroundColor: Theme.of(context).colorScheme.secondary,
       elevation: 1.0,
       //behavior: SnackBarBehavior.floating,

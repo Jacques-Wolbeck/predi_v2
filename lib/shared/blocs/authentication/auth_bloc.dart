@@ -8,10 +8,26 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final authController = AuthController.instance;
 
   AuthBloc() : super(UnAuthenticated()) {
+    on<RegisterNewPatientRequested>(_onRegisterNewPatient);
     //on<GoogleSignInRequested>(_onGoogleSignInResquested);
     on<EmailPasswordSignInRequested>(_onEmailPasswordSignInResquested);
     on<CheckLoginRequested>(_onCheckLoginResquested);
     on<SignOutRequested>(_onSignOutResquested);
+  }
+
+  void _onRegisterNewPatient(
+      RegisterNewPatientRequested event, Emitter<AuthState> emit) async {
+    emit(Loading());
+    try {
+      await authController.registerNewPatient(
+          event.patient, event.email, event.password);
+      emit(
+          const AuthError('Verifique a caixa de entrada do email cadastrado.'));
+      emit(UnAuthenticated());
+    } catch (error) {
+      emit(AuthError(error.toString()));
+      emit(UnAuthenticated());
+    }
   }
 
   /*void _onGoogleSignInResquested(
@@ -34,11 +50,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       EmailPasswordSignInRequested event, Emitter<AuthState> emit) async {
     emit(Loading());
     try {
-      final patient =
-          await authController.emailLogin(event.email, event.password);
+      final patient = await authController.loginWithEmailPassword(
+          event.email, event.password);
       if (patient != null) {
         emit(Authenticated(patient: patient));
       } else {
+        emit(const AuthError(
+            'Email não confirmado, cheque sua caixa de entrada.'));
         emit(UnAuthenticated());
       }
     } catch (error) {

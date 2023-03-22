@@ -93,6 +93,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     currentFocus: passwordFocus,
                   ),
                   LoginButton(formKey: _formkey, loginInfo: _loginInfo),
+                  TextButton(
+                      onPressed: () =>
+                          Navigator.pushNamed(context, '/register_screen'),
+                      child: const Text('Novo por aqui? Crie sua conta')),
                 ],
               ),
             )

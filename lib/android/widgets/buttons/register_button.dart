@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:predi_v2/shared/blocs/authentication/auth_event.dart';
+import 'package:predi_v2/shared/models/patients/patient_model.dart';
+import 'package:intl/intl.dart';
 
 import '../../../shared/blocs/authentication/auth_bloc.dart';
 
-class LoginButton extends StatelessWidget {
+class RegisterButton extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final Map<String, String> loginInfo;
+  final PatientModel patient;
 
-  const LoginButton({
-    super.key,
-    required this.formKey,
-    required this.loginInfo,
-  });
+  const RegisterButton(
+      {super.key,
+      required this.formKey,
+      required this.loginInfo,
+      required this.patient});
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +25,14 @@ class LoginButton extends StatelessWidget {
         onPressed: () {
           if (formKey.currentState!.validate()) {
             formKey.currentState!.save();
-            context.read<AuthBloc>().add(EmailPasswordSignInRequested(
-                email: loginInfo['email']!, password: loginInfo['password']!));
+            debugPrint(
+                '${loginInfo['email']} ---> ${loginInfo['password']} --> ${patient.name} --> ${patient.gender} --> ${DateFormat('dd-MM-yyyy').format(patient.birthDate!)}');
+            /*context.read<AuthBloc>().add(RegisterNewPatientRequested(
+                email: loginInfo['email']!,
+                password: loginInfo['password']!,
+                patient: patient));*/
+            //TODO ATIVAR O BLOC AQUI DEPOIS
+            Navigator.pop(context);
           }
         },
         style: ElevatedButton.styleFrom(
@@ -33,7 +42,7 @@ class LoginButton extends StatelessWidget {
             ),
             minimumSize: const Size(double.infinity, 45.0)),
         child: const Text(
-          "Entrar",
+          "Cadastrar",
         ),
       ),
     );

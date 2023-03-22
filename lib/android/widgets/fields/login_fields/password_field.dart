@@ -68,6 +68,7 @@ class _PasswordFieldState extends State<PasswordField> {
             },
           ),
           contentPadding: const EdgeInsets.all(16.0),
+          prefixIcon: const Icon(Icons.password_outlined),
         ),
       ),
     );

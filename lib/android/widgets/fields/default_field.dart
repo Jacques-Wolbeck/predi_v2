@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 
-class EmailField extends StatelessWidget {
+class DefaultField extends StatelessWidget {
+  final String labelText;
+  final IconData prefixIcon;
+  final TextInputType keyboardType;
   final Function(String?)? onSavedCallback;
   final FocusNode currentFocus;
   final FocusNode? nextFocus;
 
-  const EmailField(
+  const DefaultField(
       {super.key,
+      required this.labelText,
+      required this.prefixIcon,
       required this.onSavedCallback,
       required this.currentFocus,
+      this.keyboardType = TextInputType.name,
       this.nextFocus});
 
   @override
@@ -19,28 +25,22 @@ class EmailField extends StatelessWidget {
         onSaved: onSavedCallback,
         validator: (value) {
           if (value!.isEmpty) {
-            return 'Por favor digite um email';
-          }
-          if (!emailValid(value)) {
-            return 'Por favor digite um email válido.';
+            return 'Por favor digite um $labelText';
           }
           return null;
         },
         focusNode: currentFocus,
-        textInputAction: nextFocus == null
-            ? TextInputAction.done
-            : TextInputAction
-                .next, //checa se existe um prox form para passar o foco
+        textInputAction:
+            nextFocus == null ? TextInputAction.done : TextInputAction.next,
         onFieldSubmitted: (term) {
           if (nextFocus != null) {
             currentFocus.unfocus();
             FocusScope.of(context).requestFocus(nextFocus);
-            //aqui ele faz a ação de desativar o foco atual e dps passar pro prox
           }
         },
-        keyboardType: TextInputType.emailAddress,
+        keyboardType: keyboardType,
         decoration: InputDecoration(
-          labelText: 'Email',
+          labelText: labelText,
           filled: true,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0),
@@ -51,15 +51,9 @@ class EmailField extends StatelessWidget {
             borderSide: const BorderSide(width: .8),
           ),
           contentPadding: const EdgeInsets.all(16.0),
-          prefixIcon: const Icon(Icons.email_outlined),
+          prefixIcon: Icon(prefixIcon),
         ),
       ),
     );
-  }
-
-  bool emailValid(String email) {
-    final RegExp regex = RegExp(
-        r"^(([^<>()[\]\\.,;:\s@\']+(\.[^<>()[\]\\.,;:\s@\']+)*)|(\'.+\'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$");
-    return regex.hasMatch(email);
   }
 }
