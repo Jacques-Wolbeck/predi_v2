@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:predi_v2/android/widgets/buttons/login_button.dart';
+import 'package:predi_v2/android/widgets/commons/alerts/reset_password_alert.dart';
 
 import '../../shared/blocs/authentication/auth_bloc.dart';
 import '../../shared/blocs/authentication/auth_state.dart';
@@ -93,10 +94,34 @@ class _LoginScreenState extends State<LoginScreen> {
                     currentFocus: passwordFocus,
                   ),
                   LoginButton(formKey: _formkey, loginInfo: _loginInfo),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('Novo por aqui?'),
+                      TextButton(
+                        onPressed: () =>
+                            Navigator.pushNamed(context, '/register_screen'),
+                        child: const Text(
+                          'Crie sua conta',
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                   TextButton(
-                      onPressed: () =>
-                          Navigator.pushNamed(context, '/register_screen'),
-                      child: const Text('Novo por aqui? Crie sua conta')),
+                    onPressed: () => showDialog<void>(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) => const ResetPasswordAlert()),
+                    child: const Text(
+                      'Esqueceu a senha?',
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  )
                 ],
               ),
             )

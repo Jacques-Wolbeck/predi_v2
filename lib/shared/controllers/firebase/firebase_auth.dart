@@ -54,6 +54,14 @@ class AuthController {
     }
   }
 
+  Future<void> resetPassword(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (error) {
+      throw Exception(FirebaseErrors.getTranslatedErrorMessage(error.message!));
+    }
+  }
+
   Future<void> signOut() async {
     try {
       await _auth.signOut();

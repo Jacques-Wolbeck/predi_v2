@@ -32,6 +32,15 @@ class EmailPasswordSignInRequested extends AuthEvent {
 
 class GoogleSignInRequested extends AuthEvent {}
 
+class ResetPasswordRequested extends AuthEvent {
+  final String email;
+
+  const ResetPasswordRequested({required this.email});
+
+  @override
+  List<Object?> get props => [email];
+}
+
 class CheckLoginRequested extends AuthEvent {}
 
 class SignOutRequested extends AuthEvent {}

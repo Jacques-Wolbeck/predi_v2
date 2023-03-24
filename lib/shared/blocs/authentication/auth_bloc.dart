@@ -11,6 +11,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<RegisterNewPatientRequested>(_onRegisterNewPatient);
     //on<GoogleSignInRequested>(_onGoogleSignInResquested);
     on<EmailPasswordSignInRequested>(_onEmailPasswordSignInResquested);
+    on<ResetPasswordRequested>(_onResetPasswordRequested);
     on<CheckLoginRequested>(_onCheckLoginResquested);
     on<SignOutRequested>(_onSignOutResquested);
   }
@@ -75,6 +76,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } else {
         emit(UnAuthenticated());
       }
+    } catch (error) {
+      emit(AuthError(error.toString()));
+      emit(UnAuthenticated());
+    }
+  }
+
+  void _onResetPasswordRequested(
+      ResetPasswordRequested event, Emitter<AuthState> emit) async {
+    emit(Loading());
+    try {
+      //TODO TESTAR O FUNCIONAMENTO DISSO
+      //await authController.resetPassword(event.email);
+      emit(UnAuthenticated());
     } catch (error) {
       emit(AuthError(error.toString()));
       emit(UnAuthenticated());
