@@ -18,9 +18,10 @@ class HomeScreen extends StatelessWidget {
           children: [
             Text(patient.name!),
             Text(patient.gender!),
-            Text(patient.bmi!.toString()),
+            Text(patient.uid.toString()),
+            //Text(patient.bmi!.toString()),
             Text(patient.birthDate!.toString()),
-            Text(patient.height!.toString()),
+            //Text(patient.height!.toString()),
             ElevatedButton(
                 onPressed: () {
                   context.read<AuthBloc>().add(SignOutRequested());

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:predi_v2/android/widgets/buttons/google_login_button.dart';
 import 'package:predi_v2/android/widgets/buttons/login_button.dart';
 import 'package:predi_v2/android/widgets/commons/alerts/reset_password_alert.dart';
 
@@ -40,6 +41,10 @@ class _LoginScreenState extends State<LoginScreen> {
           if (state is Authenticated) {
             Navigator.pushReplacementNamed(context, '/home_screen',
                 arguments: DefaultScreenArguments(patient: state.patient));
+          }
+          if (state is FeedbackMessage) {
+            ScaffoldMessenger.of(context).showSnackBar(
+                AppSnackBar(message: state.message).snack(context));
           }
           if (state is AuthError) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -121,7 +126,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         decoration: TextDecoration.underline,
                       ),
                     ),
-                  )
+                  ),
+                  const GoogleLoginButton(),
                 ],
               ),
             )

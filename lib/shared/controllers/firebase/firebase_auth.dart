@@ -19,11 +19,48 @@ class AuthController {
           email: email, password: password);
       final User? firebaseUser = authResult.user;
       firebaseUser!.sendEmailVerification();
-      patient.uid = firebaseUser.uid;
-      //patient.photo = firebaseUser.photoURL; TODO ADICIONAR FOTO DE USUARIO NO BANCO DE DADOS DO FIREBASE
+      patient = patient.copyWith(
+          uid: firebaseUser.uid,
+          email: firebaseUser.email,
+          photo: firebaseUser.photoURL);
       PatientController.instance.createPatient(patient);
     } on FirebaseAuthException catch (error) {
-      throw Exception(FirebaseErrors.getTranslatedErrorMessage(error.message!));
+      throw FormattedException(
+          FirebaseErrors.getTranslatedErrorMessage(error.code));
+    }
+  }
+
+  Future<PatientModel?> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+      final credential = GoogleAuthProvider.credential(
+          idToken: googleAuth?.idToken, accessToken: googleAuth?.accessToken);
+      final UserCredential authResult =
+          await _auth.signInWithCredential(credential);
+
+      final User? firebaseUser = authResult.user;
+
+      //checks if exists an user with this google email
+      final patient =
+          await PatientController.instance.loadPatient(firebaseUser!);
+      if (patient == null) {
+        // Google email patients dont have birthdate, it will be necessary update later this attribute
+        final newPatient = PatientModel(
+          uid: firebaseUser.uid,
+          name: firebaseUser.displayName,
+          email: firebaseUser.email,
+          photo: firebaseUser.photoURL,
+        );
+        await PatientController.instance.createPatient(newPatient);
+        return newPatient;
+      } else {
+        return patient;
+      }
+    } on FirebaseAuthException catch (error) {
+      throw FormattedException(
+          FirebaseErrors.getTranslatedErrorMessage(error.code));
     }
   }
 
@@ -35,13 +72,22 @@ class AuthController {
       final User? firebaseUser = authResult.user;
 
       if (firebaseUser!.emailVerified) {
-        return await PatientController.instance.loadPatient(firebaseUser);
+        var patient =
+            await PatientController.instance.loadPatient(firebaseUser);
+        // This 'if' is necessary to update old patients in the database, they dont have email or photo.
+        if (patient!.photo == null || patient.email == null) {
+          patient = patient.copyWith(
+              email: firebaseUser.email, photo: firebaseUser.photoURL);
+          PatientController.instance.updatePatient(patient!);
+        }
+        return patient;
       } else {
         await _auth.signOut();
         return null;
       }
     } on FirebaseAuthException catch (error) {
-      throw Exception(FirebaseErrors.getTranslatedErrorMessage(error.message!));
+      throw FormattedException(
+          FirebaseErrors.getTranslatedErrorMessage(error.code));
     }
   }
 
@@ -58,7 +104,8 @@ class AuthController {
     try {
       await _auth.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (error) {
-      throw Exception(FirebaseErrors.getTranslatedErrorMessage(error.message!));
+      throw FormattedException(
+          FirebaseErrors.getTranslatedErrorMessage(error.code));
     }
   }
 
@@ -67,7 +114,8 @@ class AuthController {
       await _auth.signOut();
       await _googleSignIn.signOut();
     } on FirebaseAuthException catch (error) {
-      throw Exception(FirebaseErrors.getTranslatedErrorMessage(error.message!));
+      throw FormattedException(
+          FirebaseErrors.getTranslatedErrorMessage(error.code));
     }
   }
 }

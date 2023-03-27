@@ -9,7 +9,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   AuthBloc() : super(UnAuthenticated()) {
     on<RegisterNewPatientRequested>(_onRegisterNewPatient);
-    //on<GoogleSignInRequested>(_onGoogleSignInResquested);
+    on<GoogleSignInRequested>(_onGoogleSignInResquested);
     on<EmailPasswordSignInRequested>(_onEmailPasswordSignInResquested);
     on<ResetPasswordRequested>(_onResetPasswordRequested);
     on<CheckLoginRequested>(_onCheckLoginResquested);
@@ -22,8 +22,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       await authController.registerNewPatient(
           event.patient, event.email, event.password);
-      emit(
-          const AuthError('Verifique a caixa de entrada do email cadastrado.'));
+      emit(const FeedbackMessage(
+          'Verifique a caixa de entrada do email cadastrado.'));
       emit(UnAuthenticated());
     } catch (error) {
       emit(AuthError(error.toString()));
@@ -31,7 +31,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  /*void _onGoogleSignInResquested(
+  void _onGoogleSignInResquested(
       GoogleSignInRequested event, Emitter<AuthState> emit) async {
     emit(Loading());
     try {
@@ -45,7 +45,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthError(e.toString()));
       emit(UnAuthenticated());
     }
-  }*/
+  }
 
   void _onEmailPasswordSignInResquested(
       EmailPasswordSignInRequested event, Emitter<AuthState> emit) async {
@@ -86,8 +86,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       ResetPasswordRequested event, Emitter<AuthState> emit) async {
     emit(Loading());
     try {
-      //TODO TESTAR O FUNCIONAMENTO DISSO
-      //await authController.resetPassword(event.email);
+      await authController.resetPassword(event.email);
+      emit(const FeedbackMessage('Email de recupeção de senha enviado.'));
       emit(UnAuthenticated());
     } catch (error) {
       emit(AuthError(error.toString()));

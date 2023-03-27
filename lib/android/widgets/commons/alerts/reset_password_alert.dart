@@ -50,32 +50,18 @@ class _ResetPasswordAlertState extends State<ResetPasswordAlert> {
         borderRadius: BorderRadius.circular(8.0),
       ),
       actions: [
-        BlocListener<AuthBloc, AuthState>(
-          listener: (context, state) {
-            if (state is UnAuthenticated) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  const AppSnackBar(message: 'Email de recuperação enviado.')
-                      .snack(context));
-            }
-            if (state is AuthError) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  AppSnackBar(message: state.error, isError: true)
-                      .snack(context));
+        TextButton(
+          onPressed: () {
+            if (_formKey.currentState!.validate()) {
+              _formKey.currentState!.save();
+              context
+                  .read<AuthBloc>()
+                  .add(ResetPasswordRequested(email: email));
+              Navigator.pop(context);
             }
           },
-          child: TextButton(
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                _formKey.currentState!.save();
-                context
-                    .read<AuthBloc>()
-                    .add(ResetPasswordRequested(email: email));
-                Navigator.pop(context);
-              }
-            },
-            child: const Text(
-              'Enviar',
-            ),
+          child: const Text(
+            'Enviar',
           ),
         ),
         TextButton(

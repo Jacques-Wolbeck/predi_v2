@@ -20,6 +20,14 @@ class Authenticated extends AuthState {
 
 class UnAuthenticated extends AuthState {}
 
+class FeedbackMessage extends AuthState {
+  final String message;
+
+  const FeedbackMessage(this.message);
+  @override
+  List<Object?> get props => [message];
+}
+
 class AuthError extends AuthState {
   final String error;
 

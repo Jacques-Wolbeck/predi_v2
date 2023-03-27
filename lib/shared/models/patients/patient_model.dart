@@ -5,6 +5,7 @@ class PatientModel {
   String? name;
   String? email;
   String? gender;
+  String? photo;
   DateTime? birthDate;
   double? circumference;
   double? weight;
@@ -20,6 +21,7 @@ class PatientModel {
     this.name,
     this.email,
     this.gender,
+    this.photo,
     this.birthDate,
     this.bmi,
     this.cholesterol,
@@ -41,6 +43,7 @@ class PatientModel {
         name: patient['nome'],
         email: patient['email'],
         gender: patient['sexo'],
+        photo: patient['foto'],
         birthDate: patient['nascimento'],
         circumference: patient['circunferencia'],
         weight: patient['peso'],
@@ -58,6 +61,7 @@ class PatientModel {
     json.putIfAbsent('nome', () => name);
     json.putIfAbsent('email', () => email);
     json.putIfAbsent('sexo', () => gender);
+    json.putIfAbsent('foto', () => photo);
     json.putIfAbsent('nascimento', () => birthDate);
     json.putIfAbsent('circunferencia', () => circumference);
     json.putIfAbsent('peso', () => weight);
@@ -76,6 +80,7 @@ class PatientModel {
       String? name,
       String? email,
       String? gender,
+      String? photo,
       DateTime? birthDate,
       double? circumference,
       double? weight,

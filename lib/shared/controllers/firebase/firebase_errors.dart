@@ -26,3 +26,13 @@ class FirebaseErrors {
     }
   }
 }
+
+class FormattedException implements Exception {
+  final String message;
+  const FormattedException(this.message);
+
+  @override
+  String toString() {
+    return message;
+  }
+}

@@ -25,13 +25,12 @@ class RegisterButton extends StatelessWidget {
         onPressed: () {
           if (formKey.currentState!.validate()) {
             formKey.currentState!.save();
-            debugPrint(
-                '${loginInfo['email']} ---> ${loginInfo['password']} --> ${patient.name} --> ${patient.gender} --> ${DateFormat('dd-MM-yyyy').format(patient.birthDate!)}');
-            /*context.read<AuthBloc>().add(RegisterNewPatientRequested(
+            //debugPrint(
+            //'${loginInfo['email']} ---> ${loginInfo['password']} --> ${patient.name} --> ${patient.gender} --> ${DateFormat('dd-MM-yyyy').format(patient.birthDate!)}');
+            context.read<AuthBloc>().add(RegisterNewPatientRequested(
                 email: loginInfo['email']!,
                 password: loginInfo['password']!,
-                patient: patient));*/
-            //TODO ATIVAR O BLOC AQUI DEPOIS
+                patient: patient));
             Navigator.pop(context);
           }
         },
