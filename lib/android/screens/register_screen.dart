@@ -39,10 +39,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget _body() {
     return SafeArea(
       child: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formkey,
           child: Column(
             children: [
+              const Text(
+                'Informações de login',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               EmailField(
                 onSavedCallback: (value) => _loginInfo['email'] = value!,
                 currentFocus: emailFocus,
@@ -53,6 +58,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 currentFocus: passwordFocus,
                 nextFocus: nameFocus,
               ),
+              const Divider(
+                thickness: 3.0,
+              ),
+              const Text('Dados Pessoais',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
               DefaultField(
                 labelText: 'Nome',
                 prefixIcon: Icons.person_2_outlined,

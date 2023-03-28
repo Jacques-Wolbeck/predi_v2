@@ -82,12 +82,15 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _loginArea() {
     return SafeArea(
       child: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const AppTitle(),
             Form(
               key: _formkey,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   EmailField(
                     onSavedCallback: (value) => _loginInfo['email'] = value!,
@@ -99,6 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     currentFocus: passwordFocus,
                   ),
                   LoginButton(formKey: _formkey, loginInfo: _loginInfo),
+                  const GoogleLoginButton(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -127,7 +131,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  const GoogleLoginButton(),
                 ],
               ),
             )

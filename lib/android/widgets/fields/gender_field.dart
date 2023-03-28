@@ -20,7 +20,7 @@ class _GenderFieldState extends State<GenderField> {
         padding: const EdgeInsets.symmetric(vertical: 10.0),
         child: Column(
           children: [
-            const Text('Gênero'),
+            const Text('Gênero', style: TextStyle(fontWeight: FontWeight.bold)),
             RadioListTile(
               title: const Text('Masculino'),
               groupValue: _gender,
