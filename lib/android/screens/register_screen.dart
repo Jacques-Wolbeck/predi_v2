@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:predi_v2/android/widgets/buttons/register_button.dart';
-import 'package:predi_v2/android/widgets/fields/date_field.dart';
-import 'package:predi_v2/android/widgets/fields/gender_field.dart';
+import 'package:predi_v2/android/widgets/fields/personal_data_fields/date_field.dart';
+import 'package:predi_v2/android/widgets/fields/personal_data_fields/gender_field.dart';
 import 'package:predi_v2/android/widgets/fields/login_fields/email_field.dart';
 
 import '../../shared/models/patients/patient_model.dart';
@@ -30,6 +30,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 1.0,
         title: const Text('Cadastro'),
       ),
       body: _body(),

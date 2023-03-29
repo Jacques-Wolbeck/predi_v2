@@ -21,7 +21,7 @@ class MyMaterialApp extends StatelessWidget {
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.indigo,
-            brightness: Brightness.dark,
+            //brightness: Brightness.dark,
           ),
           textTheme: CustomTextTheme(),
         ),
