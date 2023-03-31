@@ -16,7 +16,7 @@ class RegisterNewPatientRequested extends AuthEvent {
   const RegisterNewPatientRequested(
       {required this.email, required this.password, required this.patient});
   @override
-  List<Object?> get props => [email, password];
+  List<Object?> get props => [email, password, patient];
 }
 
 class EmailPasswordSignInRequested extends AuthEvent {

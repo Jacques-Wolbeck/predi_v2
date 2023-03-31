@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:predi_v2/android/widgets/commons/alerts/simple_alert.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
 
 import '../../../shared/blocs/authentication/auth_bloc.dart';
 import '../../../shared/blocs/authentication/auth_event.dart';
+import '../commons/app_screen_args.dart';
 
 class HomeBottomSheet extends StatelessWidget {
   final PatientModel patient;
@@ -36,7 +38,8 @@ class HomeBottomSheet extends StatelessWidget {
                 context,
                 "Editar dados gerais",
                 Icons.settings,
-                () => null,
+                () => Navigator.pushNamed(context, '/personal_data_screen',
+                    arguments: DefaultScreenArguments(patient: patient)),
               ),
               const Divider(),
               _listTiles(
@@ -44,9 +47,23 @@ class HomeBottomSheet extends StatelessWidget {
                 "Sair",
                 Icons.exit_to_app,
                 () {
-                  context.read<AuthBloc>().add(SignOutRequested());
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, '/login_screen', (route) => false);
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (context) {
+                      return SimpleAlert(
+                        titleText: 'Deseja realmente sair?',
+                        contentText: '',
+                        button1Text: 'Sim',
+                        button2Text: 'Não',
+                        onPressed: () {
+                          context.read<AuthBloc>().add(SignOutRequested());
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, '/login_screen', (route) => false);
+                        },
+                      );
+                    },
+                  );
                 },
               ),
             ],

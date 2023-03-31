@@ -8,7 +8,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final authController = AuthController.instance;
 
   AuthBloc() : super(UnAuthenticated()) {
-    on<RegisterNewPatientRequested>(_onRegisterNewPatient);
+    on<RegisterNewPatientRequested>(_onRegisterNewPatientRequested);
     on<GoogleSignInRequested>(_onGoogleSignInResquested);
     on<EmailPasswordSignInRequested>(_onEmailPasswordSignInResquested);
     on<ResetPasswordRequested>(_onResetPasswordRequested);
@@ -16,7 +16,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignOutRequested>(_onSignOutResquested);
   }
 
-  void _onRegisterNewPatient(
+  void _onRegisterNewPatientRequested(
       RegisterNewPatientRequested event, Emitter<AuthState> emit) async {
     emit(Loading());
     try {

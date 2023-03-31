@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:predi_v2/android/widgets/bottom_sheets/home_bottom_sheet.dart';
+import 'package:predi_v2/android/widgets/tabs/home_tab_content.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
+
+import '../../shared/models/patients/enums/data_type_enum.dart';
 
 class HomeScreen extends StatefulWidget {
   final PatientModel patient;
@@ -54,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
             flex: 5,
             child: IconButton(
               onPressed: () => null,
-              icon: Icon(Icons.favorite_border),
+              icon: const Icon(Icons.favorite_border),
               iconSize: MediaQuery.of(context).size.height * .25,
             ),
           ),
@@ -72,95 +75,20 @@ class _HomeScreenState extends State<HomeScreen> {
             flex: 4,
             child: TabBarView(
               children: [
-                _tabContent(),
-                Center(child: Text('Medidas')),
-                Center(child: Text('Consultas'))
+                Center(
+                  child: HomeTabContent(
+                      patient: widget.patient, title: DataTypeEnum.rate),
+                ),
+                Center(
+                  child: HomeTabContent(
+                      patient: widget.patient, title: DataTypeEnum.measure),
+                ),
+                Center(child: Text(DataTypeEnum.appointment.value))
               ],
             ),
           )
         ],
       ),
-    );
-  }
-
-  Widget _tabContent() {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              margin:
-                  const EdgeInsets.symmetric(horizontal: 4.0, vertical: 16.0),
-              height: MediaQuery.of(context).size.height * .2,
-              width: MediaQuery.of(context).size.width * .3,
-              decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primary,
-                  borderRadius: BorderRadius.circular(8.0)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.opacity,
-                    size: 40.0,
-                  ),
-                  const Text('Hb1A1C'),
-                  widget.patient.glycatedHemoglobin == null
-                      ? const Text('0.00%')
-                      : Text('${widget.patient.glycatedHemoglobin}%'),
-                ],
-              ),
-            ),
-            Container(
-              margin:
-                  const EdgeInsets.symmetric(horizontal: 4.0, vertical: 16.0),
-              height: MediaQuery.of(context).size.height * .2,
-              width: MediaQuery.of(context).size.width * .3,
-              decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primary,
-                  borderRadius: BorderRadius.circular(8.0)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.opacity,
-                    size: 40.0,
-                  ),
-                  const Text('Jejum'),
-                  widget.patient.glycatedHemoglobin == null
-                      ? const Text('0.00 mg/dL')
-                      : Text('${widget.patient.fastingGlucose}mg/dL'),
-                ],
-              ),
-            ),
-            Container(
-              margin:
-                  const EdgeInsets.symmetric(horizontal: 4.0, vertical: 16.0),
-              height: MediaQuery.of(context).size.height * .2,
-              width: MediaQuery.of(context).size.width * .3,
-              decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primary,
-                  borderRadius: BorderRadius.circular(8.0)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.opacity,
-                    size: 40.0,
-                  ),
-                  const Text('Jejum'),
-                  widget.patient.glycatedHemoglobin == null
-                      ? const Text('0.00 mg/dL')
-                      : Text('${widget.patient.glucose75g}mg/dL'),
-                ],
-              ),
-            ),
-          ],
-        ),
-        ElevatedButton(
-            onPressed: () => null, child: const Text('Atualize suas taxas')),
-      ],
     );
   }
 }

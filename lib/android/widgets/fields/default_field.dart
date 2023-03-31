@@ -7,21 +7,25 @@ class DefaultField extends StatelessWidget {
   final Function(String?)? onSavedCallback;
   final FocusNode currentFocus;
   final FocusNode? nextFocus;
+  final String? initialValue;
 
-  const DefaultField(
-      {super.key,
-      required this.labelText,
-      required this.prefixIcon,
-      required this.onSavedCallback,
-      required this.currentFocus,
-      this.keyboardType = TextInputType.name,
-      this.nextFocus});
+  const DefaultField({
+    super.key,
+    required this.labelText,
+    required this.prefixIcon,
+    required this.onSavedCallback,
+    required this.currentFocus,
+    this.initialValue,
+    this.keyboardType = TextInputType.name,
+    this.nextFocus,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: TextFormField(
+        initialValue: initialValue ?? '',
         onSaved: onSavedCallback,
         validator: (value) {
           if (value!.isEmpty) {

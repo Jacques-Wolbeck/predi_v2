@@ -11,6 +11,8 @@ import '../widgets/fields/login_fields/password_field.dart';
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
+  //TODO adicionar um field para pegar a altura do paciente
+
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }

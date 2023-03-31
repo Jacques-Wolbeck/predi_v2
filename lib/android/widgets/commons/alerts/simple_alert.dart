@@ -22,16 +22,12 @@ class SimpleAlert extends StatelessWidget {
       title: Text(
         titleText,
         textAlign: TextAlign.center,
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-        ),
+        style: const TextStyle(),
       ),
       content: Text(
         contentText,
         textAlign: TextAlign.center,
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-        ),
+        style: const TextStyle(),
       ),
       shape: RoundedRectangleBorder(
         side: const BorderSide(width: 1.0),
