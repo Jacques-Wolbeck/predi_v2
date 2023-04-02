@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:predi_v2/android/widgets/bottom_sheets/home_bottom_sheet.dart';
 import 'package:predi_v2/android/widgets/tabs/home_tab_content.dart';
+import 'package:predi_v2/shared/blocs/patient/patient_state.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
 
+import '../../shared/blocs/patient/patient_bloc.dart';
 import '../../shared/models/patients/enums/data_type_enum.dart';
+import '../widgets/commons/app_snack_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   final PatientModel patient;
@@ -13,6 +17,7 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
+//TODO after update the patient data for second time, the snack bar is triggered twice
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
@@ -42,7 +47,20 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-        body: _body(),
+        body: BlocListener<PatientBloc, PatientState>(
+          listener: (context, state) {
+            if (state is Updated) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  AppSnackBar(message: state.message).snack(context));
+            }
+            if (state is PatientError) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  AppSnackBar(message: state.error, isError: true)
+                      .snack(context));
+            }
+          },
+          child: _body(),
+        ),
       ),
     );
   }

@@ -38,7 +38,7 @@ class HomeBottomSheet extends StatelessWidget {
                 context,
                 "Editar dados gerais",
                 Icons.settings,
-                () => Navigator.pushNamed(context, '/personal_data_screen',
+                () => Navigator.pushNamed(context, '/edit_personal_data_screen',
                     arguments: DefaultScreenArguments(patient: patient)),
               ),
               const Divider(),

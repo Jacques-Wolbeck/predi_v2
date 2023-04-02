@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
 
 import '../../widgets/buttons/update_buttons/personal_data_button.dart';
 import '../../widgets/fields/default_field.dart';
 import '../../widgets/fields/personal_data_fields/date_field.dart';
 
-class PersonalDataScreen extends StatefulWidget {
+class EditPersonalDataScreen extends StatefulWidget {
   final PatientModel patient;
-  const PersonalDataScreen({super.key, required this.patient});
+  const EditPersonalDataScreen({super.key, required this.patient});
 
   @override
-  State<PersonalDataScreen> createState() => _PersonalDataScreenState();
+  State<EditPersonalDataScreen> createState() => _EditPersonalDataScreenState();
 }
 
-class _PersonalDataScreenState extends State<PersonalDataScreen> {
+class _EditPersonalDataScreenState extends State<EditPersonalDataScreen> {
   final _formkey = GlobalKey<FormState>();
 
   final nameFocus = FocusNode();

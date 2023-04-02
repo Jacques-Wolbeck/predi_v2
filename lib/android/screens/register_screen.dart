@@ -25,6 +25,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final emailFocus = FocusNode();
   final passwordFocus = FocusNode();
   final nameFocus = FocusNode();
+  final heightFocus = FocusNode();
   final birthdateFocus = FocusNode();
   final genderFocus = FocusNode();
 
@@ -71,7 +72,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 prefixIcon: Icons.person_2_outlined,
                 onSavedCallback: (value) => patient.name = value,
                 currentFocus: nameFocus,
+                nextFocus: heightFocus,
+              ),
+              DefaultField(
+                labelText: 'Altura',
+                prefixIcon: Icons.height,
+                onSavedCallback: (value) =>
+                    patient.height = double.parse(value!),
+                currentFocus: heightFocus,
                 nextFocus: birthdateFocus,
+                keyboardType: TextInputType.number,
               ),
               DateField(
                   onSavedCallback: (value) => patient.birthDate = value,

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:predi_v2/shared/blocs/authentication/auth_event.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
-import 'package:intl/intl.dart';
 
 import '../../../shared/blocs/authentication/auth_bloc.dart';
 

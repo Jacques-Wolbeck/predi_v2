@@ -39,8 +39,14 @@ class _LoginScreenState extends State<LoginScreen> {
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is Authenticated) {
-            Navigator.pushReplacementNamed(context, '/home_screen',
-                arguments: DefaultScreenArguments(patient: state.patient));
+            if (state.patient.birthDate == null) {
+              Navigator.pushReplacementNamed(
+                  context, '/complete_personal_data_screen',
+                  arguments: DefaultScreenArguments(patient: state.patient));
+            } else {
+              Navigator.pushReplacementNamed(context, '/home_screen',
+                  arguments: DefaultScreenArguments(patient: state.patient));
+            }
           }
           if (state is FeedbackMessage) {
             ScaffoldMessenger.of(context).showSnackBar(

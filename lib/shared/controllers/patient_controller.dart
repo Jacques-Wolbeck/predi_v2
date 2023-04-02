@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
 
+import 'firebase/firebase_errors.dart';
+
 class PatientController {
   PatientController._init();
   static final PatientController instance = PatientController._init();
@@ -13,7 +15,8 @@ class PatientController {
       final doc = _patientReference.doc(patient.uid);
       await doc.set(patient.toJSON());
     } catch (error) {
-      throw Exception("Patient create error: ${error.toString()}");
+      throw const FormattedException(
+          'Erro ao criar o paciente, tente novamente');
     }
   }
 
@@ -22,7 +25,8 @@ class PatientController {
       final doc = _patientReference.doc(patient.uid);
       await doc.update(patient.toJSON());
     } catch (error) {
-      throw Exception("Patient update error: ${error.toString()}");
+      throw const FormattedException(
+          'Erro ao atualizar o paciente, tente novamente');
     }
   }
 
@@ -31,7 +35,8 @@ class PatientController {
       final doc = _patientReference.doc(patient.uid);
       await doc.delete();
     } catch (error) {
-      throw Exception("Patient delete error: ${error.toString()}");
+      throw const FormattedException(
+          'Erro ao deletar o paciente, tente novamente');
     }
   }
 
