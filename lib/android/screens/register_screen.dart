@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:predi_v2/android/widgets/buttons/register_button.dart';
-import 'package:predi_v2/android/widgets/fields/date_field.dart';
-import 'package:predi_v2/android/widgets/fields/gender_field.dart';
+import 'package:predi_v2/android/widgets/fields/personal_data_fields/date_field.dart';
+import 'package:predi_v2/android/widgets/fields/personal_data_fields/gender_field.dart';
 import 'package:predi_v2/android/widgets/fields/login_fields/email_field.dart';
 
 import '../../shared/models/patients/patient_model.dart';
@@ -10,6 +10,8 @@ import '../widgets/fields/login_fields/password_field.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
+
+  //TODO adicionar um field para pegar a altura do paciente
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -23,6 +25,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final emailFocus = FocusNode();
   final passwordFocus = FocusNode();
   final nameFocus = FocusNode();
+  final heightFocus = FocusNode();
   final birthdateFocus = FocusNode();
   final genderFocus = FocusNode();
 
@@ -30,6 +33,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 1.0,
         title: const Text('Cadastro'),
       ),
       body: _body(),
@@ -68,7 +72,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 prefixIcon: Icons.person_2_outlined,
                 onSavedCallback: (value) => patient.name = value,
                 currentFocus: nameFocus,
+                nextFocus: heightFocus,
+              ),
+              DefaultField(
+                labelText: 'Altura',
+                prefixIcon: Icons.height,
+                onSavedCallback: (value) =>
+                    patient.height = double.parse(value!),
+                currentFocus: heightFocus,
                 nextFocus: birthdateFocus,
+                keyboardType: TextInputType.number,
               ),
               DateField(
                   onSavedCallback: (value) => patient.birthDate = value,

@@ -4,17 +4,32 @@ import 'package:intl/intl.dart';
 class DateField extends StatefulWidget {
   final Function(DateTime?) onSavedCallback;
   final FocusNode currentFocus;
+  final DateTime? initialValue;
 
   const DateField(
-      {super.key, required this.onSavedCallback, required this.currentFocus});
+      {super.key,
+      required this.onSavedCallback,
+      required this.currentFocus,
+      this.initialValue});
 
   @override
   State<DateField> createState() => _DateFieldState();
 }
 
 class _DateFieldState extends State<DateField> {
-  final _dateController = TextEditingController();
-  DateTime? _pickedDate = DateTime.now();
+  late TextEditingController _dateController;
+  late DateTime? _pickedDate;
+
+  @override
+  void initState() {
+    _dateController = TextEditingController(
+        text: widget.initialValue == null
+            ? ''
+            : DateFormat('dd-MM-yyyy').format(widget.initialValue!));
+    _pickedDate = widget.initialValue ?? DateTime.now();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -5,9 +5,6 @@ import 'package:predi_v2/shared/blocs/authentication/auth_event.dart';
 
 import 'package:predi_v2/android/widgets/fields/login_fields/email_field.dart';
 
-import '../../../../shared/blocs/authentication/auth_state.dart';
-import '../app_snack_bar.dart';
-
 class ResetPasswordAlert extends StatefulWidget {
   const ResetPasswordAlert({super.key});
 

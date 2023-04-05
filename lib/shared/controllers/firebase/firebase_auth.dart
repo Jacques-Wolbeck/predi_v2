@@ -12,6 +12,8 @@ class AuthController {
   final _googleSignIn = GoogleSignIn();
   final _auth = FirebaseAuth.instance;
 
+  //Todo o login com gmail, nao pega genero e nem altura, data de nascimento
+
   Future<void> registerNewPatient(
       PatientModel patient, String email, String password) async {
     try {
