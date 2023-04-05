@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
 
 class SimpleAlert extends StatelessWidget {
-  final String titleText;
-  final String contentText;
-  final String button1Text;
+  final String title;
+  final String content;
+  final String? button1Text;
   final String button2Text;
   final Function()? onPressed;
 
   const SimpleAlert({
     super.key,
-    required this.titleText,
-    required this.contentText,
-    required this.button1Text,
+    required this.title,
+    required this.content,
+    this.button1Text,
     required this.button2Text,
-    required this.onPressed,
+    this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(
-        titleText,
+        title,
         textAlign: TextAlign.center,
         style: const TextStyle(),
       ),
       content: Text(
-        contentText,
+        content,
         textAlign: TextAlign.center,
         style: const TextStyle(),
       ),
@@ -34,13 +34,15 @@ class SimpleAlert extends StatelessWidget {
         borderRadius: BorderRadius.circular(8.0),
       ),
       actions: [
-        TextButton(
-          onPressed: onPressed,
-          child: Text(
-            button1Text,
-            style: const TextStyle(),
-          ),
-        ),
+        button1Text == null
+            ? const SizedBox.shrink()
+            : TextButton(
+                onPressed: onPressed,
+                child: Text(
+                  button1Text!,
+                  style: const TextStyle(),
+                ),
+              ),
         TextButton(
           onPressed: () => Navigator.pop(context),
           child: Text(

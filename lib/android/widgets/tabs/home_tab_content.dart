@@ -29,8 +29,9 @@ class HomeTabContent extends StatelessWidget {
               )
             : Row(
                 children: [
-                  _content(context, Icons.straighten, DataTypeEnum.weight),
-                  _content(context, Icons.straighten, DataTypeEnum.bmi),
+                  _content(context, Icons.monitor_weight_outlined,
+                      DataTypeEnum.weight),
+                  _content(context, Icons.scale, DataTypeEnum.bmi),
                   _content(
                       context, Icons.straighten, DataTypeEnum.circumference)
                 ],

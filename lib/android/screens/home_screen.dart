@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:predi_v2/android/widgets/bottom_sheets/home_bottom_sheet.dart';
+import 'package:predi_v2/android/widgets/commons/alerts/simple_alert.dart';
+import 'package:predi_v2/android/widgets/commons/app_report_information.dart';
 import 'package:predi_v2/android/widgets/tabs/home_tab_content.dart';
 import 'package:predi_v2/shared/blocs/patient/patient_state.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
@@ -28,8 +30,21 @@ class _HomeScreenState extends State<HomeScreen> {
           elevation: 1.0,
           centerTitle: true,
           title: const Text('PreDi'),
-          leading:
-              IconButton(icon: const Icon(Icons.info), onPressed: () => null),
+          leading: IconButton(
+              icon: const Icon(Icons.info),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (context) {
+                      return const SimpleAlert(
+                        title: 'Informativo',
+                        content:
+                            'Pressione o coração para obter um pré diagnóstico gerado a partir das suas taxas informadas.',
+                        button2Text: 'Voltar',
+                      );
+                    });
+              }),
           actions: [
             IconButton(
               onPressed: () => showModalBottomSheet(
@@ -73,10 +88,8 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Expanded(
             flex: 5,
-            child: IconButton(
-              onPressed: () => null,
-              icon: const Icon(Icons.favorite_border),
-              iconSize: MediaQuery.of(context).size.height * .25,
+            child: AppReportInformation(
+              patient: widget.patient,
             ),
           ),
           const PreferredSize(

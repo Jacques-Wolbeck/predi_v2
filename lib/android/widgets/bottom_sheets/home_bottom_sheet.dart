@@ -52,8 +52,8 @@ class HomeBottomSheet extends StatelessWidget {
                     barrierDismissible: false,
                     builder: (context) {
                       return SimpleAlert(
-                        titleText: 'Deseja realmente sair?',
-                        contentText: '',
+                        title: 'Deseja realmente sair?',
+                        content: '',
                         button1Text: 'Sim',
                         button2Text: 'Não',
                         onPressed: () {
