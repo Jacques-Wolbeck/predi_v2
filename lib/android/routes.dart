@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:predi_v2/android/screens/home_screen.dart';
 import 'package:predi_v2/android/screens/login_screen.dart';
+import 'package:predi_v2/android/screens/rate_screen.dart';
 import 'package:predi_v2/android/screens/register_screen.dart';
 import 'package:predi_v2/android/screens/update_data_screens/complete_personal_data_screen.dart';
 import 'package:predi_v2/android/screens/update_data_screens/edit_personal_data_screen.dart';
@@ -27,6 +28,13 @@ Route onGenerateRoute(RouteSettings settings) {
       final args = settings.arguments as DefaultScreenArguments;
       return CustomPageRoute(
           child: CompletePersonalDataScreen(
+            patient: args.patient,
+          ),
+          settings: settings);
+    case '/rate_screen':
+      final args = settings.arguments as DefaultScreenArguments;
+      return CustomPageRoute(
+          child: RateScreen(
             patient: args.patient,
           ),
           settings: settings);

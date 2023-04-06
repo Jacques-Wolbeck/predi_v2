@@ -8,7 +8,7 @@ import 'package:predi_v2/shared/blocs/patient/patient_state.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
 
 import '../../shared/blocs/patient/patient_bloc.dart';
-import '../../shared/models/patients/enums/data_type_enum.dart';
+import '../../shared/models/enums/data_type_enum.dart';
 import '../widgets/commons/app_snack_bar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -108,11 +108,11 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Center(
                   child: HomeTabContent(
-                      patient: widget.patient, title: DataTypeEnum.rate),
+                      patient: widget.patient, dataType: DataTypeEnum.rate),
                 ),
                 Center(
                   child: HomeTabContent(
-                      patient: widget.patient, title: DataTypeEnum.measure),
+                      patient: widget.patient, dataType: DataTypeEnum.measure),
                 ),
                 Center(child: Text(DataTypeEnum.appointment.value))
               ],

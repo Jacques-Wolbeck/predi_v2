@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:predi_v2/shared/models/patients/enums/data_type_enum.dart';
+import 'package:predi_v2/shared/models/enums/data_type_enum.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
+
+import '../commons/app_screen_args.dart';
 
 class HomeTabContent extends StatelessWidget {
   final PatientModel patient;
-  final DataTypeEnum title;
+  final DataTypeEnum dataType;
 
   const HomeTabContent({
     super.key,
     required this.patient,
-    required this.title,
+    required this.dataType,
   });
 
   @override
@@ -17,7 +19,7 @@ class HomeTabContent extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        title == DataTypeEnum.rate
+        dataType == DataTypeEnum.rate
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -37,7 +39,13 @@ class HomeTabContent extends StatelessWidget {
                 ],
               ),
         ElevatedButton(
-            onPressed: () => null, child: Text('Atualize suas ${title.value}')),
+            onPressed: () {
+              if (dataType == DataTypeEnum.rate) {
+                Navigator.pushNamed(context, '/rate_screen',
+                    arguments: DefaultScreenArguments(patient: patient));
+              }
+            },
+            child: Text('Atualize suas ${dataType.value}')),
       ],
     );
   }

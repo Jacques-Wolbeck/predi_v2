@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:predi_v2/android/widgets/commons/alerts/simple_alert.dart';
-import 'package:predi_v2/shared/models/patients/enums/patient_status_enum.dart';
+import 'package:predi_v2/shared/models/enums/patient_status_enum.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
 
 class AppReportInformation extends StatelessWidget {
