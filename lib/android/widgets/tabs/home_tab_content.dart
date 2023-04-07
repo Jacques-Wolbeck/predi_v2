@@ -45,7 +45,7 @@ class HomeTabContent extends StatelessWidget {
                     arguments: DefaultScreenArguments(patient: patient));
               }
             },
-            child: Text('Atualize suas ${dataType.value}')),
+            child: Text('Atualize suas ${dataType.value1}')),
       ],
     );
   }
@@ -67,7 +67,7 @@ class HomeTabContent extends StatelessWidget {
             icon,
             size: 40.0,
           ),
-          Text(dataType.value),
+          Text(dataType.value1),
           _getText(dataType),
         ],
       ),

@@ -13,7 +13,7 @@ class FirebaseDb {
   CollectionReference _getRef(PatientModel patient, DataTypeEnum dataType) {
     return _dataReference
         .doc(patient.uid)
-        .collection(dataType.value.toLowerCase());
+        .collection(dataType.value1.toLowerCase());
   }
 
   Future<void> create(PatientModel patient, DataTypeEnum dataType, data) async {
@@ -22,7 +22,7 @@ class FirebaseDb {
       data.uid = docReference.doc().id;
       docReference.doc(data.uid).set(data.toJson());
     } catch (error) {
-      throw FormattedException('Erro ao criar uma nova ${dataType.value}.');
+      throw FormattedException('Erro ao criar uma nova ${dataType.value1}.');
     }
   }
 
@@ -31,7 +31,7 @@ class FirebaseDb {
       final docReference = _getRef(patient, dataType).doc(data.uid);
       await docReference.update(data.toJson());
     } catch (error) {
-      throw FormattedException('Erro ao atualizar a ${dataType.value}.');
+      throw FormattedException('Erro ao atualizar a ${dataType.value1}.');
     }
   }
 
@@ -43,7 +43,7 @@ class FirebaseDb {
         await docReference.delete();
       }
     } catch (error) {
-      throw FormattedException('Erro ao deleter a(s) ${dataType.value}.');
+      throw FormattedException('Erro ao deleter a(s) ${dataType.value1}.');
     }
   }
 
