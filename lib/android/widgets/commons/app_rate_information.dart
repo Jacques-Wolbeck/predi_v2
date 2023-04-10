@@ -30,9 +30,9 @@ class _AppRateInformationState extends State<AppRateInformation>
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
-          Text("Informações sobre as taxas"),
+          Icon(Icons.info_outline),
           SizedBox(width: 8.0),
-          Icon(Icons.arrow_forward)
+          Text("Informações sobre as taxas"),
         ],
       ),
       onTap: () {

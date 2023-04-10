@@ -1,8 +1,10 @@
-import 'package:draw_graph/draw_graph.dart';
-import 'package:draw_graph/models/feature.dart';
 import 'package:flutter/material.dart';
+import 'package:predi_v2/android/widgets/buttons/update_buttons/rate_button.dart';
+import 'package:predi_v2/android/widgets/commons/app_data_builder.dart';
+import 'package:predi_v2/android/widgets/commons/app_line_chart.dart';
 import 'package:predi_v2/android/widgets/commons/app_rate_information.dart';
 import 'package:predi_v2/android/widgets/fields/rate_field.dart';
+
 import 'package:predi_v2/shared/models/enums/data_type_enum.dart';
 
 import '../../shared/models/patients/patient_model.dart';
@@ -16,6 +18,19 @@ class RateScreen extends StatefulWidget {
 }
 
 class _RateScreenState extends State<RateScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final glycatedFocus = FocusNode();
+  final fastingFocus = FocusNode();
+  final glucose75Focus = FocusNode();
+
+  @override
+  void initState() {
+    glycatedFocus.addListener(() => setState(() {}));
+    fastingFocus.addListener(() => setState(() {}));
+    glucose75Focus.addListener(() => setState(() {}));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -26,12 +41,39 @@ class _RateScreenState extends State<RateScreen> {
           title: const Text('Taxas'),
         ),
         body: _body(),
-        bottomNavigationBar: TabBar(
-          tabs: [
-            Text(DataTypeEnum.glycatedHemoglobin.value1),
-            Text(DataTypeEnum.fastingGlucose.value1),
-            Text(DataTypeEnum.glucose75g.value1),
-          ],
+        bottomNavigationBar: Material(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(16.0),
+            topRight: Radius.circular(16.0),
+          ),
+          color: Theme.of(context).colorScheme.secondaryContainer,
+          child: TabBar(
+            labelPadding: const EdgeInsets.all(4.0),
+            indicatorWeight: 2.0,
+            tabs: [
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.show_chart),
+                  Text(DataTypeEnum.glycatedHemoglobin.primaryTitle)
+                ],
+              ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.show_chart),
+                  Text(DataTypeEnum.fastingGlucose.primaryTitle),
+                ],
+              ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.show_chart),
+                  Text(DataTypeEnum.glucose75g.primaryTitle),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -39,68 +81,123 @@ class _RateScreenState extends State<RateScreen> {
 
   Widget _body() {
     return SafeArea(
-      child: TabBarView(
+      child: Container(
+        margin: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Form(
+              key: _formKey,
+              child: Row(
+                children: [
+                  _rateTextForm(
+                      DataTypeEnum.glycatedHemoglobin,
+                      '4.0',
+                      glycatedFocus,
+                      fastingFocus,
+                      (value) => widget.patient.glycatedHemoglobin =
+                          double.parse(value!)),
+                  const SizedBox(width: 4.0),
+                  _rateTextForm(
+                      DataTypeEnum.fastingGlucose,
+                      '90.0',
+                      fastingFocus,
+                      glucose75Focus,
+                      (value) =>
+                          widget.patient.fastingGlucose = double.parse(value!)),
+                  const SizedBox(width: 4.0),
+                  _rateTextForm(
+                      DataTypeEnum.glucose75g,
+                      '90.0',
+                      glucose75Focus,
+                      null,
+                      (value) =>
+                          widget.patient.glucose75g = double.parse(value!)),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                RateButton(formKey: _formKey, patient: widget.patient),
+                ElevatedButton(
+                    onPressed: () => null, child: const Text('Detalhes'))
+              ],
+            ),
+            const SizedBox(height: 16.0),
+            const AppRateInformation(),
+            const Divider(),
+            Expanded(
+              child: TabBarView(
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  AppDataBuilder(
+                      patient: widget.patient,
+                      dataTypeToLoad: DataTypeEnum.rate,
+                      dataType: DataTypeEnum.glycatedHemoglobin,
+                      child: _tabViewContent),
+                  AppDataBuilder(
+                      patient: widget.patient,
+                      dataTypeToLoad: DataTypeEnum.rate,
+                      dataType: DataTypeEnum.fastingGlucose,
+                      child: _tabViewContent),
+                  AppDataBuilder(
+                      patient: widget.patient,
+                      dataTypeToLoad: DataTypeEnum.rate,
+                      dataType: DataTypeEnum.glucose75g,
+                      child: _tabViewContent)
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _rateTextForm(
+      DataTypeEnum dataType,
+      String hintText,
+      FocusNode currentFocus,
+      FocusNode? nextFocus,
+      Function(String?) onSavedCallback) {
+    return Expanded(
+      child: Column(
         children: [
-          _tabViewContent(DataTypeEnum.glycatedHemoglobin,
-              widget.patient.glycatedHemoglobin!, '4.4'),
-          _tabViewContent(DataTypeEnum.fastingGlucose,
-              widget.patient.fastingGlucose, '80.0'),
-          _tabViewContent(
-              DataTypeEnum.glucose75g, widget.patient.glucose75g, '80.0'),
+          Text(
+            dataType.primaryTitle,
+            style: TextStyle(
+                color: currentFocus.hasFocus
+                    ? Theme.of(context).colorScheme.primary
+                    : Colors.black),
+          ),
+          RateField(
+            onSavedCallback: onSavedCallback,
+            dataType: dataType,
+            hintText: hintText,
+            currentFocus: currentFocus,
+            nextFocus: nextFocus,
+          ),
+          Text(
+            dataType.measurementUnit!,
+            style: TextStyle(
+                color: currentFocus.hasFocus
+                    ? Theme.of(context).colorScheme.primary
+                    : Colors.black),
+          )
         ],
       ),
     );
   }
 
-  Widget _tabViewContent(
-      DataTypeEnum dataType, double? currentValue, String hintText) {
-    currentValue = currentValue ?? 0.00;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const SizedBox(height: 16.0),
-        dataType != DataTypeEnum.glycatedHemoglobin
-            ? Text('${dataType.value2} atual: ${currentValue.toString()} mg/dL')
-            : Text('${dataType.value2} atual: ${currentValue.toString()} %'),
-        RateField(
-          onSavedCallback: (value) => debugPrint('Apertou'),
-          dataType: dataType,
-          hintText: hintText,
-        ),
-        const SizedBox(height: 16.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ElevatedButton(
-                onPressed: () => null, child: const Text('Atualizar')),
-            ElevatedButton(onPressed: () => null, child: const Text('Detalhes'))
-          ],
-        ),
-        const SizedBox(height: 16.0),
-        const AppRateInformation(),
-        const Divider(),
-        Expanded(
-          child: LineGraph(
-            features: features,
-            size: Size(420, 450),
-            labelX: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6'],
-            labelY: ['25%', '45%', '65%', '75%', '85%', '100%'],
-            showDescription: true,
-            graphColor: Colors.black87,
-          ),
-        ),
-        SizedBox(
-          height: 8.0,
-        )
-      ],
+  Widget _tabViewContent(List dataList, DataTypeEnum dataType) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: AppLineChart(
+        dataList: dataList,
+        dataType: dataType,
+      ),
     );
   }
-
-  final List<Feature> features = [
-    Feature(
-      title: "Flutter",
-      color: Colors.blue,
-      data: [0.3, 0.6, 0.8, 0.9, 1, 1.2],
-    )
-  ];
 }

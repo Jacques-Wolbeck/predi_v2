@@ -114,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: HomeTabContent(
                       patient: widget.patient, dataType: DataTypeEnum.measure),
                 ),
-                Center(child: Text(DataTypeEnum.appointment.value1))
+                Center(child: Text(DataTypeEnum.appointment.primaryTitle))
               ],
             ),
           )

@@ -24,18 +24,23 @@ class HomeTabContent extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _content(
-                      context, Icons.opacity, DataTypeEnum.glycatedHemoglobin),
-                  _content(context, Icons.opacity, DataTypeEnum.fastingGlucose),
-                  _content(context, Icons.opacity, DataTypeEnum.glucose75g)
+                      context,
+                      Icons.opacity,
+                      DataTypeEnum.glycatedHemoglobin,
+                      patient.glycatedHemoglobin),
+                  _content(context, Icons.opacity, DataTypeEnum.fastingGlucose,
+                      patient.fastingGlucose),
+                  _content(context, Icons.opacity, DataTypeEnum.glucose75g,
+                      patient.glucose75g)
                 ],
               )
             : Row(
                 children: [
                   _content(context, Icons.monitor_weight_outlined,
-                      DataTypeEnum.weight),
-                  _content(context, Icons.scale, DataTypeEnum.bmi),
-                  _content(
-                      context, Icons.straighten, DataTypeEnum.circumference)
+                      DataTypeEnum.weight, patient.weight),
+                  _content(context, Icons.scale, DataTypeEnum.bmi, patient.bmi),
+                  _content(context, Icons.straighten,
+                      DataTypeEnum.circumference, patient.circumference)
                 ],
               ),
         ElevatedButton(
@@ -45,12 +50,13 @@ class HomeTabContent extends StatelessWidget {
                     arguments: DefaultScreenArguments(patient: patient));
               }
             },
-            child: Text('Atualize suas ${dataType.value1}')),
+            child: Text('Atualize suas ${dataType.primaryTitle}')),
       ],
     );
   }
 
-  Widget _content(BuildContext context, IconData icon, DataTypeEnum dataType) {
+  Widget _content(BuildContext context, IconData icon, DataTypeEnum dataType,
+      double? value) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 16.0),
       padding: const EdgeInsets.all(8.0),
@@ -67,42 +73,28 @@ class HomeTabContent extends StatelessWidget {
             icon,
             size: 40.0,
           ),
-          Text(dataType.value1),
-          _getText(dataType),
+          Text(dataType.primaryTitle),
+          _getText(dataType, value),
         ],
       ),
     );
   }
 
-  Widget _getText(DataTypeEnum dataType) {
-    switch (dataType) {
-      case DataTypeEnum.glycatedHemoglobin:
-        return patient.glycatedHemoglobin == null
-            ? const Text('0.00 %')
-            : Text('${patient.glycatedHemoglobin}%');
-      case DataTypeEnum.fastingGlucose:
-        return patient.fastingGlucose == null
-            ? const Text('0.00 mg/dL')
-            : Text('${patient.fastingGlucose} mg/dL');
-      case DataTypeEnum.glucose75g:
-        return patient.glucose75g == null
-            ? const Text('0.00 mg/dL')
-            : Text('${patient.glucose75g} mg/dL');
-      case DataTypeEnum.weight:
-        return patient.weight == null
-            ? const Text('0.00 kg')
-            : Text('${patient.weight} kg');
-      case DataTypeEnum.bmi:
-        return patient.weight == null
-            ? Text('0.00 kg/m${String.fromCharCode(178)}')
-            : Text(
-                '${patient.bmi!.toStringAsPrecision(4)} kg/m${String.fromCharCode(178)}');
-      case DataTypeEnum.circumference:
-        return patient.circumference == null
-            ? const Text('0.00 cm')
-            : Text('${patient.circumference} cm');
-      default:
-        return const Text('-');
+  Widget _getText(DataTypeEnum dataType, double? value) {
+    if (value != null) {
+      if (dataType == DataTypeEnum.bmi) {
+        return Text(
+            '${value.toStringAsPrecision(4)} ${dataType.measurementUnit}${String.fromCharCode(178)}');
+      } else {
+        return Text('$value ${dataType.measurementUnit}');
+      }
+    } else {
+      if (dataType == DataTypeEnum.bmi) {
+        return Text(
+            '0.00 ${dataType.measurementUnit}${String.fromCharCode(178)}');
+      } else {
+        return Text('0.00 ${dataType.measurementUnit}');
+      }
     }
   }
 }
