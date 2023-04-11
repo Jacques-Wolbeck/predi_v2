@@ -41,7 +41,14 @@ class AppDataBuilder extends StatelessWidget {
             );
           }
           if (state is DataLoaded) {
-            return child(state.dataList, dataType);
+            var dataList = state.dataList;
+            if (dataList.isEmpty) {
+              return Center(
+                  child: Text(
+                      'Não há dados de ${dataType.secondaryTitle.toLowerCase()}'));
+            } else {
+              return child(state.dataList, dataType);
+            }
           }
           return const Center(child: Text('Erro desconhecido'));
         }),

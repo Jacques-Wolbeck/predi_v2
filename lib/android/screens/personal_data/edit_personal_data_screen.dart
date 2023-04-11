@@ -63,7 +63,7 @@ class _EditPersonalDataScreenState extends State<EditPersonalDataScreen> {
                   onSavedCallback: (value) => widget.patient.birthDate = value,
                   currentFocus: birthdateFocus,
                   initialValue: widget.patient.birthDate),
-              PersonalDataButton(formKey: _formkey, patient: widget.patient)
+              PersonalDataButton(formKey: _formkey)
             ],
           ),
         ),

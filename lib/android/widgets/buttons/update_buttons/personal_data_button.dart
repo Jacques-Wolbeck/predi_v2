@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:predi_v2/android/widgets/commons/app_screen_args.dart';
 
+import '../../../../shared/blocs/authentication/auth_bloc.dart';
+import '../../../../shared/blocs/authentication/auth_state.dart';
 import '../../../../shared/blocs/patient/patient_bloc.dart';
 import '../../../../shared/blocs/patient/patient_event.dart';
-import '../../../../shared/models/patients/patient_model.dart';
 
 class PersonalDataButton extends StatelessWidget {
   final GlobalKey<FormState> formKey;
-  final PatientModel patient;
 
-  const PersonalDataButton(
-      {super.key, required this.formKey, required this.patient});
+  const PersonalDataButton({super.key, required this.formKey});
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +20,16 @@ class PersonalDataButton extends StatelessWidget {
         onPressed: () {
           if (formKey.currentState!.validate()) {
             formKey.currentState!.save();
-            patient.gender ??= 'Masculino';
-            context
-                .read<PatientBloc>()
-                .add(UpdatePatientRequested(patient: patient));
-            Navigator.pushNamedAndRemoveUntil(
-                context, '/home_screen', (route) => false,
-                arguments: DefaultScreenArguments(patient: patient));
+            final state = context.read<AuthBloc>().state;
+            if (state is Authenticated) {
+              state.patient.gender ??= 'Masculino';
+              context
+                  .read<PatientBloc>()
+                  .add(UpdatePatientRequested(patient: state.patient));
+              Navigator.pushNamedAndRemoveUntil(
+                  context, '/home_screen', (route) => false,
+                  arguments: DefaultScreenArguments(patient: state.patient));
+            }
           }
         },
         style: ElevatedButton.styleFrom(

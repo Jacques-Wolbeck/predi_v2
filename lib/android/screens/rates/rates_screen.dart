@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:predi_v2/android/widgets/buttons/update_buttons/rate_button.dart';
+import 'package:predi_v2/android/widgets/buttons/update_buttons/rates_button.dart';
 import 'package:predi_v2/android/widgets/commons/app_data_builder.dart';
 import 'package:predi_v2/android/widgets/commons/app_line_chart.dart';
 import 'package:predi_v2/android/widgets/commons/app_rate_information.dart';
+import 'package:predi_v2/android/widgets/commons/app_screen_args.dart';
 import 'package:predi_v2/android/widgets/fields/rate_field.dart';
 
 import 'package:predi_v2/shared/models/enums/data_type_enum.dart';
 
-import '../../shared/models/patients/patient_model.dart';
+import '../../../shared/models/patients/patient_model.dart';
 
-class RateScreen extends StatefulWidget {
+class RatesScreen extends StatefulWidget {
   final PatientModel patient;
-  const RateScreen({super.key, required this.patient});
+  const RatesScreen({super.key, required this.patient});
 
   @override
-  State<RateScreen> createState() => _RateScreenState();
+  State<RatesScreen> createState() => _RatesScreenState();
 }
 
-class _RateScreenState extends State<RateScreen> {
+class _RatesScreenState extends State<RatesScreen> {
   final _formKey = GlobalKey<FormState>();
   final glycatedFocus = FocusNode();
   final fastingFocus = FocusNode();
@@ -120,9 +121,17 @@ class _RateScreenState extends State<RateScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                RateButton(formKey: _formKey, patient: widget.patient),
+                RatesButton(formKey: _formKey),
                 ElevatedButton(
-                    onPressed: () => null, child: const Text('Detalhes'))
+                    onPressed: () {
+                      glycatedFocus.unfocus();
+                      glucose75Focus.unfocus();
+                      fastingFocus.unfocus();
+                      Navigator.pushNamed(context, '/rates_list_screen',
+                          arguments:
+                              DefaultScreenArguments(patient: widget.patient));
+                    },
+                    child: const Text('Detalhes'))
               ],
             ),
             const SizedBox(height: 16.0),

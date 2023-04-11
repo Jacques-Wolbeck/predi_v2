@@ -46,7 +46,7 @@ class HomeTabContent extends StatelessWidget {
         ElevatedButton(
             onPressed: () {
               if (dataType == DataTypeEnum.rate) {
-                Navigator.pushNamed(context, '/rate_screen',
+                Navigator.pushNamed(context, '/rates_screen',
                     arguments: DefaultScreenArguments(patient: patient));
               }
             },

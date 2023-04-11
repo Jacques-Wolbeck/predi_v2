@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:predi_v2/shared/models/enums/data_type_enum.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
 
@@ -17,10 +18,11 @@ class FirebaseDb {
   }
 
   Future<void> create(PatientModel patient, DataTypeEnum dataType, data) async {
+    debugPrint('cHEGOUUUU NO CREATE');
     try {
       final docReference = _getRef(patient, dataType);
       data.uid = docReference.doc().id;
-      docReference.doc(data.uid).set(data.toJson());
+      docReference.doc(data.uid).set(data.toJSON());
     } catch (error) {
       throw FormattedException(
           'Erro ao criar uma nova ${dataType.primaryTitle}.');
@@ -30,7 +32,7 @@ class FirebaseDb {
   Future<void> update(PatientModel patient, DataTypeEnum dataType, data) async {
     try {
       final docReference = _getRef(patient, dataType).doc(data.uid);
-      await docReference.update(data.toJson());
+      await docReference.update(data.toJSON());
     } catch (error) {
       throw FormattedException('Erro ao atualizar a ${dataType.primaryTitle}.');
     }
@@ -55,7 +57,7 @@ class FirebaseDb {
         .snapshots()
         .asyncMap((snapshot) => snapshot.docs
             .map(
-              (DocumentSnapshot doc) => _getFromJson(doc, dataType),
+              (DocumentSnapshot doc) => _getFromJSON(doc, dataType),
             )
             .toList());
   }
@@ -71,7 +73,7 @@ class FirebaseDb {
     }
   }
 
-  _getFromJson(DocumentSnapshot doc, DataTypeEnum dataType) {
+  _getFromJSON(DocumentSnapshot doc, DataTypeEnum dataType) {
     switch (dataType) {
       case (DataTypeEnum.rate):
         return RateModel.fromJSON(doc.data() as Map<String, dynamic>);

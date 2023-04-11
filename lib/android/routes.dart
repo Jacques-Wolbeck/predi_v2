@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:predi_v2/android/screens/home_screen.dart';
 import 'package:predi_v2/android/screens/login_screen.dart';
-import 'package:predi_v2/android/screens/rate_screen.dart';
+import 'package:predi_v2/android/screens/rates/rates_list_screen.dart';
+import 'package:predi_v2/android/screens/rates/rates_screen.dart';
 import 'package:predi_v2/android/screens/register_screen.dart';
-import 'package:predi_v2/android/screens/update_data_screens/complete_personal_data_screen.dart';
-import 'package:predi_v2/android/screens/update_data_screens/edit_personal_data_screen.dart';
+import 'package:predi_v2/android/screens/personal_data/complete_personal_data_screen.dart';
+import 'package:predi_v2/android/screens/personal_data/edit_personal_data_screen.dart';
 import 'package:predi_v2/android/widgets/commons/app_screen_args.dart';
 import 'package:predi_v2/android/widgets/custom/custom_page_route.dart';
 
@@ -31,10 +32,17 @@ Route onGenerateRoute(RouteSettings settings) {
             patient: args.patient,
           ),
           settings: settings);
-    case '/rate_screen':
+    case '/rates_screen':
       final args = settings.arguments as DefaultScreenArguments;
       return CustomPageRoute(
-          child: RateScreen(
+          child: RatesScreen(
+            patient: args.patient,
+          ),
+          settings: settings);
+    case '/rates_list_screen':
+      final args = settings.arguments as DefaultScreenArguments;
+      return CustomPageRoute(
+          child: RatesListScreen(
             patient: args.patient,
           ),
           settings: settings);

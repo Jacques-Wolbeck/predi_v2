@@ -55,7 +55,12 @@ class AppLineChart extends StatelessWidget {
             dotData: FlDotData(
               show: true,
             ),
-            belowBarData: BarAreaData(show: true),
+            belowBarData: BarAreaData(
+                show: true,
+                color: Theme.of(context)
+                    .colorScheme
+                    .primaryContainer
+                    .withAlpha(150)),
           )
         ],
       ),
@@ -73,7 +78,7 @@ class AppLineChart extends StatelessWidget {
       }
     }).toList();
 
-    return barData.sublist(barData.length - 5);
+    return barData.sublist(barData.length < 5 ? 0 : barData.length - 5);
   }
 
   double _getValue(data) {

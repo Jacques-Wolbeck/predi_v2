@@ -20,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 //TODO after update the patient data for second time, the snack bar is triggered twice
+//TODO Patient informations is not updating on this screen after, the user add new values
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
