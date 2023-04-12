@@ -57,7 +57,7 @@ class _CompletePersonalDataScreenState
                   currentFocus: birthdateFocus),
               GenderField(
                   onSaveCallback: (value) => widget.patient.gender = value),
-              PersonalDataButton(formKey: _formkey, patient: widget.patient)
+              PersonalDataButton(formKey: _formkey)
             ],
           ),
         ),

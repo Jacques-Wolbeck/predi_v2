@@ -16,7 +16,7 @@ class PatientController {
       await doc.set(patient.toJSON());
     } catch (error) {
       throw const FormattedException(
-          'Erro ao criar o paciente, tente novamente');
+          'Erro ao criar o paciente, tente novamente.');
     }
   }
 
@@ -26,7 +26,7 @@ class PatientController {
       await doc.update(patient.toJSON());
     } catch (error) {
       throw const FormattedException(
-          'Erro ao atualizar o paciente, tente novamente');
+          'Erro ao atualizar o paciente, tente novamente.');
     }
   }
 
@@ -36,7 +36,7 @@ class PatientController {
       await doc.delete();
     } catch (error) {
       throw const FormattedException(
-          'Erro ao deletar o paciente, tente novamente');
+          'Erro ao deletar o paciente, tente novamente.');
     }
   }
 

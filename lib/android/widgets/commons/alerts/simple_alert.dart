@@ -40,14 +40,14 @@ class SimpleAlert extends StatelessWidget {
                 onPressed: onPressed,
                 child: Text(
                   button1Text!,
-                  style: const TextStyle(),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
         TextButton(
           onPressed: () => Navigator.pop(context),
           child: Text(
             button2Text,
-            style: const TextStyle(),
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
       ],

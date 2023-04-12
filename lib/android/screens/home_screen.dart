@@ -8,7 +8,7 @@ import 'package:predi_v2/shared/blocs/patient/patient_state.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
 
 import '../../shared/blocs/patient/patient_bloc.dart';
-import '../../shared/models/patients/enums/data_type_enum.dart';
+import '../../shared/models/enums/data_type_enum.dart';
 import '../widgets/commons/app_snack_bar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 //TODO after update the patient data for second time, the snack bar is triggered twice
+//TODO Patient informations is not updating on this screen after, the user add new values
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
           centerTitle: true,
           title: const Text('PreDi'),
           leading: IconButton(
-              icon: const Icon(Icons.info),
+              icon: const Icon(Icons.info_outline),
               onPressed: () {
                 showDialog(
                     context: context,
@@ -108,13 +109,13 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Center(
                   child: HomeTabContent(
-                      patient: widget.patient, title: DataTypeEnum.rate),
+                      patient: widget.patient, dataType: DataTypeEnum.rate),
                 ),
                 Center(
                   child: HomeTabContent(
-                      patient: widget.patient, title: DataTypeEnum.measure),
+                      patient: widget.patient, dataType: DataTypeEnum.measure),
                 ),
-                Center(child: Text(DataTypeEnum.appointment.value))
+                Center(child: Text(DataTypeEnum.appointment.primaryTitle))
               ],
             ),
           )

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:predi_v2/shared/models/patients/enums/data_type_enum.dart';
+import 'package:predi_v2/shared/models/enums/data_type_enum.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
+
+import '../commons/app_screen_args.dart';
 
 class HomeTabContent extends StatelessWidget {
   final PatientModel patient;
-  final DataTypeEnum title;
+  final DataTypeEnum dataType;
 
   const HomeTabContent({
     super.key,
     required this.patient,
-    required this.title,
+    required this.dataType,
   });
 
   @override
@@ -17,32 +19,44 @@ class HomeTabContent extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        title == DataTypeEnum.rate
+        dataType == DataTypeEnum.rate
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _content(
-                      context, Icons.opacity, DataTypeEnum.glycatedHemoglobin),
-                  _content(context, Icons.opacity, DataTypeEnum.fastingGlucose),
-                  _content(context, Icons.opacity, DataTypeEnum.glucose75g)
+                      context,
+                      Icons.opacity,
+                      DataTypeEnum.glycatedHemoglobin,
+                      patient.glycatedHemoglobin),
+                  _content(context, Icons.opacity, DataTypeEnum.fastingGlucose,
+                      patient.fastingGlucose),
+                  _content(context, Icons.opacity, DataTypeEnum.glucose75g,
+                      patient.glucose75g)
                 ],
               )
             : Row(
                 children: [
                   _content(context, Icons.monitor_weight_outlined,
-                      DataTypeEnum.weight),
-                  _content(context, Icons.scale, DataTypeEnum.bmi),
-                  _content(
-                      context, Icons.straighten, DataTypeEnum.circumference)
+                      DataTypeEnum.weight, patient.weight),
+                  _content(context, Icons.scale, DataTypeEnum.bmi, patient.bmi),
+                  _content(context, Icons.straighten,
+                      DataTypeEnum.circumference, patient.circumference)
                 ],
               ),
         ElevatedButton(
-            onPressed: () => null, child: Text('Atualize suas ${title.value}')),
+            onPressed: () {
+              if (dataType == DataTypeEnum.rate) {
+                Navigator.pushNamed(context, '/rates_screen',
+                    arguments: DefaultScreenArguments(patient: patient));
+              }
+            },
+            child: Text('Atualize suas ${dataType.primaryTitle}')),
       ],
     );
   }
 
-  Widget _content(BuildContext context, IconData icon, DataTypeEnum dataType) {
+  Widget _content(BuildContext context, IconData icon, DataTypeEnum dataType,
+      double? value) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 16.0),
       padding: const EdgeInsets.all(8.0),
@@ -58,43 +72,46 @@ class HomeTabContent extends StatelessWidget {
           Icon(
             icon,
             size: 40.0,
+            color: Theme.of(context).colorScheme.onSecondary,
           ),
-          Text(dataType.value),
-          _getText(dataType),
+          Text(dataType.primaryTitle,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onSecondary,
+              )),
+          _getText(context, dataType, value),
         ],
       ),
     );
   }
 
-  Widget _getText(DataTypeEnum dataType) {
-    switch (dataType) {
-      case DataTypeEnum.glycatedHemoglobin:
-        return patient.glycatedHemoglobin == null
-            ? const Text('0.00 %')
-            : Text('${patient.glycatedHemoglobin}%');
-      case DataTypeEnum.fastingGlucose:
-        return patient.fastingGlucose == null
-            ? const Text('0.00 mg/dL')
-            : Text('${patient.fastingGlucose} mg/dL');
-      case DataTypeEnum.glucose75g:
-        return patient.glucose75g == null
-            ? const Text('0.00 mg/dL')
-            : Text('${patient.glucose75g} mg/dL');
-      case DataTypeEnum.weight:
-        return patient.weight == null
-            ? const Text('0.00 kg')
-            : Text('${patient.weight} kg');
-      case DataTypeEnum.bmi:
-        return patient.weight == null
-            ? Text('0.00 kg/m${String.fromCharCode(178)}')
-            : Text(
-                '${patient.bmi!.toStringAsPrecision(4)} kg/m${String.fromCharCode(178)}');
-      case DataTypeEnum.circumference:
-        return patient.circumference == null
-            ? const Text('0.00 cm')
-            : Text('${patient.circumference} cm');
-      default:
-        return const Text('-');
+  Widget _getText(BuildContext context, DataTypeEnum dataType, double? value) {
+    if (value != null) {
+      if (dataType == DataTypeEnum.bmi) {
+        return Text(
+            '${value.toStringAsPrecision(4)} ${dataType.measurementUnit}${String.fromCharCode(178)}',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onSecondary,
+            ));
+      } else {
+        return Text(
+          '$value ${dataType.measurementUnit}',
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Theme.of(context).colorScheme.onSecondary),
+        );
+      }
+    } else {
+      if (dataType == DataTypeEnum.bmi) {
+        return Text(
+            '0.00 ${dataType.measurementUnit}${String.fromCharCode(178)}',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Theme.of(context).colorScheme.onSecondary));
+      } else {
+        return Text('0.00 ${dataType.measurementUnit}',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Theme.of(context).colorScheme.onSecondary));
+      }
     }
   }
 }
