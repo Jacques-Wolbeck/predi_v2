@@ -26,7 +26,6 @@ class _AppRateInformationState extends State<AppRateInformation>
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      //splashColor: Colors.white,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
@@ -60,6 +59,7 @@ class _AppRateInformationState extends State<AppRateInformation>
           onPressed: () => Navigator.pop(context),
           child: const Text(
             "Voltar",
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
         )
       ],
@@ -70,8 +70,12 @@ class _AppRateInformationState extends State<AppRateInformation>
     return TabBar(
       controller: _tabController,
       tabs: const [
-        Text("Glicose em Jejum", textAlign: TextAlign.center),
-        Text("Hemoglobina Glicada", textAlign: TextAlign.center)
+        Text("Glicose em Jejum",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontWeight: FontWeight.bold)),
+        Text("Hemoglobina Glicada",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontWeight: FontWeight.bold))
       ],
     );
   }
@@ -79,6 +83,7 @@ class _AppRateInformationState extends State<AppRateInformation>
   Widget _content() {
     return SizedBox(
       height: MediaQuery.of(context).size.height * .3,
+      width: MediaQuery.of(context).size.width * .4,
       child: TabBarView(
         controller: _tabController,
         children: [

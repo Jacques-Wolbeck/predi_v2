@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
           centerTitle: true,
           title: const Text('PreDi'),
           leading: IconButton(
-              icon: const Icon(Icons.info),
+              icon: const Icon(Icons.info_outline),
               onPressed: () {
                 showDialog(
                     context: context,

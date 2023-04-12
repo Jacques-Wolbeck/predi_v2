@@ -23,6 +23,7 @@ class RateField extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: TextFormField(
         onSaved: onSavedCallback,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
           if (value!.isEmpty) {
             return 'Vazio';

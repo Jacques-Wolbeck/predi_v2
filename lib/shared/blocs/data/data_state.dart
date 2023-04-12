@@ -20,7 +20,13 @@ class DataLoaded extends DataState {
   List<Object?> get props => [dataList];
 }
 
-class Concluded extends DataState {}
+class Concluded extends DataState {
+  final String feedbackMessage;
+
+  const Concluded({required this.feedbackMessage});
+  @override
+  List<Object?> get props => [feedbackMessage];
+}
 
 class DataError extends DataState {
   final String error;

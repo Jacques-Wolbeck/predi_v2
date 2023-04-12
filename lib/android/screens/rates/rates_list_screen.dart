@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:predi_v2/android/widgets/commons/alerts/edit_rates_alert.dart';
 import 'package:predi_v2/android/widgets/commons/app_data_builder.dart';
 import 'package:predi_v2/shared/models/enums/data_type_enum.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
 
+import '../../../shared/blocs/data/data_bloc.dart';
+import '../../../shared/blocs/data/data_state.dart';
 import '../../../shared/models/patients/rate_model.dart';
 import '../../widgets/buttons/delete_button.dart';
 import '../../widgets/commons/alerts/simple_alert.dart';
+import '../../widgets/commons/app_snack_bar.dart';
 
 class RatesListScreen extends StatefulWidget {
   final PatientModel patient;
@@ -42,7 +46,7 @@ class _RatesListScreenState extends State<RatesListScreen> {
                       );
                     });
               },
-              icon: const Icon(Icons.info))
+              icon: const Icon(Icons.info_outline))
         ],
       ),
       floatingActionButton: deleteList.isNotEmpty
@@ -52,11 +56,29 @@ class _RatesListScreenState extends State<RatesListScreen> {
               dataType: DataTypeEnum.rate,
             )
           : const SizedBox.shrink(),
-      body: AppDataBuilder(
-        patient: widget.patient,
-        dataTypeToLoad: DataTypeEnum.rate,
-        dataType: DataTypeEnum.rate,
-        child: _body,
+      body: BlocListener<DataBloc, DataState>(
+        listener: (context, state) {
+          if (state is Concluded) {
+            if (deleteList.isNotEmpty) {
+              setState(() {
+                deleteList.clear();
+              });
+            }
+            ScaffoldMessenger.of(context).showSnackBar(
+                AppSnackBar(message: state.feedbackMessage).snack(context));
+          }
+          if (state is DataError) {
+            ScaffoldMessenger.of(context).showSnackBar(
+                AppSnackBar(message: state.error, isError: true)
+                    .snack(context));
+          }
+        },
+        child: AppDataBuilder(
+          patient: widget.patient,
+          dataTypeToLoad: DataTypeEnum.rate,
+          dataType: DataTypeEnum.rate,
+          child: _body,
+        ),
       ),
     );
   }

@@ -57,15 +57,15 @@ class _ResetPasswordAlertState extends State<ResetPasswordAlert> {
               Navigator.pop(context);
             }
           },
-          child: const Text(
-            'Enviar',
-          ),
+          child: const Text('Enviar',
+              style: TextStyle(fontWeight: FontWeight.bold)),
         ),
         TextButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          child: const Text('Cancelar'),
+          child: const Text('Cancelar',
+              style: TextStyle(fontWeight: FontWeight.bold)),
         ),
       ],
     );

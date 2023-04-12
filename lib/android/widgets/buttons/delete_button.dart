@@ -5,9 +5,7 @@ import 'package:predi_v2/shared/blocs/data/data_event.dart';
 import '../../../shared/blocs/authentication/auth_bloc.dart';
 import '../../../shared/blocs/authentication/auth_state.dart';
 import '../../../shared/blocs/data/data_bloc.dart';
-import '../../../shared/blocs/data/data_state.dart';
 import '../../../shared/models/enums/data_type_enum.dart';
-import '../commons/app_snack_bar.dart';
 
 class DeleteButton extends StatefulWidget {
   final List<dynamic> deleteList;
@@ -27,22 +25,7 @@ class DeleteButton extends StatefulWidget {
 class _DeleteButtonState extends State<DeleteButton> {
   @override
   Widget build(BuildContext context) {
-    return BlocListener<DataBloc, DataState>(
-      listener: (context, state) {
-        if (state is Error) {
-          ScaffoldMessenger.of(context).showSnackBar(
-              const AppSnackBar(message: 'Ocorreu um erro.', isError: true)
-                  .snack(context));
-        } else if (state is Concluded) {
-          widget.deleteList.clear();
-          widget.onChanged();
-          ScaffoldMessenger.of(context).showSnackBar(
-              const AppSnackBar(message: 'As taxas foram deletadas')
-                  .snack(context));
-        }
-      },
-      child: _buttonContent(),
-    );
+    return _buttonContent();
   }
 
   Widget _buttonContent() {

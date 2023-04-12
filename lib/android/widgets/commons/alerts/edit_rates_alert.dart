@@ -17,7 +17,6 @@ class EditRatesAlert extends StatefulWidget {
   State<EditRatesAlert> createState() => _EditRatesAlertState();
 }
 
-//TODO Its necessary to apply bloc listener here
 class _EditRatesAlertState extends State<EditRatesAlert> {
   final _formKey = GlobalKey<FormState>();
   final glycatedFocus = FocusNode();
@@ -92,15 +91,15 @@ class _EditRatesAlertState extends State<EditRatesAlert> {
               }
             }
           },
-          child: const Text(
-            'Editar',
-          ),
+          child: const Text('Editar',
+              style: TextStyle(fontWeight: FontWeight.bold)),
         ),
         TextButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          child: const Text('Cancelar'),
+          child: const Text('Cancelar',
+              style: TextStyle(fontWeight: FontWeight.bold)),
         ),
       ],
     );

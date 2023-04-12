@@ -20,7 +20,9 @@ class DataBloc extends Bloc<DataEvent, DataState> {
     emit(LoadingData());
     try {
       await _dbInstance.create(event.patient, event.dataType, event.data);
-      emit(Concluded());
+      emit(Concluded(
+          feedbackMessage:
+              '${event.dataType.primaryTitle} adicionadas com sucesso.'));
     } catch (error) {
       emit(DataError(error.toString()));
       emit(InitialDataState());
@@ -32,7 +34,9 @@ class DataBloc extends Bloc<DataEvent, DataState> {
     emit(LoadingData());
     try {
       await _dbInstance.update(event.patient, event.dataType, event.data);
-      emit(Concluded());
+      emit(Concluded(
+          feedbackMessage:
+              '${event.dataType.primaryTitle} editadas com sucesso.'));
     } catch (error) {
       emit(DataError(error.toString()));
       emit(InitialDataState());
@@ -44,7 +48,9 @@ class DataBloc extends Bloc<DataEvent, DataState> {
     emit(LoadingData());
     try {
       await _dbInstance.delete(event.patient, event.dataType, event.deleteList);
-      emit(Concluded());
+      emit(Concluded(
+          feedbackMessage:
+              '${event.dataType.primaryTitle} deletadas com sucesso.'));
     } catch (error) {
       emit(DataError(error.toString()));
       emit(InitialDataState());

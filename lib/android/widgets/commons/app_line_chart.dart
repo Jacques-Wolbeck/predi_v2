@@ -37,21 +37,24 @@ class AppLineChart extends StatelessWidget {
         ),
         lineTouchData: LineTouchData(
           touchTooltipData: LineTouchTooltipData(
+              tooltipRoundedRadius: 16.0,
+              fitInsideHorizontally: true,
               getTooltipItems: (List<LineBarSpot> touchedSpots) {
-            return touchedSpots.map((LineBarSpot touchedSpot) {
-              return LineTooltipItem(
-                  '${touchedSpot.y.toStringAsFixed(2)} ${dataType.measurementUnit}',
-                  TextStyle(
-                      color: Theme.of(context).colorScheme.onPrimaryContainer,
-                      fontWeight: FontWeight.bold));
-            }).toList();
-          }),
+                return touchedSpots.map((LineBarSpot touchedSpot) {
+                  return LineTooltipItem(
+                      '${touchedSpot.y.toStringAsFixed(2)} ${dataType.measurementUnit}',
+                      TextStyle(
+                          color: Theme.of(context).colorScheme.onSecondary,
+                          fontWeight: FontWeight.bold));
+                }).toList();
+              }),
         ),
         lineBarsData: [
           LineChartBarData(
             spots: List.generate(barData.length,
                 (index) => FlSpot(index.toDouble(), barData[index])),
             isCurved: false,
+            color: Theme.of(context).colorScheme.primary,
             dotData: FlDotData(
               show: true,
             ),

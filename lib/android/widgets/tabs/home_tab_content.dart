@@ -72,28 +72,45 @@ class HomeTabContent extends StatelessWidget {
           Icon(
             icon,
             size: 40.0,
+            color: Theme.of(context).colorScheme.onSecondary,
           ),
-          Text(dataType.primaryTitle),
-          _getText(dataType, value),
+          Text(dataType.primaryTitle,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onSecondary,
+              )),
+          _getText(context, dataType, value),
         ],
       ),
     );
   }
 
-  Widget _getText(DataTypeEnum dataType, double? value) {
+  Widget _getText(BuildContext context, DataTypeEnum dataType, double? value) {
     if (value != null) {
       if (dataType == DataTypeEnum.bmi) {
         return Text(
-            '${value.toStringAsPrecision(4)} ${dataType.measurementUnit}${String.fromCharCode(178)}');
+            '${value.toStringAsPrecision(4)} ${dataType.measurementUnit}${String.fromCharCode(178)}',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onSecondary,
+            ));
       } else {
-        return Text('$value ${dataType.measurementUnit}');
+        return Text(
+          '$value ${dataType.measurementUnit}',
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Theme.of(context).colorScheme.onSecondary),
+        );
       }
     } else {
       if (dataType == DataTypeEnum.bmi) {
         return Text(
-            '0.00 ${dataType.measurementUnit}${String.fromCharCode(178)}');
+            '0.00 ${dataType.measurementUnit}${String.fromCharCode(178)}',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Theme.of(context).colorScheme.onSecondary));
       } else {
-        return Text('0.00 ${dataType.measurementUnit}');
+        return Text('0.00 ${dataType.measurementUnit}',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Theme.of(context).colorScheme.onSecondary));
       }
     }
   }
