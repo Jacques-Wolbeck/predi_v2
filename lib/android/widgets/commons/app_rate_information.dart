@@ -46,7 +46,7 @@ class _AppRateInformationState extends State<AppRateInformation>
     );
   }
 
-  AlertDialog _alertDialog(BuildContext context) {
+  Widget _alertDialog(BuildContext context) {
     return AlertDialog(
       title: _title(),
       content: _content(),

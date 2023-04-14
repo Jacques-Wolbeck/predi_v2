@@ -21,8 +21,8 @@ class AppLineChart extends StatelessWidget {
           bottomTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
           leftTitles: AxisTitles(
             sideTitles: SideTitles(
-              reservedSize: MediaQuery.of(context).size.width * .1,
-              interval: (dataType.maxValue! - dataType.minValue!) / 7,
+              reservedSize: MediaQuery.of(context).size.width * .15,
+              interval: ((dataType.maxValue! - dataType.minValue!) / 7),
               showTitles: true,
               /*getTitlesWidget: (value, meta) {
                 return Text(
@@ -90,8 +90,14 @@ class AppLineChart extends StatelessWidget {
         return data.glycatedHemoglobin;
       case DataTypeEnum.fastingGlucose:
         return data.fastingGlucose;
-      default:
+      case DataTypeEnum.glucose75g:
         return data.glucose75g;
+      case DataTypeEnum.weight:
+        return data.weight;
+      case DataTypeEnum.circumference:
+        return data.circumference;
+      default:
+        return 0.00;
     }
   }
 }

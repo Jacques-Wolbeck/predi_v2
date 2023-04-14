@@ -6,28 +6,27 @@ import 'package:predi_v2/shared/blocs/data/data_event.dart';
 
 import '../../../../shared/blocs/data/data_bloc.dart';
 import '../../../../shared/models/enums/data_type_enum.dart';
-import '../../../../shared/models/patients/rate_model.dart';
-import '../../fields/rate_field.dart';
+import '../../../../shared/models/patients/measurement_model.dart';
+import '../../fields/measure_field.dart';
 
-class EditRatesAlert extends StatefulWidget {
-  final RateModel rate;
-  const EditRatesAlert({super.key, required this.rate});
+class EditMeasurementsAlert extends StatefulWidget {
+  final MeasurementModel measure;
+  const EditMeasurementsAlert({super.key, required this.measure});
 
   @override
-  State<EditRatesAlert> createState() => _EditRatesAlertState();
+  State<EditMeasurementsAlert> createState() => _EditMeasurementsAlertState();
 }
 
-class _EditRatesAlertState extends State<EditRatesAlert> {
+class _EditMeasurementsAlertState extends State<EditMeasurementsAlert> {
   final _formKey = GlobalKey<FormState>();
-  final glycatedFocus = FocusNode();
-  final fastingFocus = FocusNode();
-  final glucose75Focus = FocusNode();
+  final weightFocus = FocusNode();
+  final circumferenceFocus = FocusNode();
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text(
-        'Editar Taxas',
+        'Editar Medidas',
         textAlign: TextAlign.center,
         style: TextStyle(
             //fontWeight: FontWeight.bold,
@@ -35,38 +34,28 @@ class _EditRatesAlertState extends State<EditRatesAlert> {
       ),
       content: SingleChildScrollView(
         child: SizedBox(
-          height: MediaQuery.of(context).size.height * .6,
+          height: MediaQuery.of(context).size.height * .4,
           child: Form(
             key: _formKey,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                _rateTextForm(
-                    DataTypeEnum.glycatedHemoglobin,
-                    widget.rate.glycatedHemoglobin.toString(),
-                    glycatedFocus,
-                    fastingFocus,
-                    (value) =>
-                        widget.rate.glycatedHemoglobin = double.parse(value!)),
+                _measureTextForm(
+                    DataTypeEnum.weight,
+                    widget.measure.weight.toString(),
+                    weightFocus,
+                    circumferenceFocus,
+                    (value) => widget.measure.weight = double.parse(value!)),
                 Divider(
                     thickness: 3.0,
                     color: Theme.of(context).colorScheme.primary),
-                _rateTextForm(
-                    DataTypeEnum.fastingGlucose,
-                    widget.rate.fastingGlucose.toString(),
-                    fastingFocus,
-                    glucose75Focus,
-                    (value) =>
-                        widget.rate.fastingGlucose = double.parse(value!)),
-                Divider(
-                    thickness: 3.0,
-                    color: Theme.of(context).colorScheme.primary),
-                _rateTextForm(
-                    DataTypeEnum.glucose75g,
-                    widget.rate.glucose75g.toString(),
-                    glucose75Focus,
+                _measureTextForm(
+                    DataTypeEnum.circumference,
+                    widget.measure.circumference.toString(),
+                    circumferenceFocus,
                     null,
-                    (value) => widget.rate.glucose75g = double.parse(value!)),
+                    (value) =>
+                        widget.measure.circumference = double.parse(value!)),
               ],
             ),
           ),
@@ -85,8 +74,8 @@ class _EditRatesAlertState extends State<EditRatesAlert> {
               if (state is Authenticated) {
                 context.read<DataBloc>().add(UpdateDataRequested(
                     patient: state.patient,
-                    dataType: DataTypeEnum.rate,
-                    data: widget.rate));
+                    dataType: DataTypeEnum.measure,
+                    data: widget.measure));
                 Navigator.pop(context);
               }
             }
@@ -105,7 +94,7 @@ class _EditRatesAlertState extends State<EditRatesAlert> {
     );
   }
 
-  Widget _rateTextForm(
+  Widget _measureTextForm(
       DataTypeEnum dataType,
       String hintText,
       FocusNode currentFocus,
@@ -121,7 +110,7 @@ class _EditRatesAlertState extends State<EditRatesAlert> {
                   ? Theme.of(context).colorScheme.primary
                   : Colors.black),
         ),
-        RateField(
+        MeasureField(
           onSavedCallback: onSavedCallback,
           dataType: dataType,
           hintText: hintText,

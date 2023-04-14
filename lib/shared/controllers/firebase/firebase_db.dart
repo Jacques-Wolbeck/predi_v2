@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:predi_v2/shared/models/enums/data_type_enum.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
 
+import '../../models/patients/measurement_model.dart';
 import '../../models/patients/rate_model.dart';
 import 'firebase_errors.dart';
 
@@ -78,7 +79,7 @@ class FirebaseDb {
       case (DataTypeEnum.rate):
         return RateModel.fromJSON(doc.data() as Map<String, dynamic>);
       default:
-        return RateModel.fromJSON(doc.data() as Map<String, dynamic>);
+        return MeasurementModel.fromJSON(doc.data() as Map<String, dynamic>);
     }
   }
 }

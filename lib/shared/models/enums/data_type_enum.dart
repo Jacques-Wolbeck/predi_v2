@@ -22,7 +22,7 @@ enum DataTypeEnum {
       maxValue: 200.0),
   weight(
       primaryTitle: 'Peso',
-      secondaryTitle: '',
+      secondaryTitle: 'Peso',
       measurementUnit: 'kg',
       minValue: 0.0,
       maxValue: 190.0),
