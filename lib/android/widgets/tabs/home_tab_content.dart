@@ -49,6 +49,10 @@ class HomeTabContent extends StatelessWidget {
                 Navigator.pushNamed(context, '/rates_screen',
                     arguments: DefaultScreenArguments(patient: patient));
               }
+              if (dataType == DataTypeEnum.measure) {
+                Navigator.pushNamed(context, '/measurements_screen',
+                    arguments: DefaultScreenArguments(patient: patient));
+              }
             },
             child: Text('Atualize suas ${dataType.primaryTitle}')),
       ],
