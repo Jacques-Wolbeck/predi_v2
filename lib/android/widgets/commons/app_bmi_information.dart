@@ -16,12 +16,13 @@ class AppBmiInformation extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          /*Image.asset(
-            "assets/imc_icon.png",
-            height: 30.0,
-            width: 30.0,
-          ),*/
-          const SizedBox(width: 8.0),
+          Image.asset(
+            "assets/images/imc_icon.png",
+            height: 40.0,
+            width: 40.0,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+          const SizedBox(width: 2.0),
           const Text("Qual o meu peso ideal?"),
         ],
       ),
