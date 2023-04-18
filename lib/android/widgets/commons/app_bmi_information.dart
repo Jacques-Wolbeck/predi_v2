@@ -15,6 +15,7 @@ class AppBmiInformation extends StatelessWidget {
     return InkWell(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Image.asset(
             "assets/images/imc_icon.png",
@@ -30,8 +31,8 @@ class AppBmiInformation extends StatelessWidget {
         final state = context.read<AuthBloc>().state;
         if (state is Authenticated) {
           if (state.patient.weight != null && state.patient.height != null) {
-            final double bmi = state.patient.weight! /
-                (state.patient.height! * state.patient.height!);
+            final double bmi = (state.patient.weight! /
+                (state.patient.height! * state.patient.height!));
             final double minIdealWeight =
                 18.5 * state.patient.height! * state.patient.height!;
             final double maxIdealWeight =

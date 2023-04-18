@@ -28,6 +28,7 @@ class _AppRateInformationState extends State<AppRateInformation>
     return InkWell(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: const [
           Icon(Icons.info_outline),
           SizedBox(width: 8.0),

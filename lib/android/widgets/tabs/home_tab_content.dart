@@ -103,6 +103,7 @@ class HomeTabContent extends StatelessWidget {
               color: Theme.of(context).colorScheme.primaryContainer,
             ),
           ),
+          const SizedBox(height: 4.0),
           _getText(context, dataType, value),
         ],
       ),

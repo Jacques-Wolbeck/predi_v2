@@ -28,12 +28,12 @@ class HomeBottomSheet extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               _patientInfo(context),
-              _listTiles(
+              /*_listTiles(
                 context,
                 "Compartilhar CDA",
                 Icons.share,
                 () => null,
-              ),
+              ),*/
               _listTiles(
                 context,
                 "Editar dados gerais",
@@ -104,11 +104,13 @@ class HomeBottomSheet extends StatelessWidget {
                   backgroundImage: const AssetImage(
                     "assets/images/patient_icon.png",
                   ),
-                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  backgroundColor:
+                      Theme.of(context).colorScheme.primaryContainer,
                 ),
           const SizedBox(height: 12.0),
           Text(
             patient.name!,
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           Text(
             patient.email!,

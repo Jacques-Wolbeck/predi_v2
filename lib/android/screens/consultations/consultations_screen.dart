@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:predi_v2/android/widgets/buttons/update_buttons/consultation_button.dart';
 import 'package:predi_v2/android/widgets/commons/app_data_builder.dart';
 import 'package:predi_v2/android/widgets/fields/date_time_field.dart';
@@ -131,11 +132,68 @@ class _ConsultationsScreenState extends State<ConsultationsScreen> {
             FirebaseDb.instance
                 .delete(widget.patient, dataType, [consultation]);
           }*/
-          return Card(
-            child: ListTile(
-              title: Text(consultation.local!),
-            ),
-          );
+          return _card(consultation);
+          ;
         });
+  }
+
+  Widget _card(ConsultationModel consultation) {
+    return Card(
+      child: ListTile(
+        contentPadding: const EdgeInsets.all(16.0),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _titleContent(
+                'Local', Icons.local_hospital_outlined, consultation.local),
+            const Divider(),
+            _titleContent('Tipo de exame', Icons.medical_information_outlined,
+                consultation.examType),
+            const Divider(),
+          ],
+        ),
+        subtitle: Row(
+          children: [
+            const Icon(Icons.calendar_month_outlined),
+            const SizedBox(width: 8.0),
+            Text(DateFormat('dd/MM/yyyy - HH:mm').format(consultation.date!)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _titleContent(String title, IconData icon, String? measureValue) {
+    return Wrap(
+      children: [
+        Icon(
+          icon,
+          color: Theme.of(context).colorScheme.primary,
+        ),
+        const SizedBox(width: 8.0),
+        Wrap(
+          children: [
+            Text(
+              '$title: ',
+              style: Theme.of(context).textTheme.titleSmall!.merge(
+                    TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+            ),
+            Text(
+              '$measureValue',
+              style: Theme.of(context).textTheme.titleSmall!.merge(
+                    TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      //fontWeight: FontWeight.bold,
+                    ),
+                  ),
+            ),
+          ],
+        )
+      ],
+    );
   }
 }

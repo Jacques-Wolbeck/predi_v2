@@ -10,7 +10,15 @@ class AppReportInformation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: const Icon(Icons.favorite_border),
+      icon: Icon(
+        Icons.favorite_border,
+        shadows: <Shadow>[
+          Shadow(
+              color: Theme.of(context).colorScheme.shadow,
+              blurRadius: 2.0,
+              offset: const Offset(1.0, 1.0))
+        ],
+      ),
       iconSize: MediaQuery.of(context).size.height * .25,
       color: Theme.of(context).colorScheme.secondary,
       onPressed: () {
