@@ -92,7 +92,7 @@ class _MeasurementsListScreenState extends State<MeasurementsListScreen> {
             child: ListView.builder(
               itemCount: dataList.length,
               itemBuilder: (context, index) {
-                var measure = dataList[index];
+                var measure = dataList[index] as MeasurementModel;
                 return Card(
                   margin: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Material(

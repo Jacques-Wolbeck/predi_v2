@@ -35,6 +35,7 @@ class HomeTabContent extends StatelessWidget {
                 ],
               )
             : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _content(context, Icons.monitor_weight_outlined,
                       DataTypeEnum.weight, patient.weight),
@@ -54,7 +55,16 @@ class HomeTabContent extends StatelessWidget {
                     arguments: DefaultScreenArguments(patient: patient));
               }
             },
-            child: Text('Atualize suas ${dataType.primaryTitle}')),
+            style: ElevatedButton.styleFrom(
+              elevation: 3.0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              //minimumSize: const Size(double.infinity, 45.0),
+            ),
+            child: Text(
+              'ATUALIZE SUAS ${dataType.primaryTitle.toUpperCase()}',
+            )),
       ],
     );
   }
@@ -67,8 +77,16 @@ class HomeTabContent extends StatelessWidget {
       height: MediaQuery.of(context).size.height * .2,
       width: MediaQuery.of(context).size.width * .3,
       decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primary,
-          borderRadius: BorderRadius.circular(8.0)),
+        color: Theme.of(context).colorScheme.primary,
+        borderRadius: BorderRadius.circular(8.0),
+        boxShadow: [
+          BoxShadow(
+            blurRadius: .5,
+            offset: const Offset(1.0, 1.0),
+            color: Theme.of(context).colorScheme.shadow,
+          )
+        ],
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -76,13 +94,15 @@ class HomeTabContent extends StatelessWidget {
           Icon(
             icon,
             size: 40.0,
-            color: Theme.of(context).colorScheme.onSecondary,
+            color: Theme.of(context).colorScheme.primaryContainer,
           ),
-          Text(dataType.primaryTitle,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onSecondary,
-              )),
+          Text(
+            dataType.primaryTitle,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.primaryContainer,
+            ),
+          ),
           _getText(context, dataType, value),
         ],
       ),
@@ -96,13 +116,14 @@ class HomeTabContent extends StatelessWidget {
             '${value.toStringAsPrecision(4)} ${dataType.measurementUnit}${String.fromCharCode(178)}',
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Theme.of(context).colorScheme.onSecondary,
+              color: Theme.of(context).colorScheme.primaryContainer,
             ));
       } else {
         return Text(
           '$value ${dataType.measurementUnit}',
           textAlign: TextAlign.center,
-          style: TextStyle(color: Theme.of(context).colorScheme.onSecondary),
+          style:
+              TextStyle(color: Theme.of(context).colorScheme.primaryContainer),
         );
       }
     } else {
@@ -110,11 +131,13 @@ class HomeTabContent extends StatelessWidget {
         return Text(
             '0.00 ${dataType.measurementUnit}${String.fromCharCode(178)}',
             textAlign: TextAlign.center,
-            style: TextStyle(color: Theme.of(context).colorScheme.onSecondary));
+            style: TextStyle(
+                color: Theme.of(context).colorScheme.primaryContainer));
       } else {
         return Text('0.00 ${dataType.measurementUnit}',
             textAlign: TextAlign.center,
-            style: TextStyle(color: Theme.of(context).colorScheme.onSecondary));
+            style: TextStyle(
+                color: Theme.of(context).colorScheme.primaryContainer));
       }
     }
   }

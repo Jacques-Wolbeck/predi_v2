@@ -28,6 +28,10 @@ class _EditPersonalDataScreenState extends State<EditPersonalDataScreen> {
         title: const Text('Dados Gerais'),
       ),
       body: _body(),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+        child: PersonalDataButton(formKey: _formkey),
+      ),
     );
   }
 
@@ -60,10 +64,9 @@ class _EditPersonalDataScreenState extends State<EditPersonalDataScreen> {
                 keyboardType: TextInputType.number,
               ),
               DateField(
-                  onSavedCallback: (value) => widget.patient.birthDate = value,
-                  currentFocus: birthdateFocus,
-                  initialValue: widget.patient.birthDate),
-              PersonalDataButton(formKey: _formkey)
+                onSavedCallback: (value) => widget.patient.birthDate = value,
+                currentFocus: birthdateFocus,
+              ),
             ],
           ),
         ),

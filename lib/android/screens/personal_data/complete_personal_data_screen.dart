@@ -30,6 +30,10 @@ class _CompletePersonalDataScreenState
         title: const Text('Dados Gerais'),
       ),
       body: _body(),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+        child: PersonalDataButton(formKey: _formkey),
+      ),
     );
   }
 
@@ -57,7 +61,6 @@ class _CompletePersonalDataScreenState
                   currentFocus: birthdateFocus),
               GenderField(
                   onSaveCallback: (value) => widget.patient.gender = value),
-              PersonalDataButton(formKey: _formkey)
             ],
           ),
         ),

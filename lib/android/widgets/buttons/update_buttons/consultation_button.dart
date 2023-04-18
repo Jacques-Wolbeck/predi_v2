@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:predi_v2/android/widgets/commons/app_screen_args.dart';
+import 'package:predi_v2/shared/models/patients/consultation_model.dart';
 
 import '../../../../shared/blocs/authentication/auth_bloc.dart';
 import '../../../../shared/blocs/authentication/auth_state.dart';
-import '../../../../shared/blocs/patient/patient_bloc.dart';
-import '../../../../shared/blocs/patient/patient_event.dart';
+import '../../../../shared/blocs/data/data_bloc.dart';
+import '../../../../shared/blocs/data/data_event.dart';
 
-class PersonalDataButton extends StatelessWidget {
+import '../../../../shared/models/enums/data_type_enum.dart';
+
+class ConsultationButton extends StatelessWidget {
   final GlobalKey<FormState> formKey;
+  final ConsultationModel consultation;
 
-  const PersonalDataButton({super.key, required this.formKey});
+  const ConsultationButton(
+      {super.key, required this.formKey, required this.consultation});
 
   @override
   Widget build(BuildContext context) {
@@ -23,24 +27,21 @@ class PersonalDataButton extends StatelessWidget {
             formKey.currentState!.reset();
             final state = context.read<AuthBloc>().state;
             if (state is Authenticated) {
-              state.patient.gender ??= 'Masculino';
-              context
-                  .read<PatientBloc>()
-                  .add(UpdatePatientRequested(patient: state.patient));
-              Navigator.pushNamedAndRemoveUntil(
-                  context, '/home_screen', (route) => false,
-                  arguments: DefaultScreenArguments(patient: state.patient));
+              context.read<DataBloc>().add(AddDataRequested(
+                  patient: state.patient,
+                  dataType: DataTypeEnum.consultation,
+                  data: consultation));
             }
           }
         },
-        style: ElevatedButton.styleFrom(
+        /*style: ElevatedButton.styleFrom(
             elevation: 5.0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),
             ),
-            minimumSize: const Size(double.infinity, 45.0)),
+            minimumSize: const Size(double.infinity, 45.0)),*/
         child: const Text(
-          "Atualizar",
+          "Adicionar consulta",
         ),
       ),
     );

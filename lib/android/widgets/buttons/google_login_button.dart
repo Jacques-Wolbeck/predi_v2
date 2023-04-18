@@ -14,7 +14,7 @@ class GoogleLoginButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () => context.read<AuthBloc>().add(GoogleSignInRequested()),
         style: ElevatedButton.styleFrom(
-          elevation: 5.0,
+          elevation: 3.0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
           ),
@@ -31,7 +31,10 @@ class GoogleLoginButton extends StatelessWidget {
               width: 20.0,
             ),
             const SizedBox(width: 8.0),
-            const Text('Entrar com Gmail'),
+            const Text(
+              'Entrar com Gmail',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ],
         ),
       ),

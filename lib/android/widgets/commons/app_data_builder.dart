@@ -44,8 +44,7 @@ class AppDataBuilder extends StatelessWidget {
             var dataList = state.dataList;
             if (dataList.isEmpty) {
               return Center(
-                  child: Text(
-                      'Não há dados de ${dataType.secondaryTitle.toLowerCase()}'));
+                  child: Text('Não há ${dataType.primaryTitle.toLowerCase()}'));
             } else {
               return child(state.dataList, dataType);
             }

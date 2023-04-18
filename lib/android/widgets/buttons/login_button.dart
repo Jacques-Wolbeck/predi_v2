@@ -27,13 +27,14 @@ class LoginButton extends StatelessWidget {
           }
         },
         style: ElevatedButton.styleFrom(
-            elevation: 5.0,
+            elevation: 3.0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),
             ),
             minimumSize: const Size(double.infinity, 45.0)),
         child: const Text(
           "Entrar",
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
     );
