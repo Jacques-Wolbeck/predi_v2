@@ -9,7 +9,9 @@ import 'package:predi_v2/shared/models/patients/patient_model.dart';
 
 import '../../shared/blocs/patient/patient_bloc.dart';
 import '../../shared/models/enums/data_type_enum.dart';
+import '../widgets/commons/app_screen_args.dart';
 import '../widgets/commons/app_snack_bar.dart';
+import '../widgets/tabs/consultations_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   final PatientModel patient;
@@ -115,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: HomeTabContent(
                       patient: widget.patient, dataType: DataTypeEnum.measure),
                 ),
-                Center(child: Text(DataTypeEnum.appointment.primaryTitle))
+                Center(child: ConsultationsTab(patient: widget.patient)),
               ],
             ),
           )

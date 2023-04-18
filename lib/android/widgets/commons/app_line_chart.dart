@@ -37,6 +37,7 @@ class AppLineChart extends StatelessWidget {
         ),
         lineTouchData: LineTouchData(
           touchTooltipData: LineTouchTooltipData(
+              tooltipBgColor: Theme.of(context).colorScheme.primary,
               tooltipRoundedRadius: 16.0,
               fitInsideHorizontally: true,
               getTooltipItems: (List<LineBarSpot> touchedSpots) {

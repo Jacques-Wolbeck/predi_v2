@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:predi_v2/android/screens/consultations/consultations_screen.dart';
 import 'package:predi_v2/android/screens/home_screen.dart';
 import 'package:predi_v2/android/screens/login_screen.dart';
 import 'package:predi_v2/android/screens/measurements/measurements_list_screen.dart';
@@ -59,6 +60,13 @@ Route onGenerateRoute(RouteSettings settings) {
       final args = settings.arguments as DefaultScreenArguments;
       return CustomPageRoute(
           child: MeasurementsListScreen(
+            patient: args.patient,
+          ),
+          settings: settings);
+    case '/consultations_screen':
+      final args = settings.arguments as DefaultScreenArguments;
+      return CustomPageRoute(
+          child: ConsultationsScreen(
             patient: args.patient,
           ),
           settings: settings);

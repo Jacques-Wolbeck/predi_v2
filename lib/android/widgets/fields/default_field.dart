@@ -8,6 +8,7 @@ class DefaultField extends StatelessWidget {
   final FocusNode currentFocus;
   final FocusNode? nextFocus;
   final String? initialValue;
+  final String? hintText;
 
   const DefaultField({
     super.key,
@@ -16,6 +17,7 @@ class DefaultField extends StatelessWidget {
     required this.onSavedCallback,
     required this.currentFocus,
     this.initialValue,
+    this.hintText,
     this.keyboardType = TextInputType.name,
     this.nextFocus,
   });
@@ -45,6 +47,7 @@ class DefaultField extends StatelessWidget {
         keyboardType: keyboardType,
         decoration: InputDecoration(
           labelText: labelText,
+          hintText: hintText,
           filled: true,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0),

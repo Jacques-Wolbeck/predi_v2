@@ -23,6 +23,7 @@ class MeasurementButton extends StatelessWidget {
         onPressed: () {
           if (formKey.currentState!.validate()) {
             formKey.currentState!.save();
+            formKey.currentState!.reset();
             final state = context.read<AuthBloc>().state;
             if (state is Authenticated) {
               context

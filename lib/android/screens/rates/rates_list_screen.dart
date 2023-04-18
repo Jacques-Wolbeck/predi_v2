@@ -93,7 +93,7 @@ class _RatesListScreenState extends State<RatesListScreen> {
             child: ListView.builder(
               itemCount: dataList.length,
               itemBuilder: (context, index) {
-                var rate = dataList[index];
+                var rate = dataList[index] as RateModel;
                 return Card(
                   margin: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Material(

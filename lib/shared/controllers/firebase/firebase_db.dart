@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:predi_v2/shared/models/enums/data_type_enum.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
 
+import '../../models/patients/consultation_model.dart';
 import '../../models/patients/measurement_model.dart';
 import '../../models/patients/rate_model.dart';
 import 'firebase_errors.dart';
@@ -19,14 +19,13 @@ class FirebaseDb {
   }
 
   Future<void> create(PatientModel patient, DataTypeEnum dataType, data) async {
-    debugPrint('cHEGOUUUU NO CREATE');
     try {
       final docReference = _getRef(patient, dataType);
       data.uid = docReference.doc().id;
       docReference.doc(data.uid).set(data.toJSON());
     } catch (error) {
       throw FormattedException(
-          'Erro ao criar uma nova ${dataType.primaryTitle}.');
+          'Erro ao criar uma nova ${dataType.secondaryTitle}.');
     }
   }
 
@@ -35,7 +34,8 @@ class FirebaseDb {
       final docReference = _getRef(patient, dataType).doc(data.uid);
       await docReference.update(data.toJSON());
     } catch (error) {
-      throw FormattedException('Erro ao atualizar a ${dataType.primaryTitle}.');
+      throw FormattedException(
+          'Erro ao atualizar a(s) ${dataType.primaryTitle}.');
     }
   }
 
@@ -54,7 +54,8 @@ class FirebaseDb {
 
   Stream<List?> getAll(PatientModel patient, DataTypeEnum dataType) {
     return _getRef(patient, dataType)
-        .orderBy(_getOrderBy(dataType), descending: true)
+        .orderBy(_getOrderBy(dataType),
+            descending: dataType == DataTypeEnum.consultation ? false : true)
         .snapshots()
         .asyncMap((snapshot) => snapshot.docs
             .map(
@@ -78,8 +79,10 @@ class FirebaseDb {
     switch (dataType) {
       case (DataTypeEnum.rate):
         return RateModel.fromJSON(doc.data() as Map<String, dynamic>);
-      default:
+      case (DataTypeEnum.measure):
         return MeasurementModel.fromJSON(doc.data() as Map<String, dynamic>);
+      default:
+        return ConsultationModel.fromJSON(doc.data() as Map<String, dynamic>);
     }
   }
 }
