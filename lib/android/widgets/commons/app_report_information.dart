@@ -3,6 +3,8 @@ import 'package:predi_v2/android/widgets/commons/alerts/simple_alert.dart';
 import 'package:predi_v2/shared/models/enums/patient_status_enum.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
 
+import 'alerts/report_information_alert.dart';
+
 class AppReportInformation extends StatelessWidget {
   final PatientModel patient;
   const AppReportInformation({super.key, required this.patient});
@@ -27,10 +29,10 @@ class AppReportInformation extends StatelessWidget {
             barrierDismissible: false,
             builder: (context) {
               PatientStatusEnum patientEnum = _statusCalculation();
-              return SimpleAlert(
-                  title: patientEnum.status,
-                  content: patientEnum.content,
-                  button2Text: 'Voltar');
+              return ReportInformationAlert(
+                title: patientEnum.status,
+                content: patientEnum.content,
+              );
             });
       },
     );
