@@ -12,6 +12,7 @@ class AppReportInformation extends StatelessWidget {
     return IconButton(
       icon: const Icon(Icons.favorite_border),
       iconSize: MediaQuery.of(context).size.height * .25,
+      color: Theme.of(context).colorScheme.secondary,
       onPressed: () {
         showDialog(
             context: context,

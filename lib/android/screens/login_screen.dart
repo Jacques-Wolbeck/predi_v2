@@ -87,51 +87,52 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _loginArea() {
     return SafeArea(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const AppTitle(),
-            Form(
-              key: _formkey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+      child: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              const AppTitle(),
+              Form(
+                key: _formkey,
+                child: Column(
+                  children: [
+                    EmailField(
+                      onSavedCallback: (value) => _loginInfo['email'] = value!,
+                      currentFocus: emailFocus,
+                      nextFocus: passwordFocus,
+                    ),
+                    PasswordField(
+                      onSavedCallback: (value) =>
+                          _loginInfo['password'] = value!,
+                      currentFocus: passwordFocus,
+                    ),
+                  ],
+                ),
+              ),
+              LoginButton(formKey: _formkey, loginInfo: _loginInfo),
+              const GoogleLoginButton(),
+              TextButton(
+                onPressed: () => showDialog<void>(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (context) => const ResetPasswordAlert()),
+                child: const Text(
+                  'Esqueceu a senha?',
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  EmailField(
-                    onSavedCallback: (value) => _loginInfo['email'] = value!,
-                    currentFocus: emailFocus,
-                    nextFocus: passwordFocus,
-                  ),
-                  PasswordField(
-                    onSavedCallback: (value) => _loginInfo['password'] = value!,
-                    currentFocus: passwordFocus,
-                  ),
-                  LoginButton(formKey: _formkey, loginInfo: _loginInfo),
-                  const GoogleLoginButton(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text('Novo por aqui?'),
-                      TextButton(
-                        onPressed: () =>
-                            Navigator.pushNamed(context, '/register_screen'),
-                        child: const Text(
-                          'Crie sua conta',
-                          style: TextStyle(
-                            decoration: TextDecoration.underline,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  const Text('Novo por aqui?'),
                   TextButton(
-                    onPressed: () => showDialog<void>(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (context) => const ResetPasswordAlert()),
+                    onPressed: () =>
+                        Navigator.pushNamed(context, '/register_screen'),
                     child: const Text(
-                      'Esqueceu a senha?',
+                      'Crie sua conta',
                       style: TextStyle(
                         decoration: TextDecoration.underline,
                       ),
@@ -139,8 +140,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ],
               ),
-            )
-          ],
+            ],
+          ),
         ),
       ),
     );

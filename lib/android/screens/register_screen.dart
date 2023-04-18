@@ -35,6 +35,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
         title: const Text('Cadastro'),
       ),
       body: _body(),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+        child: RegisterButton(
+            formKey: _formkey, loginInfo: _loginInfo, patient: patient),
+      ),
     );
   }
 
@@ -85,8 +90,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   onSavedCallback: (value) => patient.birthDate = value,
                   currentFocus: birthdateFocus),
               GenderField(onSaveCallback: (value) => patient.gender = value),
-              RegisterButton(
-                  formKey: _formkey, loginInfo: _loginInfo, patient: patient)
             ],
           ),
         ),

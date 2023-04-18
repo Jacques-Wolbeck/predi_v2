@@ -7,25 +7,35 @@ class AppTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: RichText(
-        text: TextSpan(
-          text: 'Pre',
-          style: Theme.of(context).textTheme.headlineSmall!.merge(
-                TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-          children: <TextSpan>[
-            TextSpan(
-              text: 'Di',
-              style: Theme.of(context).textTheme.headlineSmall!.merge(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.favorite_border,
+            size: 30.0,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+          RichText(
+            text: TextSpan(
+              text: 'Pre',
+              style: Theme.of(context).textTheme.headlineMedium!.merge(
                     TextStyle(
-                      color: Theme.of(context).colorScheme.primaryContainer,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
+              children: <TextSpan>[
+                TextSpan(
+                  text: 'Di',
+                  style: Theme.of(context).textTheme.headlineMedium!.merge(
+                        TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

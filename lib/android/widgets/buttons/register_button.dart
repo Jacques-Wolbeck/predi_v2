@@ -18,30 +18,28 @@ class RegisterButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: ElevatedButton(
-        onPressed: () {
-          if (formKey.currentState!.validate()) {
-            formKey.currentState!.save();
-            //debugPrint(
-            //'${loginInfo['email']} ---> ${loginInfo['password']} --> ${patient.name} --> ${patient.gender} --> ${DateFormat('dd-MM-yyyy').format(patient.birthDate!)}');
-            context.read<AuthBloc>().add(RegisterNewPatientRequested(
-                email: loginInfo['email']!,
-                password: loginInfo['password']!,
-                patient: patient));
-            Navigator.pop(context);
-          }
-        },
-        style: ElevatedButton.styleFrom(
-            elevation: 5.0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            minimumSize: const Size(double.infinity, 45.0)),
-        child: const Text(
-          "Cadastrar",
-        ),
+    return ElevatedButton(
+      onPressed: () {
+        if (formKey.currentState!.validate()) {
+          formKey.currentState!.save();
+          //debugPrint(
+          //'${loginInfo['email']} ---> ${loginInfo['password']} --> ${patient.name} --> ${patient.gender} --> ${DateFormat('dd-MM-yyyy').format(patient.birthDate!)}');
+          context.read<AuthBloc>().add(RegisterNewPatientRequested(
+              email: loginInfo['email']!,
+              password: loginInfo['password']!,
+              patient: patient));
+          Navigator.pop(context);
+        }
+      },
+      style: ElevatedButton.styleFrom(
+          elevation: 3.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          minimumSize: const Size(double.infinity, 45.0)),
+      child: const Text(
+        "Cadastrar",
+        style: TextStyle(fontWeight: FontWeight.bold),
       ),
     );
   }
