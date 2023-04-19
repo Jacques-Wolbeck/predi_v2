@@ -55,6 +55,7 @@ class _EditPersonalDataScreenState extends State<EditPersonalDataScreen> {
               ),
               DefaultField(
                 labelText: 'Altura',
+                hintText: '1.75',
                 prefixIcon: Icons.height,
                 onSavedCallback: (value) =>
                     widget.patient.height = double.parse(value!),

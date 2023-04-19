@@ -38,6 +38,7 @@ class _ConsultationsTabState extends State<ConsultationsTab> {
             ],
           ),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,

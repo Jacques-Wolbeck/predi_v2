@@ -49,6 +49,7 @@ class _CompletePersonalDataScreenState
                   style: TextStyle(fontWeight: FontWeight.bold)),
               DefaultField(
                 labelText: 'Altura',
+                hintText: '1.75',
                 prefixIcon: Icons.height,
                 onSavedCallback: (value) =>
                     widget.patient.height = double.parse(value!),

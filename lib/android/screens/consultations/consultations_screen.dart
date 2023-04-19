@@ -73,8 +73,8 @@ class _ConsultationsScreenState extends State<ConsultationsScreen> {
   }
 
   Widget _body() {
-    return Container(
-      margin: const EdgeInsets.all(16.0),
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
       child: SingleChildScrollView(
         child: Column(
           children: [
