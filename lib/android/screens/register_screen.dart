@@ -36,7 +36,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
       body: _body(),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
         child: RegisterButton(
             formKey: _formkey, loginInfo: _loginInfo, patient: patient),
       ),

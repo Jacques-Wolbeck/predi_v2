@@ -49,7 +49,8 @@ class _AppRateInformationState extends State<AppRateInformation>
 
   Widget _alertDialog(BuildContext context) {
     return AlertDialog(
-      title: _title(),
+      iconPadding: EdgeInsets.zero,
+      icon: _title(),
       content: _content(),
       shape: RoundedRectangleBorder(
         side: const BorderSide(width: 1.0),
@@ -68,16 +69,28 @@ class _AppRateInformationState extends State<AppRateInformation>
   }
 
   Widget _title() {
-    return TabBar(
-      controller: _tabController,
-      tabs: const [
-        Text("Glicose em Jejum",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontWeight: FontWeight.bold)),
-        Text("Hemoglobina Glicada",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontWeight: FontWeight.bold))
-      ],
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primary,
+        borderRadius: const BorderRadius.only(
+            topRight: Radius.circular(8.0), topLeft: Radius.circular(8.0)),
+      ),
+      child: TabBar(
+        //indicatorColor: Theme.of(context).colorScheme.onPrimary,
+        unselectedLabelColor: Theme.of(context).colorScheme.primaryContainer,
+        labelColor: Theme.of(context).colorScheme.onSecondary,
+        controller: _tabController,
+        tabs: const [
+          Text("Glicose em Jejum",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontWeight: FontWeight.bold)),
+          Text("Hemoglobina Glicada",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontWeight: FontWeight.bold))
+        ],
+      ),
     );
   }
 

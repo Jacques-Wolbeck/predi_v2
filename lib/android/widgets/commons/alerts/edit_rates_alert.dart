@@ -26,12 +26,24 @@ class _EditRatesAlertState extends State<EditRatesAlert> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text(
-        'Editar Taxas',
-        textAlign: TextAlign.center,
-        style: TextStyle(
-            //fontWeight: FontWeight.bold,
-            ),
+      iconPadding: EdgeInsets.zero,
+      icon: Container(
+        padding: const EdgeInsets.all(16.0),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primary,
+          borderRadius: const BorderRadius.only(
+              topRight: Radius.circular(8.0), topLeft: Radius.circular(8.0)),
+        ),
+        child: Text(
+          'Editar Taxas',
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.headlineSmall!.merge(
+                TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+              ),
+        ),
       ),
       content: SingleChildScrollView(
         child: SizedBox(
@@ -48,9 +60,7 @@ class _EditRatesAlertState extends State<EditRatesAlert> {
                     fastingFocus,
                     (value) =>
                         widget.rate.glycatedHemoglobin = double.parse(value!)),
-                Divider(
-                    thickness: 3.0,
-                    color: Theme.of(context).colorScheme.primary),
+                Divider(color: Theme.of(context).colorScheme.primary),
                 _rateTextForm(
                     DataTypeEnum.fastingGlucose,
                     widget.rate.fastingGlucose.toString(),
@@ -58,9 +68,7 @@ class _EditRatesAlertState extends State<EditRatesAlert> {
                     glucose75Focus,
                     (value) =>
                         widget.rate.fastingGlucose = double.parse(value!)),
-                Divider(
-                    thickness: 3.0,
-                    color: Theme.of(context).colorScheme.primary),
+                Divider(color: Theme.of(context).colorScheme.primary),
                 _rateTextForm(
                     DataTypeEnum.glucose75g,
                     widget.rate.glucose75g.toString(),
@@ -111,31 +119,13 @@ class _EditRatesAlertState extends State<EditRatesAlert> {
       FocusNode currentFocus,
       FocusNode? nextFocus,
       Function(String?) onSavedCallback) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(
-          dataType.secondaryTitle,
-          style: TextStyle(
-              color: currentFocus.hasFocus
-                  ? Theme.of(context).colorScheme.primary
-                  : Colors.black),
-        ),
-        RateField(
-          onSavedCallback: onSavedCallback,
-          dataType: dataType,
-          hintText: hintText,
-          currentFocus: currentFocus,
-          nextFocus: nextFocus,
-        ),
-        Text(
-          dataType.measurementUnit!,
-          style: TextStyle(
-              color: currentFocus.hasFocus
-                  ? Theme.of(context).colorScheme.primary
-                  : Colors.black),
-        )
-      ],
+    return RateField(
+      onSavedCallback: onSavedCallback,
+      dataType: dataType,
+      hintText: hintText,
+      currentFocus: currentFocus,
+      nextFocus: nextFocus,
+      isEditField: true,
     );
   }
 }

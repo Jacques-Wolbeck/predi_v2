@@ -31,7 +31,7 @@ class _CompletePersonalDataScreenState
       ),
       body: _body(),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: PersonalDataButton(formKey: _formkey),
       ),
     );

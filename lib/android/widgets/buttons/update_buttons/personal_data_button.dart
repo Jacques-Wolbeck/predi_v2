@@ -15,7 +15,7 @@ class PersonalDataButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: ElevatedButton(
         onPressed: () {
           if (formKey.currentState!.validate()) {
@@ -40,7 +40,7 @@ class PersonalDataButton extends StatelessWidget {
             ),
             minimumSize: const Size(double.infinity, 45.0)),
         child: const Text(
-          "Atualizar",
+          "ATUALIZAR",
         ),
       ),
     );
