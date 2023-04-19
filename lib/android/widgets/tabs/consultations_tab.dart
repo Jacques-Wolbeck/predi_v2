@@ -19,6 +19,7 @@ class _ConsultationsTabState extends State<ConsultationsTab> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),

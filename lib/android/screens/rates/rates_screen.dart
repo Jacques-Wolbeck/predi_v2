@@ -131,7 +131,13 @@ class _RatesScreenState extends State<RatesScreen> {
                           arguments:
                               DefaultScreenArguments(patient: widget.patient));
                     },
-                    child: const Text('Detalhes'))
+                    style: ElevatedButton.styleFrom(
+                      elevation: 3.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    child: const Text('DETALHES'))
               ],
             ),
             const SizedBox(height: 16.0),

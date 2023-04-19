@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
 
-class SimpleAlert extends StatelessWidget {
+class ReportInformationAlert extends StatelessWidget {
   final String title;
   final String content;
-  final String? button1Text;
-  final String button2Text;
-  final Function()? onPressed;
 
-  const SimpleAlert({
+  const ReportInformationAlert({
     super.key,
     required this.title,
     required this.content,
-    this.button1Text,
-    required this.button2Text,
-    this.onPressed,
   });
 
   @override
@@ -28,14 +22,31 @@ class SimpleAlert extends StatelessWidget {
           borderRadius: const BorderRadius.only(
               topRight: Radius.circular(8.0), topLeft: Radius.circular(8.0)),
         ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Relatório',
+              style: Theme.of(context).textTheme.headlineSmall!.merge(
+                    TextStyle(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
+                  ),
+            ),
+            Icon(
+              Icons.feed_outlined,
+              color: Theme.of(context).colorScheme.onPrimary,
+              size: 40.0,
+            )
+          ],
+        ),
+      ),
+      title: Padding(
+        padding: const EdgeInsets.only(top: 16.0),
         child: Text(
           title,
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headlineSmall!.merge(
-                TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
-              ),
+          style: const TextStyle(),
         ),
       ),
       content: Text(
@@ -48,20 +59,11 @@ class SimpleAlert extends StatelessWidget {
         borderRadius: BorderRadius.circular(8.0),
       ),
       actions: [
-        button1Text == null
-            ? const SizedBox.shrink()
-            : TextButton(
-                onPressed: onPressed,
-                child: Text(
-                  button1Text!,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text(
-            button2Text,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+          child: const Text(
+            'Voltar',
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
       ],

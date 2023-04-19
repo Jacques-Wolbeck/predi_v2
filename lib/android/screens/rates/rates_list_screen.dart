@@ -86,71 +86,107 @@ class _RatesListScreenState extends State<RatesListScreen> {
   Widget _body(List dataList, DataTypeEnum dataType) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-      child: Column(
-        children: [
-          const Text('Últimas cinco taxas'),
-          Expanded(
-            child: ListView.builder(
-              itemCount: dataList.length,
-              itemBuilder: (context, index) {
-                var rate = dataList[index] as RateModel;
-                return Card(
-                  margin: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Material(
-                      borderRadius: BorderRadius.circular(16.0),
-                      color: deleteList.contains(rate)
-                          ? Theme.of(context).colorScheme.secondary
-                          : Theme.of(context).colorScheme.primaryContainer,
-                      child: InkWell(
-                          onTap: () {
-                            if (deleteList.contains(rate)) {
-                              deleteList.remove(rate);
-                              setState(() {});
-                            } else if (deleteList.isNotEmpty) {
-                              deleteList.add(rate);
-                              setState(() {});
-                            } else {
-                              debugPrint('aloouuuu');
-                              showDialog(
-                                  barrierDismissible: false,
-                                  context: context,
-                                  builder: (context) {
-                                    return EditRatesAlert(rate: rate);
-                                  });
-                            }
-                          },
-                          onLongPress: () {
-                            if (!deleteList.contains(rate)) {
-                              deleteList.add(rate);
-                              setState(() {});
-                            }
-                          },
-                          child: _card(rate))),
-                );
-              },
-            ),
-          ),
-        ],
+      child: ListView.builder(
+        itemCount: dataList.length,
+        itemBuilder: (context, index) {
+          var rate = dataList[index] as RateModel;
+          return Card(
+            margin: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Material(
+                borderRadius: BorderRadius.circular(16.0),
+                color: deleteList.contains(rate)
+                    ? Theme.of(context).colorScheme.secondary
+                    : Theme.of(context).colorScheme.primaryContainer,
+                child: InkWell(
+                    onTap: () {
+                      if (deleteList.contains(rate)) {
+                        deleteList.remove(rate);
+                        setState(() {});
+                      } else if (deleteList.isNotEmpty) {
+                        deleteList.add(rate);
+                        setState(() {});
+                      } else {
+                        debugPrint('aloouuuu');
+                        showDialog(
+                            barrierDismissible: false,
+                            context: context,
+                            builder: (context) {
+                              return EditRatesAlert(rate: rate);
+                            });
+                      }
+                    },
+                    onLongPress: () {
+                      if (!deleteList.contains(rate)) {
+                        deleteList.add(rate);
+                        setState(() {});
+                      }
+                    },
+                    child: _card(rate))),
+          );
+        },
       ),
     );
   }
 
   Widget _card(RateModel rate) {
     return ListTile(
-      contentPadding: const EdgeInsets.all(8.0),
+      contentPadding: const EdgeInsets.all(16.0),
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-              '${DataTypeEnum.glycatedHemoglobin.secondaryTitle}: ${rate.glycatedHemoglobin.toString()} ${DataTypeEnum.glycatedHemoglobin.measurementUnit}'),
-          Text(
-              '${DataTypeEnum.fastingGlucose.secondaryTitle}: ${rate.fastingGlucose.toString()} ${DataTypeEnum.fastingGlucose.measurementUnit}'),
-          Text(
-              '${DataTypeEnum.glucose75g.secondaryTitle}: ${rate.glucose75g.toString()} ${DataTypeEnum.glucose75g.measurementUnit}'),
+          _titleContent(DataTypeEnum.glycatedHemoglobin, Icons.opacity,
+              rate.glycatedHemoglobin.toString()),
+          const Divider(),
+          _titleContent(DataTypeEnum.fastingGlucose, Icons.opacity,
+              rate.fastingGlucose.toString()),
+          const Divider(),
+          _titleContent(DataTypeEnum.glucose75g, Icons.opacity,
+              rate.glucose75g.toString()),
+          const Divider(),
         ],
       ),
-      subtitle: Text(DateFormat('dd-MM-yyyy').format(rate.date!)),
-      leading: const Icon(Icons.opacity),
+      subtitle: Row(
+        children: [
+          const Icon(Icons.calendar_month_outlined),
+          const SizedBox(width: 8.0),
+          Text(DateFormat('dd-MM-yyyy').format(rate.date!)),
+        ],
+      ),
+    );
+  }
+
+  Widget _titleContent(
+      DataTypeEnum dataType, IconData icon, String? measureValue) {
+    return Wrap(
+      children: [
+        Icon(
+          icon,
+          color: Theme.of(context).colorScheme.primary,
+        ),
+        const SizedBox(width: 8.0),
+        Wrap(
+          children: [
+            Text(
+              '${dataType.secondaryTitle}: ',
+              style: Theme.of(context).textTheme.titleSmall!.merge(
+                    TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+            ),
+            Text(
+              '$measureValue ${dataType.measurementUnit!}',
+              style: Theme.of(context).textTheme.titleSmall!.merge(
+                    TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      //fontWeight: FontWeight.bold,
+                    ),
+                  ),
+            ),
+          ],
+        )
+      ],
     );
   }
 }

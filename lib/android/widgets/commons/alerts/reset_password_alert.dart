@@ -21,12 +21,24 @@ class _ResetPasswordAlertState extends State<ResetPasswordAlert> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text(
-        'Recuperar Senha',
-        textAlign: TextAlign.center,
-        style: TextStyle(
-            //fontWeight: FontWeight.bold,
-            ),
+      iconPadding: EdgeInsets.zero,
+      icon: Container(
+        padding: const EdgeInsets.all(16.0),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primary,
+          borderRadius: const BorderRadius.only(
+              topRight: Radius.circular(8.0), topLeft: Radius.circular(8.0)),
+        ),
+        child: Text(
+          'Recuperar Senha',
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.headlineSmall!.merge(
+                TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+              ),
+        ),
       ),
       content: SingleChildScrollView(
         child: Column(

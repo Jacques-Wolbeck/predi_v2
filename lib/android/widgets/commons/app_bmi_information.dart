@@ -15,6 +15,7 @@ class AppBmiInformation extends StatelessWidget {
     return InkWell(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Image.asset(
             "assets/images/imc_icon.png",
@@ -30,8 +31,8 @@ class AppBmiInformation extends StatelessWidget {
         final state = context.read<AuthBloc>().state;
         if (state is Authenticated) {
           if (state.patient.weight != null && state.patient.height != null) {
-            final double bmi = state.patient.weight! /
-                (state.patient.height! * state.patient.height!);
+            final double bmi = (state.patient.weight! /
+                (state.patient.height! * state.patient.height!));
             final double minIdealWeight =
                 18.5 * state.patient.height! * state.patient.height!;
             final double maxIdealWeight =
@@ -90,7 +91,15 @@ class AppBmiInformation extends StatelessWidget {
   Widget _alertDialog(BuildContext context, String condition, double bmi,
       double maxIdealWeight, double minIdealWeight) {
     return AlertDialog(
-      title: _title(condition),
+      iconPadding: EdgeInsets.zero,
+      icon: _title(context, condition),
+      title: const Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Text(
+          "Peso Ideal",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
       content: _content(bmi, condition, minIdealWeight, maxIdealWeight),
       shape: RoundedRectangleBorder(
         side: const BorderSide(width: 1.0),
@@ -108,23 +117,35 @@ class AppBmiInformation extends StatelessWidget {
     );
   }
 
-  Widget _title(String condition) {
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+  Widget _title(BuildContext context, String condition) {
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primary,
+        borderRadius: const BorderRadius.only(
+            topRight: Radius.circular(8.0), topLeft: Radius.circular(8.0)),
+      ),
+      child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
+        children: [
           Text(
             condition,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.headlineSmall!.merge(
+                  TextStyle(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                ),
           ),
-          const SizedBox(height: 8.0),
-          const Icon(Icons.access_alarm),
-          const SizedBox(height: 8.0),
-          const Text(
-            "Peso Ideal",
-            style: TextStyle(fontWeight: FontWeight.bold),
+          Image.asset(
+            'assets/images/imc_icon.png',
+            color: Theme.of(context).colorScheme.onPrimary,
+            height: 60.0,
+            width: 60.0,
           )
-        ]);
+        ],
+      ),
+    );
   }
 
   Widget _content(double bmi, String condition, double minIdealWeight,

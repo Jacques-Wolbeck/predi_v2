@@ -8,6 +8,7 @@ class RateField extends StatelessWidget {
   final FocusNode currentFocus;
   final FocusNode? nextFocus;
   final String hintText;
+  final bool isEditField;
 
   const RateField(
       {super.key,
@@ -15,7 +16,8 @@ class RateField extends StatelessWidget {
       required this.dataType,
       required this.hintText,
       required this.currentFocus,
-      this.nextFocus});
+      this.nextFocus,
+      this.isEditField = false});
 
   @override
   Widget build(BuildContext context) {
@@ -30,24 +32,27 @@ class RateField extends StatelessWidget {
           }
           return null;
         },
-        textAlign: TextAlign.center,
+        textAlign: isEditField ? TextAlign.start : TextAlign.center,
         focusNode: currentFocus,
         textInputAction:
             nextFocus == null ? TextInputAction.done : TextInputAction.next,
         keyboardType: TextInputType.number,
         decoration: InputDecoration(
+          labelText: isEditField ? dataType.primaryTitle : null,
           hintText: hintText,
           filled: true,
-          /*border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            borderSide: const BorderSide(width: .8),
-          ),*/
-          /*enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.0),
-              borderSide: const BorderSide(width: .8),
-            ),*/
-          //contentPadding: const EdgeInsets.all(16.0),
-          //prefixIcon: const Icon(Icons.opacity),
+          border: isEditField
+              ? OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: const BorderSide(width: .8),
+                )
+              : null,
+          enabledBorder: isEditField
+              ? OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: const BorderSide(width: .8),
+                )
+              : null,
         ),
       ),
     );

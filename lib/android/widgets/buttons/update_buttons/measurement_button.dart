@@ -42,14 +42,14 @@ class MeasurementButton extends StatelessWidget {
             }
           }
         },
-        /*style: ElevatedButton.styleFrom(
-            elevation: 5.0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            minimumSize: const Size(double.infinity, 45.0)),*/
+        style: ElevatedButton.styleFrom(
+          elevation: 3.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+        ),
         child: const Text(
-          "Atualizar",
+          "ATUALIZAR",
         ),
       ),
     );

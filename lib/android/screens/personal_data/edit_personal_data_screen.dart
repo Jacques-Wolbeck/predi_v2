@@ -29,7 +29,7 @@ class _EditPersonalDataScreenState extends State<EditPersonalDataScreen> {
       ),
       body: _body(),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: PersonalDataButton(formKey: _formkey),
       ),
     );
