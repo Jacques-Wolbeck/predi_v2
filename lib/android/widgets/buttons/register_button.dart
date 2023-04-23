@@ -24,6 +24,9 @@ class RegisterButton extends StatelessWidget {
           formKey.currentState!.save();
           //debugPrint(
           //'${loginInfo['email']} ---> ${loginInfo['password']} --> ${patient.name} --> ${patient.gender} --> ${DateFormat('dd-MM-yyyy').format(patient.birthDate!)}');
+          if (patient.height! > 3.5) {
+            patient.height = patient.height! / 100;
+          }
           context.read<AuthBloc>().add(RegisterNewPatientRequested(
               email: loginInfo['email']!,
               password: loginInfo['password']!,

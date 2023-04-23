@@ -24,6 +24,9 @@ class PersonalDataButton extends StatelessWidget {
             final state = context.read<AuthBloc>().state;
             if (state is Authenticated) {
               state.patient.gender ??= 'Masculino';
+              if (state.patient.height! > 3.5) {
+                state.patient.height = state.patient.height! / 100;
+              }
               context
                   .read<PatientBloc>()
                   .add(UpdatePatientRequested(patient: state.patient));
