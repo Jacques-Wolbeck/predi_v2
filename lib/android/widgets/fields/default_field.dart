@@ -38,8 +38,8 @@ class DefaultField extends StatelessWidget {
           }
 
           if (isHeightField) {
-            var parsedValue = double.parse(value);
-            if (parsedValue > 300) {
+            var parsedValue = double.tryParse(value);
+            if (parsedValue == null || parsedValue > 300) {
               return 'Valor Inválido';
             }
           }

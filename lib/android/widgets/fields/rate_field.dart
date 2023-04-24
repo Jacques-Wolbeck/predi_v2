@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../shared/models/enums/data_type_enum.dart';
 
-//TODO If the user put a dot after the number, the double parse will throw an exeption, example: "80.0." this throw an error
 class RateField extends StatelessWidget {
   final Function(String?)? onSavedCallback;
   final DataTypeEnum dataType;
@@ -33,7 +32,10 @@ class RateField extends StatelessWidget {
           if (value!.isEmpty) {
             return 'Vazio';
           }
-          var parsedValue = double.parse(value);
+          var parsedValue = double.tryParse(value);
+          if (parsedValue == null) {
+            return 'Valor Inválido';
+          }
           if (dataType == DataTypeEnum.glycatedHemoglobin &&
               parsedValue > 100) {
             return 'Valor Inválido';

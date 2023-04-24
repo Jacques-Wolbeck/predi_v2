@@ -32,7 +32,10 @@ class MeasureField extends StatelessWidget {
           if (value!.isEmpty) {
             return 'Vazio';
           }
-          var parsedValue = double.parse(value);
+          var parsedValue = double.tryParse(value);
+          if (parsedValue == null) {
+            return 'Valor Inválido';
+          }
           if (dataType == DataTypeEnum.weight && parsedValue > 600.0) {
             return 'Valor Inválido';
           }

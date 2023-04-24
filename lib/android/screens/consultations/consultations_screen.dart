@@ -9,6 +9,7 @@ import 'package:predi_v2/shared/models/patients/patient_model.dart';
 
 import '../../../shared/blocs/data/data_bloc.dart';
 import '../../../shared/blocs/data/data_state.dart';
+import '../../../shared/controllers/firebase/firebase_db.dart';
 import '../../../shared/models/enums/data_type_enum.dart';
 import '../../widgets/alerts/simple_alert.dart';
 import '../../widgets/commons/app_snack_bar.dart';
@@ -127,10 +128,10 @@ class _ConsultationsScreenState extends State<ConsultationsScreen> {
         itemBuilder: (context, index) {
           var consultation = consultations[index] as ConsultationModel;
           //TODO auto delete old consultations
-          /*if (DateTime.now().isAfter(consultation.date!)) {
+          if (DateTime.now().isAfter(consultation.date!)) {
             FirebaseDb.instance
                 .delete(widget.patient, dataType, [consultation]);
-          }*/
+          }
           return _card(consultation);
         });
   }
