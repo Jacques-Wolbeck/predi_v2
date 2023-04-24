@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:predi_v2/android/widgets/bottom_sheets/home_bottom_sheet.dart';
-import 'package:predi_v2/android/widgets/commons/alerts/simple_alert.dart';
+import 'package:predi_v2/android/widgets/alerts/simple_alert.dart';
 import 'package:predi_v2/android/widgets/commons/app_report_information.dart';
-import 'package:predi_v2/android/widgets/tabs/home_tab_content.dart';
+import 'package:predi_v2/android/widgets/tabs/rates_measures_tab.dart';
 import 'package:predi_v2/shared/blocs/patient/patient_state.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
 
 import '../../shared/blocs/patient/patient_bloc.dart';
 import '../../shared/models/enums/data_type_enum.dart';
-import '../widgets/commons/app_screen_args.dart';
 import '../widgets/commons/app_snack_bar.dart';
 import '../widgets/tabs/consultations_tab.dart';
 
@@ -110,11 +109,11 @@ class _HomeScreenState extends State<HomeScreen> {
             child: TabBarView(
               children: [
                 Center(
-                  child: HomeTabContent(
+                  child: RatesAndMeasuresTab(
                       patient: widget.patient, dataType: DataTypeEnum.rate),
                 ),
                 Center(
-                  child: HomeTabContent(
+                  child: RatesAndMeasuresTab(
                       patient: widget.patient, dataType: DataTypeEnum.measure),
                 ),
                 Center(child: ConsultationsTab(patient: widget.patient)),

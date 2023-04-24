@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:predi_v2/android/widgets/commons/alerts/simple_alert.dart';
+import 'package:predi_v2/android/widgets/alerts/simple_alert.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
 
 import '../../../shared/blocs/authentication/auth_bloc.dart';
@@ -31,12 +31,6 @@ class HomeBottomSheet extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               _patientInfo(context),
-              /*_listTiles(
-                context,
-                "Compartilhar CDA",
-                Icons.share,
-                () => null,
-              ),*/
               _listTiles(
                 context,
                 "Editar dados gerais",
@@ -105,7 +99,7 @@ class HomeBottomSheet extends StatelessWidget {
                 )
               : CircleAvatar(
                   backgroundImage: const AssetImage(
-                    "assets/images/patient_icon.png",
+                    "assets/images/icons/patient_icon.png",
                   ),
                   backgroundColor:
                       Theme.of(context).colorScheme.primaryContainer,
@@ -113,11 +107,21 @@ class HomeBottomSheet extends StatelessWidget {
           const SizedBox(height: 12.0),
           Text(
             patient.name!,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.titleMedium!.merge(
+                  TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.bold),
+                ),
           ),
           Text(
             patient.email!,
-            //style: Theme.of(context).textTheme.subtitle2,
+            style: Theme.of(context).textTheme.titleSmall!.merge(
+                TextStyle(color: Theme.of(context).colorScheme.secondary)),
+          ),
+          Text(
+            '${patient.height ?? 0.00} m',
+            style: Theme.of(context).textTheme.titleSmall!.merge(
+                TextStyle(color: Theme.of(context).colorScheme.secondary)),
           ),
         ],
       ),

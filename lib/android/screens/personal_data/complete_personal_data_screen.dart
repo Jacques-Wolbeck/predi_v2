@@ -56,6 +56,7 @@ class _CompletePersonalDataScreenState
                 currentFocus: heightFocus,
                 nextFocus: birthdateFocus,
                 keyboardType: TextInputType.number,
+                isHeightField: true,
               ),
               DateField(
                   onSavedCallback: (value) => widget.patient.birthDate = value,

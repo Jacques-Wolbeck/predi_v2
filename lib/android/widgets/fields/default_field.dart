@@ -9,18 +9,19 @@ class DefaultField extends StatelessWidget {
   final FocusNode? nextFocus;
   final String? initialValue;
   final String? hintText;
+  final bool isHeightField;
 
-  const DefaultField({
-    super.key,
-    required this.labelText,
-    required this.prefixIcon,
-    required this.onSavedCallback,
-    required this.currentFocus,
-    this.initialValue,
-    this.hintText,
-    this.keyboardType = TextInputType.name,
-    this.nextFocus,
-  });
+  const DefaultField(
+      {super.key,
+      required this.labelText,
+      required this.prefixIcon,
+      required this.onSavedCallback,
+      required this.currentFocus,
+      this.initialValue,
+      this.hintText,
+      this.keyboardType = TextInputType.name,
+      this.nextFocus,
+      this.isHeightField = false});
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +30,18 @@ class DefaultField extends StatelessWidget {
       child: TextFormField(
         initialValue: initialValue ?? '',
         onSaved: onSavedCallback,
+        autovalidateMode:
+            isHeightField ? AutovalidateMode.onUserInteraction : null,
         validator: (value) {
           if (value!.isEmpty) {
             return 'Por favor digite um $labelText';
+          }
+
+          if (isHeightField) {
+            var parsedValue = double.parse(value);
+            if (parsedValue > 300) {
+              return 'Valor Inválido';
+            }
           }
           return null;
         },

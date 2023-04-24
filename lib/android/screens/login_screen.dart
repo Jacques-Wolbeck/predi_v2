@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:predi_v2/android/widgets/buttons/google_login_button.dart';
 import 'package:predi_v2/android/widgets/buttons/login_button.dart';
-import 'package:predi_v2/android/widgets/commons/alerts/reset_password_alert.dart';
+import 'package:predi_v2/android/widgets/alerts/reset_password_alert.dart';
 
 import '../../shared/blocs/authentication/auth_bloc.dart';
 import '../../shared/blocs/authentication/auth_state.dart';

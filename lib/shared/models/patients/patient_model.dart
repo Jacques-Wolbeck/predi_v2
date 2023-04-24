@@ -105,4 +105,34 @@ class PatientModel {
         glycatedHemoglobin: glycatedHemoglobin ?? this.glycatedHemoglobin,
         cholesterol: cholesterol ?? this.cholesterol);
   }
+
+  double calculateBmi({double? weight, double? height}) {
+    if (weight != null && height != null) {
+      return (weight / (height * height));
+    } else {
+      return (this.weight! / (this.height! * this.height!));
+    }
+  }
+
+  double getMaxIdealBmi() => (24.9 * height! * height!);
+
+  double getMinIdealBmi() => (18.5 * height! * height!);
+
+  String getBmiCondition(double bmi) {
+    if (bmi < 18.5) {
+      return "Magreza";
+    } else if (bmi <= 24.9) {
+      return "Saudável";
+    } else if (bmi <= 29.9) {
+      return "Sobrepeso";
+    } else if (bmi <= 34.9) {
+      return "Obesidade grau I";
+    } else if (bmi <= 39.9) {
+      return "Obesidade grau II";
+    } else if (bmi > 40) {
+      return "Obesidade grau III";
+    }
+
+    return '';
+  }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:predi_v2/android/widgets/commons/alerts/edit_rates_alert.dart';
 import 'package:predi_v2/android/widgets/commons/app_data_builder.dart';
 import 'package:predi_v2/shared/models/enums/data_type_enum.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
@@ -9,8 +8,9 @@ import 'package:predi_v2/shared/models/patients/patient_model.dart';
 import '../../../shared/blocs/data/data_bloc.dart';
 import '../../../shared/blocs/data/data_state.dart';
 import '../../../shared/models/patients/rate_model.dart';
+import '../../widgets/bottom_sheets/edit_rates_bottom_sheet.dart';
 import '../../widgets/buttons/delete_button.dart';
-import '../../widgets/commons/alerts/simple_alert.dart';
+import '../../widgets/alerts/simple_alert.dart';
 import '../../widgets/commons/app_snack_bar.dart';
 
 class RatesListScreen extends StatefulWidget {
@@ -106,12 +106,17 @@ class _RatesListScreenState extends State<RatesListScreen> {
                         deleteList.add(rate);
                         setState(() {});
                       } else {
-                        debugPrint('aloouuuu');
-                        showDialog(
-                            barrierDismissible: false,
+                        showModalBottomSheet(
                             context: context,
+                            isScrollControlled: true,
+                            isDismissible: false,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(16.0),
+                                  topRight: Radius.circular(16.0)),
+                            ),
                             builder: (context) {
-                              return EditRatesAlert(rate: rate);
+                              return EditRatesBottomSheet(rate: rate);
                             });
                       }
                     },

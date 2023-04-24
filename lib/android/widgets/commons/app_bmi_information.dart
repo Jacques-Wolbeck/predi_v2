@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:predi_v2/android/widgets/commons/alerts/simple_alert.dart';
+import 'package:predi_v2/android/widgets/alerts/simple_alert.dart';
 
 import '../../../shared/blocs/authentication/auth_bloc.dart';
 import '../../../shared/blocs/authentication/auth_state.dart';
@@ -18,7 +18,7 @@ class AppBmiInformation extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Image.asset(
-            "assets/images/imc_icon.png",
+            "assets/images/icons/imc_icon.png",
             height: 40.0,
             width: 40.0,
             color: Theme.of(context).colorScheme.primary,
@@ -31,13 +31,10 @@ class AppBmiInformation extends StatelessWidget {
         final state = context.read<AuthBloc>().state;
         if (state is Authenticated) {
           if (state.patient.weight != null && state.patient.height != null) {
-            final double bmi = (state.patient.weight! /
-                (state.patient.height! * state.patient.height!));
-            final double minIdealWeight =
-                18.5 * state.patient.height! * state.patient.height!;
-            final double maxIdealWeight =
-                24.9 * state.patient.height! * state.patient.height!;
-            final String condition = _bmiCondition(bmi);
+            final double bmi = state.patient.calculateBmi();
+            final double minIdealWeight = state.patient.getMinIdealBmi();
+            final double maxIdealWeight = state.patient.getMaxIdealBmi();
+            final String condition = state.patient.getBmiCondition(bmi);
 
             var updatedPatient = state.patient
                 .copyWith(bmi: double.parse(bmi.toStringAsPrecision(4)));
@@ -70,24 +67,6 @@ class AppBmiInformation extends StatelessWidget {
     );
   }
 
-  String _bmiCondition(double bmi) {
-    if (bmi < 18.5) {
-      return "Magreza";
-    } else if (bmi <= 24.9) {
-      return "Saudável";
-    } else if (bmi <= 29.9) {
-      return "Sobrepeso";
-    } else if (bmi <= 34.9) {
-      return "Obesidade grau I";
-    } else if (bmi <= 39.9) {
-      return "Obesidade grau II";
-    } else if (bmi > 40) {
-      return "Obesidade grau III";
-    }
-
-    return '';
-  }
-
   Widget _alertDialog(BuildContext context, String condition, double bmi,
       double maxIdealWeight, double minIdealWeight) {
     return AlertDialog(
@@ -106,13 +85,23 @@ class AppBmiInformation extends StatelessWidget {
         borderRadius: BorderRadius.circular(8.0),
       ),
       actions: <Widget>[
-        TextButton(
+        ElevatedButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text(
-            "Voltar",
-            style: TextStyle(fontWeight: FontWeight.bold),
+          style: ElevatedButton.styleFrom(
+            elevation: 3.0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+            ),
           ),
-        )
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              Icon(Icons.keyboard_return_outlined),
+              SizedBox(width: 4.0),
+              Text('Voltar', style: TextStyle(fontWeight: FontWeight.bold)),
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -138,7 +127,7 @@ class AppBmiInformation extends StatelessWidget {
                 ),
           ),
           Image.asset(
-            'assets/images/imc_icon.png',
+            'assets/images/icons/imc_icon.png',
             color: Theme.of(context).colorScheme.onPrimary,
             height: 60.0,
             width: 60.0,

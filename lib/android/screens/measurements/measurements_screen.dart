@@ -140,6 +140,16 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                 ],
               ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  '5 últimas medidas',
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+                const Icon(Icons.straighten_outlined, size: 12.0),
+              ],
+            ),
           ],
         ),
       ),

@@ -59,7 +59,7 @@ class _ResetPasswordAlertState extends State<ResetPasswordAlert> {
         borderRadius: BorderRadius.circular(8.0),
       ),
       actions: [
-        TextButton(
+        ElevatedButton(
           onPressed: () {
             if (_formKey.currentState!.validate()) {
               _formKey.currentState!.save();
@@ -69,15 +69,32 @@ class _ResetPasswordAlertState extends State<ResetPasswordAlert> {
               Navigator.pop(context);
             }
           },
-          child: const Text('Enviar',
-              style: TextStyle(fontWeight: FontWeight.bold)),
+          style: ElevatedButton.styleFrom(
+            elevation: 3.0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              Icon(Icons.send_outlined),
+              SizedBox(width: 4.0),
+              Text('Enviar', style: TextStyle(fontWeight: FontWeight.bold)),
+            ],
+          ),
         ),
-        TextButton(
+        ElevatedButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          child: const Text('Cancelar',
-              style: TextStyle(fontWeight: FontWeight.bold)),
+          style: ElevatedButton.styleFrom(
+            elevation: 3.0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+          ),
+          child: const Icon(Icons.cancel_outlined),
         ),
       ],
     );

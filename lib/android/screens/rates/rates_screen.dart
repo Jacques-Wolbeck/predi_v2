@@ -165,6 +165,16 @@ class _RatesScreenState extends State<RatesScreen> {
                 ],
               ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  '5 últimas taxas',
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+                const Icon(Icons.opacity_outlined, size: 12.0),
+              ],
+            ),
           ],
         ),
       ),
