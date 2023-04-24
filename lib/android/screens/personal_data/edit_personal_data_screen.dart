@@ -63,6 +63,7 @@ class _EditPersonalDataScreenState extends State<EditPersonalDataScreen> {
                 nextFocus: birthdateFocus,
                 initialValue: widget.patient.height.toString(),
                 keyboardType: TextInputType.number,
+                isHeightField: true,
               ),
               DateField(
                 onSavedCallback: (value) => widget.patient.birthDate = value,

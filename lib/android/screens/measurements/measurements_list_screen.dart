@@ -7,9 +7,9 @@ import '../../../shared/blocs/data/data_state.dart';
 import '../../../shared/models/enums/data_type_enum.dart';
 import '../../../shared/models/patients/measurement_model.dart';
 import '../../../shared/models/patients/patient_model.dart';
+import '../../widgets/bottom_sheets/edit_measures_bottom_sheet.dart';
 import '../../widgets/buttons/delete_button.dart';
-import '../../widgets/commons/alerts/edit_measurements_alert.dart';
-import '../../widgets/commons/alerts/simple_alert.dart';
+import '../../widgets/alerts/simple_alert.dart';
 import '../../widgets/commons/app_data_builder.dart';
 import '../../widgets/commons/app_snack_bar.dart';
 
@@ -105,12 +105,23 @@ class _MeasurementsListScreenState extends State<MeasurementsListScreen> {
                         deleteList.add(measure);
                         setState(() {});
                       } else {
-                        debugPrint('aloouuuu');
-                        showDialog(
+                        /*showDialog(
                             barrierDismissible: false,
                             context: context,
                             builder: (context) {
                               return EditMeasurementsAlert(measure: measure);
+                            });*/
+                        showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            isDismissible: false,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(16.0),
+                                  topRight: Radius.circular(16.0)),
+                            ),
+                            builder: (context) {
+                              return EditMeasuresBottomSheet(measure: measure);
                             });
                       }
                     },
@@ -141,7 +152,7 @@ class _MeasurementsListScreenState extends State<MeasurementsListScreen> {
           const Divider(),
           _titleContent(
               DataTypeEnum.bmi,
-              Icons.scale,
+              Icons.accessibility_new_outlined,
               (measure.weight! /
                       (widget.patient.height! * widget.patient.height!))
                   .toStringAsFixed(2)),
@@ -159,7 +170,7 @@ class _MeasurementsListScreenState extends State<MeasurementsListScreen> {
   }
 
   Widget _titleContent(
-      DataTypeEnum dataType, IconData icon, String? measureValue) {
+      DataTypeEnum dataType, IconData? icon, String? measureValue) {
     return Wrap(
       children: [
         Icon(

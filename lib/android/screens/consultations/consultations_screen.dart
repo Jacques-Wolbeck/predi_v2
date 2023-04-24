@@ -4,14 +4,14 @@ import 'package:intl/intl.dart';
 import 'package:predi_v2/android/widgets/buttons/update_buttons/consultation_button.dart';
 import 'package:predi_v2/android/widgets/commons/app_data_builder.dart';
 import 'package:predi_v2/android/widgets/fields/date_time_field.dart';
-import 'package:predi_v2/shared/controllers/firebase/firebase_db.dart';
 import 'package:predi_v2/shared/models/patients/consultation_model.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
 
 import '../../../shared/blocs/data/data_bloc.dart';
 import '../../../shared/blocs/data/data_state.dart';
+import '../../../shared/controllers/firebase/firebase_db.dart';
 import '../../../shared/models/enums/data_type_enum.dart';
-import '../../widgets/commons/alerts/simple_alert.dart';
+import '../../widgets/alerts/simple_alert.dart';
 import '../../widgets/commons/app_snack_bar.dart';
 import '../../widgets/fields/default_field.dart';
 
@@ -128,12 +128,11 @@ class _ConsultationsScreenState extends State<ConsultationsScreen> {
         itemBuilder: (context, index) {
           var consultation = consultations[index] as ConsultationModel;
           //TODO auto delete old consultations
-          /*if (DateTime.now().isAfter(consultation.date!)) {
+          if (DateTime.now().isAfter(consultation.date!)) {
             FirebaseDb.instance
                 .delete(widget.patient, dataType, [consultation]);
-          }*/
+          }
           return _card(consultation);
-          ;
         });
   }
 

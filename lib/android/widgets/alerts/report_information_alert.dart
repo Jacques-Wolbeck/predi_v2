@@ -59,11 +59,21 @@ class ReportInformationAlert extends StatelessWidget {
         borderRadius: BorderRadius.circular(8.0),
       ),
       actions: [
-        TextButton(
+        ElevatedButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text(
-            'Voltar',
-            style: TextStyle(fontWeight: FontWeight.bold),
+          style: ElevatedButton.styleFrom(
+            elevation: 3.0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              Icon(Icons.keyboard_return_outlined),
+              SizedBox(width: 4.0),
+              Text('Voltar', style: TextStyle(fontWeight: FontWeight.bold)),
+            ],
           ),
         ),
       ],

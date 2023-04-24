@@ -22,8 +22,6 @@ class RegisterButton extends StatelessWidget {
       onPressed: () {
         if (formKey.currentState!.validate()) {
           formKey.currentState!.save();
-          //debugPrint(
-          //'${loginInfo['email']} ---> ${loginInfo['password']} --> ${patient.name} --> ${patient.gender} --> ${DateFormat('dd-MM-yyyy').format(patient.birthDate!)}');
           if (patient.height! > 3.5) {
             patient.height = patient.height! / 100;
           }

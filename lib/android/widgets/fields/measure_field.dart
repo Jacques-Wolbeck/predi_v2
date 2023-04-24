@@ -9,6 +9,7 @@ class MeasureField extends StatelessWidget {
   final FocusNode? nextFocus;
   final String hintText;
   final bool isEditField;
+  final IconData? prefixIcon;
 
   const MeasureField(
       {super.key,
@@ -16,6 +17,7 @@ class MeasureField extends StatelessWidget {
       required this.dataType,
       required this.hintText,
       required this.currentFocus,
+      this.prefixIcon,
       this.nextFocus,
       this.isEditField = false});
 
@@ -30,6 +32,16 @@ class MeasureField extends StatelessWidget {
           if (value!.isEmpty) {
             return 'Vazio';
           }
+          var parsedValue = double.tryParse(value);
+          if (parsedValue == null) {
+            return 'Valor Inválido';
+          }
+          if (dataType == DataTypeEnum.weight && parsedValue > 600.0) {
+            return 'Valor Inválido';
+          }
+          if (dataType == DataTypeEnum.circumference && parsedValue > 500.0) {
+            return 'Valor Inválido';
+          }
           return null;
         },
         textAlign: isEditField ? TextAlign.start : TextAlign.center,
@@ -41,6 +53,7 @@ class MeasureField extends StatelessWidget {
           labelText: isEditField ? dataType.primaryTitle : null,
           hintText: hintText,
           filled: true,
+          prefixIcon: isEditField ? Icon(prefixIcon) : null,
           border: isEditField
               ? OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),

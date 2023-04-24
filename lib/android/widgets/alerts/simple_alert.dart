@@ -50,18 +50,40 @@ class SimpleAlert extends StatelessWidget {
       actions: [
         button1Text == null
             ? const SizedBox.shrink()
-            : TextButton(
+            : ElevatedButton(
                 onPressed: onPressed,
-                child: Text(
-                  button1Text!,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                style: ElevatedButton.styleFrom(
+                  elevation: 3.0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(Icons.check_outlined),
+                    const SizedBox(width: 4.0),
+                    Text(button1Text!,
+                        style: const TextStyle(fontWeight: FontWeight.bold)),
+                  ],
                 ),
               ),
-        TextButton(
+        ElevatedButton(
           onPressed: () => Navigator.pop(context),
-          child: Text(
-            button2Text,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+          style: ElevatedButton.styleFrom(
+            elevation: 3.0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(Icons.keyboard_return_outlined),
+              const SizedBox(width: 4.0),
+              Text(button2Text,
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
+            ],
           ),
         ),
       ],

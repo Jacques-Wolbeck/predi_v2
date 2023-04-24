@@ -4,11 +4,11 @@ import 'package:predi_v2/shared/models/patients/patient_model.dart';
 
 import '../commons/app_screen_args.dart';
 
-class HomeTabContent extends StatelessWidget {
+class RatesAndMeasuresTab extends StatelessWidget {
   final PatientModel patient;
   final DataTypeEnum dataType;
 
-  const HomeTabContent({
+  const RatesAndMeasuresTab({
     super.key,
     required this.patient,
     required this.dataType,
@@ -39,7 +39,8 @@ class HomeTabContent extends StatelessWidget {
                 children: [
                   _content(context, Icons.monitor_weight_outlined,
                       DataTypeEnum.weight, patient.weight),
-                  _content(context, Icons.scale, DataTypeEnum.bmi, patient.bmi),
+                  _content(context, Icons.accessibility_new_outlined,
+                      DataTypeEnum.bmi, patient.bmi),
                   _content(context, Icons.straighten,
                       DataTypeEnum.circumference, patient.circumference)
                 ],
@@ -69,7 +70,7 @@ class HomeTabContent extends StatelessWidget {
     );
   }
 
-  Widget _content(BuildContext context, IconData icon, DataTypeEnum dataType,
+  Widget _content(BuildContext context, IconData? icon, DataTypeEnum dataType,
       double? value) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 16.0),

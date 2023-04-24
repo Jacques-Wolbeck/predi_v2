@@ -85,6 +85,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 currentFocus: heightFocus,
                 nextFocus: birthdateFocus,
                 keyboardType: TextInputType.number,
+                isHeightField: true,
               ),
               DateField(
                   onSavedCallback: (value) => patient.birthDate = value,

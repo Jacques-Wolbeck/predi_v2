@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:predi_v2/shared/models/enums/patient_status_enum.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
 
-import 'alerts/report_information_alert.dart';
+import '../alerts/report_information_alert.dart';
 
 class AppReportInformation extends StatelessWidget {
   final PatientModel patient;
