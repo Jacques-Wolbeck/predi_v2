@@ -16,7 +16,7 @@ class PatientBloc extends Bloc<PatientEvent, PatientState> {
     emit(Loading());
     try {
       await patientController.updatePatient(event.patient);
-      emit(const Updated('Atualização de dados concluida.'));
+      emit(Updated('Atualização de dados concluida.', event.patient));
     } catch (error) {
       emit(PatientError(error.toString()));
     }

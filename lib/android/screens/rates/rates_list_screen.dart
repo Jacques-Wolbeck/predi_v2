@@ -95,7 +95,7 @@ class _RatesListScreenState extends State<RatesListScreen> {
             child: Material(
                 borderRadius: BorderRadius.circular(16.0),
                 color: deleteList.contains(rate)
-                    ? Theme.of(context).colorScheme.secondary
+                    ? Theme.of(context).colorScheme.onSecondaryContainer
                     : Theme.of(context).colorScheme.primaryContainer,
                 child: InkWell(
                     onTap: () {

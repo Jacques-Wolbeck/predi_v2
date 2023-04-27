@@ -94,7 +94,7 @@ class _MeasurementsListScreenState extends State<MeasurementsListScreen> {
             child: Material(
                 borderRadius: BorderRadius.circular(16.0),
                 color: deleteList.contains(measure)
-                    ? Theme.of(context).colorScheme.secondary
+                    ? Theme.of(context).colorScheme.onSecondaryContainer
                     : Theme.of(context).colorScheme.primaryContainer,
                 child: InkWell(
                     onTap: () {

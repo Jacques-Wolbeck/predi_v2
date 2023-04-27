@@ -9,6 +9,7 @@ import 'package:predi_v2/shared/models/patients/patient_model.dart';
 
 import '../../shared/blocs/patient/patient_bloc.dart';
 import '../../shared/models/enums/data_type_enum.dart';
+import '../widgets/commons/app_progress_indicator.dart';
 import '../widgets/commons/app_snack_bar.dart';
 import '../widgets/tabs/consultations_tab.dart';
 
@@ -106,18 +107,48 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Expanded(
             flex: 4,
-            child: TabBarView(
-              children: [
-                Center(
-                  child: RatesAndMeasuresTab(
-                      patient: widget.patient, dataType: DataTypeEnum.rate),
-                ),
-                Center(
-                  child: RatesAndMeasuresTab(
-                      patient: widget.patient, dataType: DataTypeEnum.measure),
-                ),
-                Center(child: ConsultationsTab(patient: widget.patient)),
-              ],
+            child: BlocBuilder<PatientBloc, PatientState>(
+              builder: (context, state) {
+                if (state is Loading) {
+                  return const Center(
+                    child: AppProgressIndicator(),
+                  );
+                }
+                if (state is InitialState) {
+                  return TabBarView(
+                    children: [
+                      Center(
+                        child: RatesAndMeasuresTab(
+                            patient: widget.patient,
+                            dataType: DataTypeEnum.rate),
+                      ),
+                      Center(
+                        child: RatesAndMeasuresTab(
+                            patient: widget.patient,
+                            dataType: DataTypeEnum.measure),
+                      ),
+                      Center(child: ConsultationsTab(patient: widget.patient)),
+                    ],
+                  );
+                }
+                if (state is Updated) {
+                  var patient = state.patient;
+                  return TabBarView(
+                    children: [
+                      Center(
+                        child: RatesAndMeasuresTab(
+                            patient: patient, dataType: DataTypeEnum.rate),
+                      ),
+                      Center(
+                        child: RatesAndMeasuresTab(
+                            patient: patient, dataType: DataTypeEnum.measure),
+                      ),
+                      Center(child: ConsultationsTab(patient: widget.patient)),
+                    ],
+                  );
+                }
+                return const Center(child: Text('Erro desconhecido'));
+              },
             ),
           )
         ],
