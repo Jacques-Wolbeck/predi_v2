@@ -12,7 +12,6 @@ class HomeBottomSheet extends StatelessWidget {
   const HomeBottomSheet({super.key, required this.patient});
 
   //TODO THE URL OF PHOTO IS NOT UPDATING IN THE FIREBASE DATABASE
-  //TODO NAO ESTA ATULAIZANDO OS DADOS DE TAXAS E MEDIDAS NA TELA INCIAL E APOS EDITAR
 
   @override
   Widget build(BuildContext context) {
