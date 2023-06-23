@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:predi_v2/android/widgets/bottom_sheets/home_bottom_sheet.dart';
 import 'package:predi_v2/android/widgets/alerts/simple_alert.dart';
 import 'package:predi_v2/android/widgets/commons/app_report_information.dart';
+import 'package:predi_v2/android/widgets/commons/app_screen_args.dart';
 import 'package:predi_v2/android/widgets/tabs/rates_measures_tab.dart';
 import 'package:predi_v2/shared/blocs/patient/patient_state.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
@@ -88,10 +89,23 @@ class _HomeScreenState extends State<HomeScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Expanded(
+          Flexible(
             flex: 5,
             child: AppReportInformation(
               patient: widget.patient,
+            ),
+          ),
+          Flexible(
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/survey_screen',
+                        arguments:
+                            DefaultScreenArguments(patient: widget.patient));
+                  },
+                  child: const Text('Questionário')),
             ),
           ),
           const PreferredSize(
@@ -104,8 +118,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          Expanded(
-            flex: 4,
+          Flexible(
+            flex: 5,
             child: BlocBuilder<PatientBloc, PatientState>(
               builder: (context, state) {
                 if (state is Loading) {
