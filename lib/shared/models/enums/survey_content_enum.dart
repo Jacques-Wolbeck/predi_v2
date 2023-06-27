@@ -38,7 +38,7 @@ enum SurveyContentEnum {
   heartDiseaseorAttack(
       title: 'Doença Cardíaca',
       description:
-          'Você tem doença arterial coronariana ou teve já teve infarto do miocárdio (ataque cardíaco)?',
+          'Você tem doença arterial coronariana ou já teve infarto do miocárdio (ataque cardíaco)?',
       image: 'assets/images/report.png'),
   physActivity(
       title: 'Atividade Física',

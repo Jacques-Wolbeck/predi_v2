@@ -11,7 +11,7 @@ class SurveyModel {
   final double? heartDiseaseorAttack;
   final double? physActivity;
   final double? mentHlth;
-  final double? cholCheck;
+  late final double? cholCheck;
 
   SurveyModel(
       {this.genHlth,
