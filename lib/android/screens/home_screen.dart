@@ -100,12 +100,19 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/survey_screen',
-                        arguments:
-                            DefaultScreenArguments(patient: widget.patient));
-                  },
-                  child: const Text('Questionário')),
+                onPressed: () async {
+                  Navigator.pushNamed(context, '/survey_screen',
+                      arguments:
+                          DefaultScreenArguments(patient: widget.patient));
+                },
+                style: ElevatedButton.styleFrom(
+                  elevation: 3.0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+                child: const Text('Questionário'),
+              ),
             ),
           ),
           const PreferredSize(

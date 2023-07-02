@@ -33,30 +33,6 @@ class _SurveyBackButtonState extends State<SurveyBackButton> {
                 setState(() {
                   widget.pageController.jumpToPage(3);
                 });
-              } else if (widget.currentIndex == 5) {
-                setState(() {
-                  widget.pageController.jumpToPage(4);
-                });
-              } else if (widget.currentIndex == 6) {
-                setState(() {
-                  widget.pageController.jumpToPage(5);
-                });
-              } else if (widget.currentIndex == 7) {
-                setState(() {
-                  widget.pageController.jumpToPage(6);
-                });
-              } else if (widget.currentIndex == 8) {
-                setState(() {
-                  widget.pageController.jumpToPage(7);
-                });
-              } else if (widget.currentIndex == 9) {
-                setState(() {
-                  widget.pageController.jumpToPage(8);
-                });
-              } else if (widget.currentIndex == 10) {
-                setState(() {
-                  widget.pageController.jumpToPage(9);
-                });
               }
             },
             style: ElevatedButton.styleFrom(

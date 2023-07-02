@@ -37,10 +37,10 @@ class _SplashScreenState extends State<SplashScreen> {
             Navigator.pushReplacementNamed(context, '/login_screen');
           }
         },
-        child: Center(
+        child: const Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               AppTitle(),
               SizedBox(width: 16.0),
               AppProgressIndicator(),

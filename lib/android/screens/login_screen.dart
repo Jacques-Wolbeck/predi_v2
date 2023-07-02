@@ -60,14 +60,14 @@ class _LoginScreenState extends State<LoginScreen> {
         },
         builder: (context, state) {
           if (state is Loading) {
-            return SafeArea(
+            return const SafeArea(
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(16.0),
                 child: Center(
                   child: Row(
                       //crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
+                      children: [
                         AppTitle(),
                         SizedBox(width: 16.0),
                         AppProgressIndicator(),

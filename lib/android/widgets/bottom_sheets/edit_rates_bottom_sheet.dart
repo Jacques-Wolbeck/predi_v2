@@ -141,8 +141,8 @@ class _EditRatesBottomSheetState extends State<EditRatesBottomSheet> {
                 borderRadius: BorderRadius.circular(8.0),
               ),
             ),
-            child: Row(
-              children: const [
+            child: const Row(
+              children: [
                 Icon(Icons.edit_outlined),
                 SizedBox(width: 4.0),
                 Text('Editar', style: TextStyle(fontWeight: FontWeight.bold)),
@@ -159,8 +159,8 @@ class _EditRatesBottomSheetState extends State<EditRatesBottomSheet> {
                 borderRadius: BorderRadius.circular(8.0),
               ),
             ),
-            child: Row(
-              children: const [
+            child: const Row(
+              children: [
                 Icon(Icons.cancel_outlined),
                 SizedBox(width: 4.0),
                 Text('Cancelar', style: TextStyle(fontWeight: FontWeight.bold)),

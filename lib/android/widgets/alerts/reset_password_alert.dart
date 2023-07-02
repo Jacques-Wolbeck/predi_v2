@@ -75,9 +75,9 @@ class _ResetPasswordAlertState extends State<ResetPasswordAlert> {
               borderRadius: BorderRadius.circular(8.0),
             ),
           ),
-          child: Row(
+          child: const Row(
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               Icon(Icons.send_outlined),
               SizedBox(width: 4.0),
               Text('Enviar', style: TextStyle(fontWeight: FontWeight.bold)),

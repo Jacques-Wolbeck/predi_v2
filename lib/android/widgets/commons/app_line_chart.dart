@@ -16,9 +16,12 @@ class AppLineChart extends StatelessWidget {
         minY: dataType.minValue,
         maxY: dataType.maxValue,
         titlesData: FlTitlesData(
-          rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-          topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-          bottomTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          rightTitles:
+              const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          topTitles:
+              const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          bottomTitles:
+              const AxisTitles(sideTitles: SideTitles(showTitles: false)),
           leftTitles: AxisTitles(
             sideTitles: SideTitles(
               reservedSize: MediaQuery.of(context).size.width * .15,
@@ -56,7 +59,7 @@ class AppLineChart extends StatelessWidget {
                 (index) => FlSpot(index.toDouble(), barData[index])),
             isCurved: false,
             color: Theme.of(context).colorScheme.primary,
-            dotData: FlDotData(
+            dotData: const FlDotData(
               show: true,
             ),
             belowBarData: BarAreaData(

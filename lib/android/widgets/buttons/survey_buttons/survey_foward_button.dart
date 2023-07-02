@@ -1,10 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:sklite/ensemble/forest.dart';
+import 'package:predi_v2/android/widgets/commons/app_progress_indicator.dart';
+import 'package:predi_v2/shared/services/prediabetes_api_service.dart';
 
-import '../../../../shared/models/patients/survey_model.dart';
+import '../../../../shared/models/patients/patient_model.dart';
 
 class SurveyFowardButton extends StatefulWidget {
   final PageController pageController;
@@ -26,10 +24,6 @@ class _SurveyFowardButtonState extends State<SurveyFowardButton> {
     return ElevatedButton(
       onPressed: () async {
         if (widget.currentIndex == 0) {
-          debugPrint(
-              "=============> high bp: ${widget.patientSurvey['highBp']}");
-          debugPrint(
-              "=============> high Chol: ${widget.patientSurvey['highChol']}");
           setState(() {
             widget.pageController.jumpToPage(1);
           });
@@ -42,87 +36,82 @@ class _SurveyFowardButtonState extends State<SurveyFowardButton> {
             widget.pageController.jumpToPage(3);
           });
         } else if (widget.currentIndex == 3) {
-          setState(() {
-            widget.pageController.jumpToPage(4);
-          });
-        } else if (widget.currentIndex == 4) {
-          setState(() {
-            widget.pageController.jumpToPage(5);
-          });
-        } else if (widget.currentIndex == 5) {
-          setState(() {
-            widget.pageController.jumpToPage(6);
-          });
-        } else if (widget.currentIndex == 6) {
-          setState(() {
-            widget.pageController.jumpToPage(7);
-          });
-        } else if (widget.currentIndex == 7) {
-          setState(() {
-            widget.pageController.jumpToPage(8);
-          });
-        } else if (widget.currentIndex == 8) {
-          setState(() {
-            widget.pageController.jumpToPage(9);
-          });
-        } else if (widget.currentIndex == 9) {
-          rootBundle
-              .loadString('assets/machinelearning/prediabetesmodel.json')
-              .then((response) {
-            debugPrint('-------tem arquivo ${response.length}');
-            // x index : 'GenHlth','HighBP', 'HighChol', 'BMI',
-            //'Income', 'DiffWalk', 'Age', 'PhysHlth', 'Education',
-            // 'HeartDiseaseorAttack', 'PhysActivity', 'MentHlth',
-            //'CholCheck',
-            /* var x = [
-              1.0,
-              0.0,
-              1.0,
-              32.0,
-              5.0,
-              0.0,
-              5.0,
-              0.0,
-              6.0,
-              0.0,
-              0.0,
-              3.0,
-              1.0,
-            ];*/
-            final patientSurveyModel = SurveyModel(
-                highBP: widget.patientSurvey['highBp'],
-                highChol: widget.patientSurvey['highChol'],
-                cholCheck: widget.patientSurvey['cholCheck'],
-                heartDiseaseorAttack:
-                    widget.patientSurvey['heartDiseaseorAttack'],
-                genHlth: widget.patientSurvey['genHlth'],
-                diffWalk: widget.patientSurvey['diffWalk'],
-                physActivity: widget.patientSurvey['physActivity'],
-                physHlth: widget.patientSurvey['physHlth'],
-                education: widget.patientSurvey['education'],
-                income: widget.patientSurvey['income']);
-            var x = [
-              patientSurveyModel.genHlth!,
-              patientSurveyModel.highBP!,
-              patientSurveyModel.highChol!,
-              patientSurveyModel.bmi!,
-              patientSurveyModel.income!,
-              patientSurveyModel.diffWalk!,
-              patientSurveyModel.age!,
-              patientSurveyModel.physHlth!,
-              patientSurveyModel.education!,
-              patientSurveyModel.heartDiseaseorAttack!,
-              patientSurveyModel.physActivity!,
-              patientSurveyModel.mentHlth!,
-              patientSurveyModel.cholCheck!
-            ];
-            Map<String, dynamic> params = json.decode(response);
-            debugPrint("Loading.......");
-            RandomForestClassifier randForest =
-                RandomForestClassifier.fromMap(params);
-            debugPrint("-----> resultado do modelo: ${randForest.predict(x)}");
-          });
-          Navigator.pop(context);
+          //final state = context.read<AuthBloc>().state;
+          //if (state is Authenticated) {
+          /*final patientSurveyModel = SurveyModel(
+              /*bmi: state.patient.bmi,
+                age: _getAge(state.patient),*/
+              bmi: 26.0,
+              age: 27.0,
+              highBP: widget.patientSurvey['highBp'],
+              highChol: widget.patientSurvey['highChol'],
+              cholCheck: widget.patientSurvey['cholCheck'],
+              heartDiseaseorAttack:
+                  widget.patientSurvey['heartDiseaseorAttack'],
+              genHlth: widget.patientSurvey['genHlth'],
+              diffWalk: widget.patientSurvey['diffWalk'],
+              physActivity: widget.patientSurvey['physActivity'],
+              physHlth: widget.patientSurvey['physHlth'],
+              mentHlth: widget.patientSurvey['mentHlth'],
+              education: 3.0,
+              income: 1.0);
+          var x = [
+            patientSurveyModel.genHlth!,
+            patientSurveyModel.highBP!,
+            patientSurveyModel.highChol!,
+            patientSurveyModel.bmi!,
+            patientSurveyModel.income!,
+            patientSurveyModel.diffWalk!,
+            patientSurveyModel.age!,
+            patientSurveyModel.physHlth!,
+            patientSurveyModel.education!,
+            patientSurveyModel.heartDiseaseorAttack!,
+            patientSurveyModel.physActivity!,
+            patientSurveyModel.mentHlth!,
+            patientSurveyModel.cholCheck!
+          ];*/
+          var x = [
+            1.0,
+            0.0,
+            1.0,
+            32.0,
+            5.0,
+            0.0,
+            5.0,
+            0.0,
+            6.0,
+            0.0,
+            0.0,
+            3.0,
+            1.0,
+          ];
+
+          //Navigator.pop(context);
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: const Text('Prediabetes Classifier'),
+                  content: FutureBuilder(
+                      future: PrediabetesApiService.instance.getModelInfo(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(snapshot.data.toString());
+                        } else if (snapshot.hasError) {
+                          return const Text('Deu erro');
+                        } else {
+                          return const Center(
+                            child: AppProgressIndicator(),
+                          );
+                        }
+                      }),
+                  actions: [
+                    ElevatedButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: const Text('Sair'))
+                  ],
+                );
+              });
         }
       },
       style: ElevatedButton.styleFrom(
@@ -132,8 +121,41 @@ class _SurveyFowardButtonState extends State<SurveyFowardButton> {
         ),
       ),
       child: Text(
-        widget.currentIndex == 9 ? "Finalizar questionário" : "Próximo",
+        widget.currentIndex == 3 ? "Finalizar questionário" : "Próximo",
       ),
     );
+  }
+
+  double _getAge(PatientModel patient) {
+    var age = DateTime.now().year - patient.birthDate!.year;
+    debugPrint('-------> age: ${patient.birthDate!.year.toString()}');
+    debugPrint('-------> age: $age');
+    if (age <= 24) {
+      return 1.0;
+    } else if (age >= 25 && age <= 29) {
+      return 2.0;
+    } else if (age >= 30 && age <= 34) {
+      return 3.0;
+    } else if (age >= 35 && age <= 39) {
+      return 4.0;
+    } else if (age >= 40 && age <= 44) {
+      return 5.0;
+    } else if (age >= 45 && age <= 49) {
+      return 6.0;
+    } else if (age >= 50 && age <= 54) {
+      return 7.0;
+    } else if (age >= 55 && age <= 59) {
+      return 8.0;
+    } else if (age >= 60 && age <= 64) {
+      return 9.0;
+    } else if (age >= 65 && age <= 69) {
+      return 10.0;
+    } else if (age >= 70 && age <= 74) {
+      return 11.0;
+    } else if (age >= 75 && age <= 79) {
+      return 12.0;
+    } else {
+      return 13.0;
+    }
   }
 }
