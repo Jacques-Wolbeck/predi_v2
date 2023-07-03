@@ -4,7 +4,7 @@ import '../../../shared/models/enums/survey_content_enum.dart';
 import '../../widgets/buttons/survey_buttons/binary_button.dart';
 
 class SecondPageScreen extends StatefulWidget {
-  final Function(String, double) updateSurvey;
+  final Function(String, int) updateSurvey;
   const SecondPageScreen({super.key, required this.updateSurvey});
 
   @override
@@ -59,9 +59,9 @@ class _SecondPageScreenState extends State<SecondPageScreen> {
                 }
               });
               if (_selectedCholCheckOption[0]) {
-                widget.updateSurvey('cholCheck', 1.0);
+                widget.updateSurvey('cholCheck', 1);
               } else {
-                widget.updateSurvey('cholCheck', 0.0);
+                widget.updateSurvey('cholCheck', 0);
               }
             },
             children: const [Text('Sim'), Text('Não')],
@@ -106,9 +106,9 @@ class _SecondPageScreenState extends State<SecondPageScreen> {
                 }
               });
               if (_selectedHeartDiseaseOption[0]) {
-                widget.updateSurvey('heartDiseaseorAttack', 1.0);
+                widget.updateSurvey('heartDiseaseorAttack', 1);
               } else {
-                widget.updateSurvey('heartDiseaseorAttack', 0.0);
+                widget.updateSurvey('heartDiseaseorAttack', 0);
               }
             },
             children: const [Text('Sim'), Text('Não')],

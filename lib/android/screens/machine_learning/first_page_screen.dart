@@ -4,7 +4,7 @@ import 'package:predi_v2/android/widgets/buttons/survey_buttons/binary_button.da
 import '../../../shared/models/enums/survey_content_enum.dart';
 
 class FirstPageScreen extends StatefulWidget {
-  final Function(String, double) updateSurvey;
+  final Function(String, int) updateSurvey;
   const FirstPageScreen({super.key, required this.updateSurvey});
 
   @override
@@ -60,9 +60,9 @@ class _FirstPageScreenState extends State<FirstPageScreen> {
                 }
               });
               if (_selectedBpOption[0]) {
-                widget.updateSurvey('highBp', 1.0);
+                widget.updateSurvey('highBp', 1);
               } else {
-                widget.updateSurvey('highBp', 0.0);
+                widget.updateSurvey('highBp', 0);
               }
             },
             children: const [Text('Sim'), Text('Não')],
@@ -107,9 +107,9 @@ class _FirstPageScreenState extends State<FirstPageScreen> {
                 }
               });
               if (_selectedCholOption[0]) {
-                widget.updateSurvey('highChol', 1.0);
+                widget.updateSurvey('highChol', 1);
               } else {
-                widget.updateSurvey('highChol', 0.0);
+                widget.updateSurvey('highChol', 0);
               }
             },
             children: const [Text('Sim'), Text('Não')],

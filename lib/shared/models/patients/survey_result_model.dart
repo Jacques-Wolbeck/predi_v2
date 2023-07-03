@@ -13,3 +13,19 @@ class SurveyResultModel {
     return 'Name: $name  -> Version: $version';
   }
 }
+
+class PredictionResult {
+  final String label;
+  final int prediction;
+
+  PredictionResult({required this.label, required this.prediction});
+  factory PredictionResult.fromJson(Map<String, dynamic> predict) {
+    return PredictionResult(
+        label: predict['label'], prediction: predict['prediction']);
+  }
+
+  @override
+  String toString() {
+    return '$label -> $prediction';
+  }
+}

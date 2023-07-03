@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../shared/models/enums/survey_content_enum.dart';
 
 class FourthPageScreen extends StatefulWidget {
-  final Function(String, double) updateSurvey;
+  final Function(String, int) updateSurvey;
   const FourthPageScreen({super.key, required this.updateSurvey});
 
   @override
@@ -53,7 +53,7 @@ class _FourthPageScreenState extends State<FourthPageScreen> {
               return null;
             },
             onFieldSubmitted: (value) {
-              widget.updateSurvey('physHlth', double.parse(value));
+              widget.updateSurvey('physHlth', int.parse(value));
             },
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
@@ -108,7 +108,7 @@ class _FourthPageScreenState extends State<FourthPageScreen> {
               return null;
             },
             onFieldSubmitted: (value) {
-              widget.updateSurvey('mentHlth', double.parse(value));
+              widget.updateSurvey('mentHlth', int.parse(value));
             },
             keyboardType: TextInputType.number,
             decoration: InputDecoration(

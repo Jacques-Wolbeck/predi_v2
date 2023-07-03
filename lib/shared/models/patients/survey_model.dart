@@ -1,17 +1,17 @@
 class SurveyModel {
-  final double? genHlth;
-  final double? highBP;
-  final double? highChol;
-  final double? bmi;
-  final double? income;
-  final double? diffWalk;
-  final double? age;
-  final double? physHlth;
-  final double? education;
-  final double? heartDiseaseorAttack;
-  final double? physActivity;
-  final double? mentHlth;
-  late final double? cholCheck;
+  final int? genHlth;
+  final int? highBP;
+  final int? highChol;
+  final int? bmi;
+  final int? income;
+  final int? diffWalk;
+  final int? age;
+  final int? physHlth;
+  final int? education;
+  final int? heartDiseaseorAttack;
+  final int? physActivity;
+  final int? mentHlth;
+  late final int? cholCheck;
 
   SurveyModel(
       {this.genHlth,
@@ -27,4 +27,22 @@ class SurveyModel {
       this.physActivity,
       this.mentHlth,
       this.cholCheck});
+
+  Map<String, dynamic> toJson() {
+    return {
+      "gen_hlth": genHlth.toString(),
+      "high_bp": highBP.toString(),
+      "high_chol": highChol.toString(),
+      "bmi": bmi.toString(),
+      "income": income.toString(),
+      "diffwalk": diffWalk.toString(),
+      "age": age.toString(),
+      "phys_hlth": physHlth.toString(),
+      "education": education.toString(),
+      "heart_disease_or_attack": heartDiseaseorAttack.toString(),
+      "phys_activity": physActivity.toString(),
+      "men_hlth": mentHlth.toString(),
+      "chol_check": cholCheck.toString()
+    };
+  }
 }

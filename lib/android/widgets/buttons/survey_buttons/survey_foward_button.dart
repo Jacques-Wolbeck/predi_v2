@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:predi_v2/android/widgets/commons/app_progress_indicator.dart';
 import 'package:predi_v2/shared/services/prediabetes_api_service.dart';
 
+import '../../../../shared/blocs/authentication/auth_bloc.dart';
+import '../../../../shared/blocs/authentication/auth_state.dart';
 import '../../../../shared/models/patients/patient_model.dart';
+import '../../../../shared/models/patients/survey_model.dart';
 
 class SurveyFowardButton extends StatefulWidget {
   final PageController pageController;
-  final Map<String, double> patientSurvey;
+  final Map<String, int> patientSurvey;
   final int currentIndex;
   const SurveyFowardButton(
       {super.key,
@@ -36,14 +40,14 @@ class _SurveyFowardButtonState extends State<SurveyFowardButton> {
             widget.pageController.jumpToPage(3);
           });
         } else if (widget.currentIndex == 3) {
-          //final state = context.read<AuthBloc>().state;
-          //if (state is Authenticated) {
-          /*final patientSurveyModel = SurveyModel(
+          final state = context.read<AuthBloc>().state;
+          if (state is Authenticated) {
+            final patientSurveyModel = SurveyModel(
               /*bmi: state.patient.bmi,
                 age: _getAge(state.patient),*/
-              bmi: 26.0,
-              age: 27.0,
-              highBP: widget.patientSurvey['highBp'],
+              bmi: 26,
+              age: 27,
+              highBP: widget.patientSurvey['highBp']!.toInt(),
               highChol: widget.patientSurvey['highChol'],
               cholCheck: widget.patientSurvey['cholCheck'],
               heartDiseaseorAttack:
@@ -53,24 +57,43 @@ class _SurveyFowardButtonState extends State<SurveyFowardButton> {
               physActivity: widget.patientSurvey['physActivity'],
               physHlth: widget.patientSurvey['physHlth'],
               mentHlth: widget.patientSurvey['mentHlth'],
-              education: 3.0,
-              income: 1.0);
-          var x = [
-            patientSurveyModel.genHlth!,
-            patientSurveyModel.highBP!,
-            patientSurveyModel.highChol!,
-            patientSurveyModel.bmi!,
-            patientSurveyModel.income!,
-            patientSurveyModel.diffWalk!,
-            patientSurveyModel.age!,
-            patientSurveyModel.physHlth!,
-            patientSurveyModel.education!,
-            patientSurveyModel.heartDiseaseorAttack!,
-            patientSurveyModel.physActivity!,
-            patientSurveyModel.mentHlth!,
-            patientSurveyModel.cholCheck!
-          ];*/
-          var x = [
+              education: 3,
+              income: 1,
+            );
+
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text('Prediabetes Classifier'),
+                    content: Container(
+                      margin: EdgeInsets.all(16.0),
+                      padding: EdgeInsets.all(16.0),
+                      child: FutureBuilder(
+                          future: PrediabetesApiService.instance
+                              .predict(patientSurveyModel),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return Text(snapshot.data.toString());
+                            } else if (snapshot.hasError) {
+                              return const Text('Deu erro');
+                            } else {
+                              return const Center(
+                                heightFactor: 25.0,
+                                child: AppProgressIndicator(),
+                              );
+                            }
+                          }),
+                    ),
+                    actions: [
+                      ElevatedButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text('Sair'))
+                    ],
+                  );
+                });
+          }
+          /*var x = [
             1.0,
             0.0,
             1.0,
@@ -84,34 +107,7 @@ class _SurveyFowardButtonState extends State<SurveyFowardButton> {
             0.0,
             3.0,
             1.0,
-          ];
-
-          //Navigator.pop(context);
-          showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  title: const Text('Prediabetes Classifier'),
-                  content: FutureBuilder(
-                      future: PrediabetesApiService.instance.getModelInfo(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          return Text(snapshot.data.toString());
-                        } else if (snapshot.hasError) {
-                          return const Text('Deu erro');
-                        } else {
-                          return const Center(
-                            child: AppProgressIndicator(),
-                          );
-                        }
-                      }),
-                  actions: [
-                    ElevatedButton(
-                        onPressed: () => Navigator.pop(context),
-                        child: const Text('Sair'))
-                  ],
-                );
-              });
+          ];*/
         }
       },
       style: ElevatedButton.styleFrom(

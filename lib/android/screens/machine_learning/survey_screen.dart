@@ -20,18 +20,18 @@ class SurveyScreen extends StatefulWidget {
 //TODO o aplicativo fica muito pesado com json de modelo de aprendizagem de maquina
 class _SurveyScreenState extends State<SurveyScreen> {
   final _pageController = PageController(initialPage: 0);
-  final Map<String, double> patientSurvey = {
-    'highBp': 0.0,
-    'highChol': 0.0,
-    'cholCheck': 0.0,
-    'heartDiseaseorAttack': 0.0,
-    'genHlth': 0.0,
-    'diffWalk': 0.0,
-    'physActivity': 0.0,
-    'physHlth': 0.0,
-    'mentHlth': 0.0,
-    'education': 0.0,
-    'income': 0.0,
+  final Map<String, int> patientSurvey = {
+    'highBp': 0,
+    'highChol': 0,
+    'cholCheck': 0,
+    'heartDiseaseorAttack': 0,
+    'genHlth': 0,
+    'diffWalk': 0,
+    'physActivity': 0,
+    'physHlth': 0,
+    'mentHlth': 0,
+    'education': 0,
+    'income': 0,
   };
   int currentIndex = 0;
 
@@ -151,7 +151,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
     );
   }
 
-  void _updateMap(String key, double newValue) {
+  void _updateMap(String key, int newValue) {
     patientSurvey.update(key, (value) => newValue);
   }
 

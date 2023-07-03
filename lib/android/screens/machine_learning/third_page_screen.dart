@@ -4,7 +4,7 @@ import '../../../shared/models/enums/survey_content_enum.dart';
 import '../../widgets/buttons/survey_buttons/binary_button.dart';
 
 class ThirdPageScreen extends StatefulWidget {
-  final Function(String, double) updateSurvey;
+  final Function(String, int) updateSurvey;
   const ThirdPageScreen({super.key, required this.updateSurvey});
 
   @override
@@ -63,17 +63,17 @@ class _ThirdPageScreenState extends State<ThirdPageScreen> {
                 }
               });
               if (_selectedGenHlthOption[0]) {
-                widget.updateSurvey('genHlth', 1.0);
+                widget.updateSurvey('genHlth', 1);
               } else if (_selectedGenHlthOption[1]) {
-                widget.updateSurvey('genHlth', 2.0);
+                widget.updateSurvey('genHlth', 2);
               } else if (_selectedGenHlthOption[2]) {
-                widget.updateSurvey('genHlth', 3.0);
+                widget.updateSurvey('genHlth', 3);
               } else if (_selectedGenHlthOption[3]) {
-                widget.updateSurvey('genHlth', 4.0);
+                widget.updateSurvey('genHlth', 4);
               } else if (_selectedGenHlthOption[4]) {
-                widget.updateSurvey('genHlth', 5.0);
+                widget.updateSurvey('genHlth', 5);
               } else {
-                widget.updateSurvey('genHlth', 1.0);
+                widget.updateSurvey('genHlth', 1);
               }
             },
             children: const [
@@ -130,9 +130,9 @@ class _ThirdPageScreenState extends State<ThirdPageScreen> {
                 }
               });
               if (_selectedDiffWalkOption[0]) {
-                widget.updateSurvey('diffWalk', 1.0);
+                widget.updateSurvey('diffWalk', 1);
               } else {
-                widget.updateSurvey('diffWalk', 0.0);
+                widget.updateSurvey('diffWalk', 0);
               }
             },
             children: const [Text('Sim'), Text('Não')],
@@ -177,9 +177,9 @@ class _ThirdPageScreenState extends State<ThirdPageScreen> {
                   }
                 });
                 if (_selectedPhysActivityOption[0]) {
-                  widget.updateSurvey('physActivity', 1.0);
+                  widget.updateSurvey('physActivity', 1);
                 } else {
-                  widget.updateSurvey('physActivity', 0.0);
+                  widget.updateSurvey('physActivity', 0);
                 }
               },
               children: const [Text('Sim'), Text('Não')])
