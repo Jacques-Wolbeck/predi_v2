@@ -23,15 +23,12 @@ class _SurveyScreenState extends State<SurveyScreen> {
   final Map<String, int> patientSurvey = {
     'highBp': 0,
     'highChol': 0,
-    'cholCheck': 0,
     'heartDiseaseorAttack': 0,
     'genHlth': 0,
     'diffWalk': 0,
     'physActivity': 0,
     'physHlth': 0,
-    'mentHlth': 0,
     'education': 0,
-    'income': 0,
   };
   int currentIndex = 0;
 
@@ -105,9 +102,10 @@ class _SurveyScreenState extends State<SurveyScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  const Text('Informações Extras'),
                   Expanded(
                     child: Container(
-                      height: MediaQuery.of(context).size.height * .5,
+                      height: MediaQuery.of(context).size.height * .6,
                       width: size.width,
                       alignment: Alignment.center,
                       padding: EdgeInsets.only(
@@ -127,7 +125,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * .08,
+                    height: MediaQuery.of(context).size.height * .05,
                   ),
                   Container(
                     alignment: Alignment.center,

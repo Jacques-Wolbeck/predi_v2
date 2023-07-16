@@ -65,9 +65,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 currentFocus: passwordFocus,
                 nextFocus: nameFocus,
               ),
-              const Divider(
-                thickness: 3.0,
-              ),
+              const Divider(thickness: 3.0),
               const Text('Dados Pessoais',
                   style: TextStyle(fontWeight: FontWeight.bold)),
               DefaultField(

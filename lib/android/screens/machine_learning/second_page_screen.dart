@@ -12,62 +12,13 @@ class SecondPageScreen extends StatefulWidget {
 }
 
 class _SecondPageScreenState extends State<SecondPageScreen> {
-  final List<bool> _selectedCholCheckOption = <bool>[false, true];
   final List<bool> _selectedHeartDiseaseOption = <bool>[false, true];
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _firstQuestion(),
         _secondQuestion(),
       ],
-    );
-  }
-
-  Widget _firstQuestion() {
-    return Container(
-      width: double.infinity,
-      margin: const EdgeInsets.all(8.0),
-      padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.background,
-          borderRadius: BorderRadius.circular(8.0),
-          boxShadow: [
-            BoxShadow(
-              blurRadius: .2,
-              offset: const Offset(.5, .5),
-              color: Theme.of(context).colorScheme.shadow,
-            )
-          ]),
-      child: Column(
-        children: [
-          Text(
-            SurveyContentEnum.cholCheck.description,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 16.0),
-          BinaryButton(
-            selectedOption: _selectedCholCheckOption,
-            onPressed: (index) {
-              setState(() {
-                for (int i = 0; i < _selectedCholCheckOption.length; i++) {
-                  if (i == index) {
-                    _selectedCholCheckOption[i] = true;
-                  } else {
-                    _selectedCholCheckOption[i] = false;
-                  }
-                }
-              });
-              if (_selectedCholCheckOption[0]) {
-                widget.updateSurvey('cholCheck', 1);
-              } else {
-                widget.updateSurvey('cholCheck', 0);
-              }
-            },
-            children: const [Text('Sim'), Text('Não')],
-          )
-        ],
-      ),
     );
   }
 

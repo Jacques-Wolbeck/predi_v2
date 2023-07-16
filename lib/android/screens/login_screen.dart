@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:predi_v2/android/widgets/buttons/google_login_button.dart';
 import 'package:predi_v2/android/widgets/buttons/login_button.dart';
 import 'package:predi_v2/android/widgets/alerts/reset_password_alert.dart';
+import 'package:predi_v2/shared/models/patients/patient_model.dart';
 
 import '../../shared/blocs/authentication/auth_bloc.dart';
 import '../../shared/blocs/authentication/auth_state.dart';
@@ -140,6 +141,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ],
               ),
+              ElevatedButton(
+                  onPressed: () => Navigator.pushNamed(
+                      context, '/survey_screen',
+                      arguments:
+                          DefaultScreenArguments(patient: PatientModel())),
+                  child: const Text('Teste'))
             ],
           ),
         ),
