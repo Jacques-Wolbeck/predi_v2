@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../shared/blocs/authentication/auth_bloc.dart';
 import '../../../../shared/blocs/authentication/auth_state.dart';
+import '../../../../shared/blocs/data/data_bloc.dart';
+import '../../../../shared/blocs/data/data_event.dart';
+import '../../../../shared/models/enums/data_type_enum.dart';
 import '../../../../shared/models/patients/patient_model.dart';
 import '../../../../shared/models/patients/survey_model.dart';
 
@@ -37,24 +40,31 @@ class _SurveyFowardButtonState extends State<SurveyFowardButton> {
           final state = context.read<AuthBloc>().state;
           if (state is Authenticated) {
             final patientSurveyModel = SurveyModel(
-              /*bmi: state.patient.bmi,
-                age: _getAge(state.patient),*/
-              bmi: 26,
-              age: 27,
+              //bmi: state.patient.bmi,
+              age: _getAge(state.patient),
+              date: DateTime.now(),
               highBP: widget.patientSurvey['highBp'],
               highChol: widget.patientSurvey['highChol'],
-              cholCheck: widget.patientSurvey['cholCheck'],
               heartDiseaseorAttack:
                   widget.patientSurvey['heartDiseaseorAttack'],
-              genHlth: widget.patientSurvey['genHlth'],
+              genHlth: widget.patientSurvey['genHlth'] == 0
+                  ? 1
+                  : widget.patientSurvey['genHlth'],
               diffWalk: widget.patientSurvey['diffWalk'],
               physActivity: widget.patientSurvey['physActivity'],
               physHlth: widget.patientSurvey['physHlth'],
-              education: widget.patientSurvey['education'],
+              education: widget.patientSurvey['education'] == 0
+                  ? 1
+                  : widget.patientSurvey['education'],
             );
 
             debugPrint('-------> ${widget.patientSurvey}');
-
+            context.read<DataBloc>().add(AddDataRequested(
+                patient: state.patient,
+                dataType: DataTypeEnum.survey,
+                data: patientSurveyModel));
+            debugPrint('-------> Survey criadoooo');
+            Navigator.pop(context);
             /*showDialog(
                 context: context,
                 builder: (context) {
@@ -116,36 +126,36 @@ class _SurveyFowardButtonState extends State<SurveyFowardButton> {
     );
   }
 
-  double _getAge(PatientModel patient) {
+  int _getAge(PatientModel patient) {
     var age = DateTime.now().year - patient.birthDate!.year;
     debugPrint('-------> age: ${patient.birthDate!.year.toString()}');
     debugPrint('-------> age: $age');
     if (age <= 24) {
-      return 1.0;
+      return 1;
     } else if (age >= 25 && age <= 29) {
-      return 2.0;
+      return 2;
     } else if (age >= 30 && age <= 34) {
-      return 3.0;
+      return 3;
     } else if (age >= 35 && age <= 39) {
-      return 4.0;
+      return 4;
     } else if (age >= 40 && age <= 44) {
-      return 5.0;
+      return 5;
     } else if (age >= 45 && age <= 49) {
-      return 6.0;
+      return 6;
     } else if (age >= 50 && age <= 54) {
-      return 7.0;
+      return 7;
     } else if (age >= 55 && age <= 59) {
-      return 8.0;
+      return 8;
     } else if (age >= 60 && age <= 64) {
-      return 9.0;
+      return 9;
     } else if (age >= 65 && age <= 69) {
-      return 10.0;
+      return 10;
     } else if (age >= 70 && age <= 74) {
-      return 11.0;
+      return 11;
     } else if (age >= 75 && age <= 79) {
-      return 12.0;
+      return 12;
     } else {
-      return 13.0;
+      return 13;
     }
   }
 }

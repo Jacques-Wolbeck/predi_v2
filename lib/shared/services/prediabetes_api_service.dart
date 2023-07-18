@@ -24,7 +24,7 @@ class PrediabetesApiService {
     var url = Uri.parse('http://192.168.1.146:8000/predict');
     final response = await http.post(url,
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode(survey.toJson()));
+        body: jsonEncode(survey.toJSON()));
     if (response.statusCode == 200) {
       final jsonResponse = jsonDecode(response.body);
       return PredictionResult.fromJson(jsonResponse);

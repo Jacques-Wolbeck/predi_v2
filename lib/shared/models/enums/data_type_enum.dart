@@ -2,6 +2,7 @@ enum DataTypeEnum {
   rate(primaryTitle: 'Taxas', secondaryTitle: 'Taxa'),
   measure(primaryTitle: 'Medidas', secondaryTitle: 'Medida'),
   consultation(primaryTitle: 'Consultas', secondaryTitle: 'Consulta'),
+  survey(primaryTitle: 'Survey', secondaryTitle: 'Informações Extras'),
   glycatedHemoglobin(
       primaryTitle: 'Hb1A1C',
       secondaryTitle: 'Hemoglobina glicada',
