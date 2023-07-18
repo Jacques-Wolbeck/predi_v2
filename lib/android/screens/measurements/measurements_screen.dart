@@ -117,7 +117,7 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                    child: const Text('DETALHES'))
+                    child: const Text('Detalhes'))
               ],
             ),
             const SizedBox(height: 16.0),

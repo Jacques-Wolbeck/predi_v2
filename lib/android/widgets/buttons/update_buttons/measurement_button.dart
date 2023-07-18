@@ -49,7 +49,7 @@ class MeasurementButton extends StatelessWidget {
           ),
         ),
         child: const Text(
-          "ATUALIZAR",
+          "Atualizar",
         ),
       ),
     );

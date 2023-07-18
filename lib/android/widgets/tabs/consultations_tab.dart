@@ -78,7 +78,7 @@ class _ConsultationsTabState extends State<ConsultationsTab> {
             ),
           ),
           child: Text(
-            'CADASTRAR ${DataTypeEnum.consultation.primaryTitle.toUpperCase()}',
+            'Cadastrar ${DataTypeEnum.consultation.primaryTitle}',
           ),
         )
       ],

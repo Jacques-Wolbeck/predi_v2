@@ -137,7 +137,7 @@ class _RatesScreenState extends State<RatesScreen> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                    child: const Text('DETALHES'))
+                    child: const Text('Detalhes'))
               ],
             ),
             const SizedBox(height: 16.0),

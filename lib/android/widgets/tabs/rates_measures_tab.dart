@@ -64,7 +64,7 @@ class RatesAndMeasuresTab extends StatelessWidget {
               //minimumSize: const Size(double.infinity, 45.0),
             ),
             child: Text(
-              'ATUALIZE SUAS ${dataType.primaryTitle.toUpperCase()}',
+              'Atualize suas ${dataType.primaryTitle}',
             )),
       ],
     );

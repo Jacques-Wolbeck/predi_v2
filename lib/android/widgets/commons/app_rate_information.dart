@@ -26,10 +26,10 @@ class _AppRateInformationState extends State<AppRateInformation>
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
-        children: const [
+        children: [
           Icon(Icons.info_outline),
           SizedBox(width: 8.0),
           Text("Informações sobre as taxas"),
@@ -65,9 +65,9 @@ class _AppRateInformationState extends State<AppRateInformation>
               borderRadius: BorderRadius.circular(8.0),
             ),
           ),
-          child: Row(
+          child: const Row(
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               Icon(Icons.keyboard_return_outlined),
               SizedBox(width: 4.0),
               Text('Voltar', style: TextStyle(fontWeight: FontWeight.bold)),

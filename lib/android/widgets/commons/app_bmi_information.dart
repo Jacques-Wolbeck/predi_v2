@@ -93,9 +93,9 @@ class AppBmiInformation extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
             ),
           ),
-          child: Row(
+          child: const Row(
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               Icon(Icons.keyboard_return_outlined),
               SizedBox(width: 4.0),
               Text('Voltar', style: TextStyle(fontWeight: FontWeight.bold)),

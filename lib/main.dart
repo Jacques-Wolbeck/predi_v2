@@ -13,5 +13,6 @@ void main() async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   //FirebaseCrashlytics.instance.crash();
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+
   runApp(const MyMaterialApp());
 }

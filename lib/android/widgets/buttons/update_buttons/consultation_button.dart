@@ -41,7 +41,7 @@ class ConsultationButton extends StatelessWidget {
           ),
         ),
         child: const Text(
-          "ADICIONAR CONSULTA",
+          "Adicionar Consulta",
         ),
       ),
     );

@@ -51,7 +51,7 @@ class RatesButton extends StatelessWidget {
           ),
         ),
         child: const Text(
-          "ATUALIZAR",
+          "Atualizar",
         ),
       ),
     );
