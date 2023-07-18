@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:predi_v2/android/widgets/commons/app_progress_indicator.dart';
-import 'package:predi_v2/shared/services/prediabetes_api_service.dart';
 
 import '../../../../shared/blocs/authentication/auth_bloc.dart';
 import '../../../../shared/blocs/authentication/auth_state.dart';
@@ -36,10 +34,6 @@ class _SurveyFowardButtonState extends State<SurveyFowardButton> {
             widget.pageController.jumpToPage(2);
           });
         } else if (widget.currentIndex == 2) {
-          setState(() {
-            widget.pageController.jumpToPage(3);
-          });
-        } else if (widget.currentIndex == 3) {
           final state = context.read<AuthBloc>().state;
           if (state is Authenticated) {
             final patientSurveyModel = SurveyModel(
@@ -47,7 +41,7 @@ class _SurveyFowardButtonState extends State<SurveyFowardButton> {
                 age: _getAge(state.patient),*/
               bmi: 26,
               age: 27,
-              highBP: widget.patientSurvey['highBp']!.toInt(),
+              highBP: widget.patientSurvey['highBp'],
               highChol: widget.patientSurvey['highChol'],
               cholCheck: widget.patientSurvey['cholCheck'],
               heartDiseaseorAttack:
@@ -56,19 +50,19 @@ class _SurveyFowardButtonState extends State<SurveyFowardButton> {
               diffWalk: widget.patientSurvey['diffWalk'],
               physActivity: widget.patientSurvey['physActivity'],
               physHlth: widget.patientSurvey['physHlth'],
-              mentHlth: widget.patientSurvey['mentHlth'],
-              education: 3,
-              income: 1,
+              education: widget.patientSurvey['education'],
             );
 
-            showDialog(
+            debugPrint('-------> ${widget.patientSurvey}');
+
+            /*showDialog(
                 context: context,
                 builder: (context) {
                   return AlertDialog(
                     title: const Text('Prediabetes Classifier'),
                     content: Container(
-                      margin: EdgeInsets.all(16.0),
-                      padding: EdgeInsets.all(16.0),
+                      margin: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.all(16.0),
                       child: FutureBuilder(
                           future: PrediabetesApiService.instance
                               .predict(patientSurveyModel),
@@ -91,7 +85,7 @@ class _SurveyFowardButtonState extends State<SurveyFowardButton> {
                           child: const Text('Sair'))
                     ],
                   );
-                });
+                });*/
           }
           /*var x = [
             1.0,
@@ -117,7 +111,7 @@ class _SurveyFowardButtonState extends State<SurveyFowardButton> {
         ),
       ),
       child: Text(
-        widget.currentIndex == 3 ? "Finalizar questionário" : "Próximo",
+        widget.currentIndex == 2 ? "Finalizar questionário" : "Próximo",
       ),
     );
   }

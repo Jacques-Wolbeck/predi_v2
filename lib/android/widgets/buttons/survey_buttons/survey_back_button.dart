@@ -29,10 +29,6 @@ class _SurveyBackButtonState extends State<SurveyBackButton> {
                 setState(() {
                   widget.pageController.jumpToPage(2);
                 });
-              } else if (widget.currentIndex == 4) {
-                setState(() {
-                  widget.pageController.jumpToPage(3);
-                });
               }
             },
             style: ElevatedButton.styleFrom(

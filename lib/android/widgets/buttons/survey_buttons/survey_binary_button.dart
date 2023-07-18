@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-class BinaryButton extends StatefulWidget {
+class SurveyBinaryButton extends StatefulWidget {
   final List<bool> selectedOption;
   final Function(int)? onPressed;
   final List<Widget> children;
-  const BinaryButton(
+  const SurveyBinaryButton(
       {super.key,
       required this.selectedOption,
       required this.onPressed,
       required this.children});
 
   @override
-  State<BinaryButton> createState() => _BinaryButtonState();
+  State<SurveyBinaryButton> createState() => _SurveyBinaryButtonState();
 }
 
-class _BinaryButtonState extends State<BinaryButton> {
+class _SurveyBinaryButtonState extends State<SurveyBinaryButton> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

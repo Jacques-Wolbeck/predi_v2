@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:predi_v2/android/widgets/buttons/survey_buttons/binary_button.dart';
+import 'package:predi_v2/android/widgets/buttons/survey_buttons/survey_binary_button.dart';
 
 import '../../../shared/models/enums/survey_content_enum.dart';
 
 class FirstPageScreen extends StatefulWidget {
-  final Function(String, int) updateSurvey;
+  final Function(SurveyContentEnum, dynamic) updateSurvey;
   const FirstPageScreen({super.key, required this.updateSurvey});
 
   @override
@@ -14,14 +14,12 @@ class FirstPageScreen extends StatefulWidget {
 class _FirstPageScreenState extends State<FirstPageScreen> {
   final List<bool> _selectedBpOption = <bool>[false, true];
   final List<bool> _selectedCholOption = <bool>[false, true];
+  final List<bool> _selectedHeartDiseaseOption = <bool>[false, true];
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        _firstQuestion(),
-        _secondQuestion(),
-      ],
+      children: [_firstQuestion(), _secondQuestion(), _thirdQuestion()],
     );
   }
 
@@ -47,7 +45,7 @@ class _FirstPageScreenState extends State<FirstPageScreen> {
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16.0),
-          BinaryButton(
+          SurveyBinaryButton(
             selectedOption: _selectedBpOption,
             onPressed: (index) {
               setState(() {
@@ -60,9 +58,9 @@ class _FirstPageScreenState extends State<FirstPageScreen> {
                 }
               });
               if (_selectedBpOption[0]) {
-                widget.updateSurvey('highBp', 1);
+                widget.updateSurvey(SurveyContentEnum.highBp, 1);
               } else {
-                widget.updateSurvey('highBp', 0);
+                widget.updateSurvey(SurveyContentEnum.highBp, 0);
               }
             },
             children: const [Text('Sim'), Text('Não')],
@@ -94,7 +92,7 @@ class _FirstPageScreenState extends State<FirstPageScreen> {
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16.0),
-          BinaryButton(
+          SurveyBinaryButton(
             selectedOption: _selectedCholOption,
             onPressed: (index) {
               setState(() {
@@ -107,9 +105,56 @@ class _FirstPageScreenState extends State<FirstPageScreen> {
                 }
               });
               if (_selectedCholOption[0]) {
-                widget.updateSurvey('highChol', 1);
+                widget.updateSurvey(SurveyContentEnum.highChol, 1);
               } else {
-                widget.updateSurvey('highChol', 0);
+                widget.updateSurvey(SurveyContentEnum.highChol, 0);
+              }
+            },
+            children: const [Text('Sim'), Text('Não')],
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _thirdQuestion() {
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8.0),
+      decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.background,
+          borderRadius: BorderRadius.circular(8.0),
+          boxShadow: [
+            BoxShadow(
+              blurRadius: .2,
+              offset: const Offset(.5, .5),
+              color: Theme.of(context).colorScheme.shadow,
+            )
+          ]),
+      child: Column(
+        children: [
+          Text(
+            SurveyContentEnum.heartDiseaseorAttack.description,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 16.0),
+          SurveyBinaryButton(
+            selectedOption: _selectedHeartDiseaseOption,
+            onPressed: (index) {
+              setState(() {
+                for (int i = 0; i < _selectedHeartDiseaseOption.length; i++) {
+                  if (i == index) {
+                    _selectedHeartDiseaseOption[i] = true;
+                  } else {
+                    _selectedHeartDiseaseOption[i] = false;
+                  }
+                }
+              });
+              if (_selectedHeartDiseaseOption[0]) {
+                widget.updateSurvey(SurveyContentEnum.heartDiseaseorAttack, 1);
+              } else {
+                widget.updateSurvey(SurveyContentEnum.heartDiseaseorAttack, 0);
               }
             },
             children: const [Text('Sim'), Text('Não')],
