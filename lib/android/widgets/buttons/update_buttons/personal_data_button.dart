@@ -30,9 +30,17 @@ class PersonalDataButton extends StatelessWidget {
               context
                   .read<PatientBloc>()
                   .add(UpdatePatientRequested(patient: state.patient));
-              Navigator.pushNamedAndRemoveUntil(
-                  context, '/home_screen', (route) => false,
-                  arguments: DefaultScreenArguments(patient: state.patient));
+
+              if (state.patient.isSurveyCompleted == null ||
+                  !state.patient.isSurveyCompleted!) {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/survey_screen', (route) => false,
+                    arguments: DefaultScreenArguments(patient: state.patient));
+              } else {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/home_screen', (route) => false,
+                    arguments: DefaultScreenArguments(patient: state.patient));
+              }
             }
           }
         },

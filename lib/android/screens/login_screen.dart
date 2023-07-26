@@ -44,6 +44,10 @@ class _LoginScreenState extends State<LoginScreen> {
               Navigator.pushReplacementNamed(
                   context, '/complete_personal_data_screen',
                   arguments: DefaultScreenArguments(patient: state.patient));
+            } else if (state.patient.isSurveyCompleted == null ||
+                !state.patient.isSurveyCompleted!) {
+              Navigator.pushReplacementNamed(context, '/survey_screen',
+                  arguments: DefaultScreenArguments(patient: state.patient));
             } else {
               Navigator.pushReplacementNamed(context, '/home_screen',
                   arguments: DefaultScreenArguments(patient: state.patient));
@@ -141,12 +145,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ],
               ),
-              ElevatedButton(
-                  onPressed: () => Navigator.pushNamed(
-                      context, '/survey_screen',
-                      arguments:
-                          DefaultScreenArguments(patient: PatientModel())),
-                  child: const Text('Teste'))
             ],
           ),
         ),

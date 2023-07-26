@@ -1,19 +1,19 @@
 enum SurveyContentEnum {
   genHlth(
-      key: 'genHlth',
+      key: 'gen_hlth',
       title: 'Saúde Geral',
       description:
           'Em uma escala de 1-5, como você considera sua saúde em geral?',
       image: 'assets/images/report.png',
       list: ['1- Excelente', '2- Muito Bom', '3- Bom', '4 - Pobre', '5- Ruim']),
   highBp(
-      key: 'highBp',
+      key: 'high_bp',
       title: 'Pressão Arterial',
       description: 'Você possui pressão alta?',
       image: 'assets/images/report.png',
       list: []),
   highChol(
-      key: 'highChol',
+      key: 'high_chol',
       title: 'Colesterol',
       description: 'Você possui colesterol alto?',
       image: 'assets/images/report.png',
@@ -32,14 +32,14 @@ enum SurveyContentEnum {
       image: 'assets/images/report.png',
       list: []),
   diffWalk(
-      key: 'diffWalk',
+      key: 'diffwalk',
       title: 'Dificuldade para Andar',
       description:
           'Você tem sérias dificuldades para caminhar ou subir escadas?',
       image: 'assets/images/report.png',
       list: []),
   physHlth(
-      key: 'physHlth',
+      key: 'phys_hlth',
       title: 'Saúde Física',
       description:
           'Por quantos dias nos últimos 30, você ficou com algum problema físico?',
@@ -66,27 +66,27 @@ enum SurveyContentEnum {
         '6- Ensino Superior ou Curso Técnico Completo'
       ]),
   heartDiseaseorAttack(
-      key: 'heartDiseaseorAttack',
+      key: 'heart_disease_or_attack',
       title: 'Doença Cardíaca',
       description:
           'Você tem doença arterial coronariana ou já teve infarto do miocárdio (ataque cardíaco)?',
       image: 'assets/images/report.png',
       list: []),
   physActivity(
-      key: 'physActivity',
+      key: 'phys_activity',
       title: 'Atividade Física',
       description: 'Você fez atividade física nos últimos 30 dias?',
       image: 'assets/images/report.png',
       list: []),
   mentHlth(
-      key: 'mentHlth',
+      key: 'ment_hlth',
       title: 'Saúde Mental',
       description:
           'Por quantos dias nos últimos 30, você teve problemas com a sua saúde mental?',
       image: 'assets/images/report.png',
       list: []),
   cholCheck(
-      key: 'cholCheck',
+      key: 'chol_check',
       title: 'Verificação de Colesterol',
       description: 'Você verificou seu colesterol nos últimos 5 anos?',
       image: 'assets/images/report.png',

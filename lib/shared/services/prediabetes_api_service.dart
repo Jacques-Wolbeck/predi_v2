@@ -9,7 +9,7 @@ class PrediabetesApiService {
 
   Future<SurveyResultModel?> getModelInfo() async {
     var url = Uri.parse(
-        'http://192.168.1.146:8000'); //esse é o ip da rede do computador (localhost)
+        'http://192.168.1.129:8000'); //esse é o ip da rede do computador (localhost)
 
     final response = await http.get(url);
     if (response.statusCode == 200) {
@@ -21,10 +21,10 @@ class PrediabetesApiService {
   }
 
   Future<PredictionResult?> predict(SurveyModel survey) async {
-    var url = Uri.parse('http://192.168.1.146:8000/predict');
+    var url = Uri.parse('http://192.168.1.129:8000/predict');
     final response = await http.post(url,
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode(survey.toJSON()));
+        body: jsonEncode(survey.toJSON(isPredict: true)));
     if (response.statusCode == 200) {
       final jsonResponse = jsonDecode(response.body);
       return PredictionResult.fromJson(jsonResponse);

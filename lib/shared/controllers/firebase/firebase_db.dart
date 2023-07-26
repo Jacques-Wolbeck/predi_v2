@@ -65,6 +65,16 @@ class FirebaseDb {
             .toList());
   }
 
+  Future<SurveyModel?> getLastSurvey(PatientModel patient) async {
+    try {
+      var snapshot = await _getRef(patient, DataTypeEnum.survey).get();
+      var doc = snapshot.docs.last;
+      return SurveyModel.fromJSON(doc.data() as Map<String, dynamic>);
+    } catch (error) {
+      throw const FormattedException('Questionário incompleto.');
+    }
+  }
+
   Object _getOrderBy(DataTypeEnum dataType) {
     switch (dataType) {
       case (DataTypeEnum.rate):

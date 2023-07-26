@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class SurveyModel {
   String? uid;
   DateTime? date;
+  int? bmi;
   int? age;
   int? genHlth;
   int? highBP;
@@ -16,6 +17,7 @@ class SurveyModel {
   SurveyModel({
     this.uid,
     this.date,
+    this.bmi,
     this.age,
     this.genHlth,
     this.highBP,
@@ -28,49 +30,58 @@ class SurveyModel {
   });
 
   factory SurveyModel.fromJSON(Map<String, dynamic> survey) {
-    if (survey['dateSurvey'] is Timestamp) {
-      survey['dateSurvey'] = survey['dateSurvey'].toDate();
+    if (survey['date_survey'] is Timestamp) {
+      survey['date_survey'] = survey['date_survey'].toDate();
     }
     return SurveyModel(
       uid: survey['uid'],
-      date: survey['dateSurvey'],
+      date: survey['date_survey'],
+      bmi: survey['bmi'],
       age: survey['age'],
-      genHlth: survey['genHlth'],
-      highBP: survey['highBp'],
-      highChol: survey['highChol'],
-      diffWalk: survey['diffWalk'],
-      physHlth: survey['physHlth'],
-      physActivity: survey['physActivity'],
+      genHlth: survey['gen_hlth'],
+      highBP: survey['high_bp'],
+      highChol: survey['high_chol'],
+      diffWalk: survey['diffwalk'],
+      physHlth: survey['phys_hlth'],
+      physActivity: survey['phys_activity'],
       education: survey['education'],
-      heartDiseaseorAttack: survey['heartDiseaseorAttack'],
+      heartDiseaseorAttack: survey['heart_disease_or_attack'],
     );
   }
-  Map<String, dynamic> toJSON() {
-    final json = <String, dynamic>{};
-    json.putIfAbsent('uid', () => uid);
-    json.putIfAbsent('dateSurvey', () => date);
-    json.putIfAbsent('age', () => age);
-    json.putIfAbsent('genHlth', () => genHlth);
-    json.putIfAbsent('highBp', () => highBP);
-    json.putIfAbsent('highChol', () => highChol);
-    json.putIfAbsent('diffWalk', () => diffWalk);
-    json.putIfAbsent('physHlth', () => physHlth);
-    json.putIfAbsent('physActivity', () => physActivity);
-    json.putIfAbsent('education', () => education);
-    json.putIfAbsent('heartDiseaseorAttack', () => heartDiseaseorAttack);
-    /*return {
-      "uid": uid,
-      "dateSurvey": date,
-      "age": age,
-      "genHlth": genHlth.toString(),
-      "highBp": highBP.toString(),
-      "highChol": highChol.toString(),
-      "diffWalk": diffWalk.toString(),
-      "physHlth": physHlth.toString(),
-      "education": education.toString(),
-      "heartDiseaseorAttack": heartDiseaseorAttack.toString(),
-      "physActivity": physActivity.toString(),
-    };*/
-    return json;
+  Map<String, dynamic> toJSON({bool isPredict = false}) {
+    if (isPredict) {
+      return {
+        "gen_hlth": genHlth,
+        "high_bp": highBP,
+        "high_chol": highChol,
+        "bmi": bmi,
+        "diffwalk": diffWalk,
+        "age": age,
+        "phys_hlth": physHlth,
+        "education": education,
+        "heart_disease_or_attack": heartDiseaseorAttack,
+        "phys_activity": physActivity
+      };
+    } else {
+      final json = <String, dynamic>{};
+      json.putIfAbsent('uid', () => uid);
+      json.putIfAbsent('date_survey', () => date);
+      json.putIfAbsent('bmi', () => bmi);
+      json.putIfAbsent('age', () => age);
+      json.putIfAbsent('gen_hlth', () => genHlth);
+      json.putIfAbsent('high_bp', () => highBP);
+      json.putIfAbsent('high_chol', () => highChol);
+      json.putIfAbsent('diffwalk', () => diffWalk);
+      json.putIfAbsent('phys_hlth', () => physHlth);
+      json.putIfAbsent('phys_activity', () => physActivity);
+      json.putIfAbsent('education', () => education);
+      json.putIfAbsent('heart_disease_or_attack', () => heartDiseaseorAttack);
+      return json;
+    }
+  }
+
+  @override
+  String toString() {
+    return 'uid $uid / date $date';
   }
 }

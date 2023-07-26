@@ -15,23 +15,24 @@ class PatientModel {
   double? glucose75g;
   double? glycatedHemoglobin; // Hemoglobina Glicada
   double? cholesterol;
+  bool? isSurveyCompleted;
 
-  PatientModel({
-    this.uid,
-    this.name,
-    this.email,
-    this.gender,
-    this.photo,
-    this.birthDate,
-    this.bmi,
-    this.cholesterol,
-    this.circumference,
-    this.fastingGlucose,
-    this.glucose75g,
-    this.glycatedHemoglobin,
-    this.height,
-    this.weight,
-  });
+  PatientModel(
+      {this.uid,
+      this.name,
+      this.email,
+      this.gender,
+      this.photo,
+      this.birthDate,
+      this.bmi,
+      this.cholesterol,
+      this.circumference,
+      this.fastingGlucose,
+      this.glucose75g,
+      this.glycatedHemoglobin,
+      this.height,
+      this.weight,
+      this.isSurveyCompleted = false});
 
   factory PatientModel.fromJSON(Map<String, dynamic> patient) {
     if (patient['nascimento'] is Timestamp) {
@@ -52,7 +53,8 @@ class PatientModel {
         fastingGlucose: patient['glicoseJejum'],
         glucose75g: patient['glicose75g'],
         glycatedHemoglobin: patient['hemoglobinaGlicolisada'],
-        cholesterol: patient['colesterol']);
+        cholesterol: patient['colesterol'],
+        isSurveyCompleted: patient['questionario']);
   }
 
   Map<String, dynamic> toJSON() {
@@ -71,25 +73,27 @@ class PatientModel {
     json.putIfAbsent('glicose75g', () => glucose75g);
     json.putIfAbsent('hemoglobinaGlicolisada', () => glycatedHemoglobin);
     json.putIfAbsent('colesterol', () => cholesterol);
+    json.putIfAbsent('questionario', () => isSurveyCompleted);
 
     return json;
   }
 
-  copyWith(
-      {String? uid,
-      String? name,
-      String? email,
-      String? gender,
-      String? photo,
-      DateTime? birthDate,
-      double? circumference,
-      double? weight,
-      double? height,
-      double? bmi,
-      double? fastingGlucose,
-      double? glucose75g,
-      double? glycatedHemoglobin,
-      double? cholesterol}) {
+  copyWith({
+    String? uid,
+    String? name,
+    String? email,
+    String? gender,
+    String? photo,
+    DateTime? birthDate,
+    double? circumference,
+    double? weight,
+    double? height,
+    double? bmi,
+    double? fastingGlucose,
+    double? glucose75g,
+    double? glycatedHemoglobin,
+    double? cholesterol,
+  }) {
     return PatientModel(
         uid: uid ?? this.uid,
         name: name ?? this.name,
