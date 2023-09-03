@@ -39,9 +39,21 @@ class _SecondPageScreenState extends State<SecondPageScreen> {
           ]),
       child: Column(
         children: [
-          Text(
-            SurveyContentEnum.genHlth.description,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  SurveyContentEnum.genHlth.description,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              Image.asset(
+                SurveyContentEnum.genHlth.image,
+                height: 30.0,
+                width: 30.0,
+              )
+            ],
           ),
           const SizedBox(height: 16.0),
           SurveyDropDownButton(
@@ -69,9 +81,22 @@ class _SecondPageScreenState extends State<SecondPageScreen> {
           ]),
       child: Column(
         children: [
-          Text(
-            SurveyContentEnum.diffWalk.description,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  SurveyContentEnum.diffWalk.description,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              Image.asset(
+                SurveyContentEnum.diffWalk.image,
+                height: 30.0,
+                width: 30.0,
+                color: Colors.black,
+              )
+            ],
           ),
           const SizedBox(height: 16.0),
           SurveyBinaryButton(
@@ -116,9 +141,21 @@ class _SecondPageScreenState extends State<SecondPageScreen> {
           ]),
       child: Column(
         children: [
-          Text(
-            SurveyContentEnum.physActivity.description,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  SurveyContentEnum.physActivity.description,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              Image.asset(
+                SurveyContentEnum.physActivity.image,
+                height: 30.0,
+                width: 30.0,
+              )
+            ],
           ),
           const SizedBox(height: 16.0),
           SurveyBinaryButton(

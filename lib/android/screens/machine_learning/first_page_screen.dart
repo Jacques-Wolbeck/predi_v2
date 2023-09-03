@@ -40,9 +40,21 @@ class _FirstPageScreenState extends State<FirstPageScreen> {
           ]),
       child: Column(
         children: [
-          Text(
-            SurveyContentEnum.highBp.description,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  SurveyContentEnum.highBp.description,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              Image.asset(
+                SurveyContentEnum.highBp.image,
+                height: 30.0,
+                width: 30.0,
+              )
+            ],
           ),
           const SizedBox(height: 16.0),
           SurveyBinaryButton(
@@ -87,9 +99,19 @@ class _FirstPageScreenState extends State<FirstPageScreen> {
           ]),
       child: Column(
         children: [
-          Text(
-            SurveyContentEnum.highChol.description,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                SurveyContentEnum.highChol.description,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Image.asset(
+                SurveyContentEnum.highChol.image,
+                height: 30.0,
+                width: 30.0,
+              )
+            ],
           ),
           const SizedBox(height: 16.0),
           SurveyBinaryButton(
@@ -134,9 +156,21 @@ class _FirstPageScreenState extends State<FirstPageScreen> {
           ]),
       child: Column(
         children: [
-          Text(
-            SurveyContentEnum.heartDiseaseorAttack.description,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  SurveyContentEnum.heartDiseaseorAttack.description,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              Image.asset(
+                SurveyContentEnum.heartDiseaseorAttack.image,
+                height: 30.0,
+                width: 30.0,
+              )
+            ],
           ),
           const SizedBox(height: 16.0),
           SurveyBinaryButton(

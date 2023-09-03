@@ -126,11 +126,12 @@ class AppBmiInformation extends StatelessWidget {
                   ),
                 ),
           ),
+          const SizedBox(height: 8.0),
           Image.asset(
-            'assets/images/icons/imc_icon.png',
+            'assets/images/icons/bmi_icon.png',
             color: Theme.of(context).colorScheme.onPrimary,
-            height: 60.0,
-            width: 60.0,
+            height: 45.0,
+            width: 45.0,
           )
         ],
       ),

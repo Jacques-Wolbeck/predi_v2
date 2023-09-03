@@ -102,7 +102,16 @@ class _SurveyScreenState extends State<SurveyScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text('Informações Extras'),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Text(
+                      'Informações Extras',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize:
+                              Theme.of(context).textTheme.bodyLarge!.fontSize),
+                    ),
+                  ),
                   Expanded(
                     child: Container(
                       height: MediaQuery.of(context).size.height * .6,
@@ -125,7 +134,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * .05,
+                    height: MediaQuery.of(context).size.height * .02,
                   ),
                   Container(
                     alignment: Alignment.center,

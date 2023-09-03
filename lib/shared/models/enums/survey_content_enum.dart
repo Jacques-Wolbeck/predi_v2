@@ -4,25 +4,25 @@ enum SurveyContentEnum {
       title: 'Saúde Geral',
       description:
           'Em uma escala de 1-5, como você considera sua saúde em geral?',
-      image: 'assets/images/report.png',
+      image: 'assets/images/icons/gen_hlth_icon.png',
       list: ['1- Excelente', '2- Muito Bom', '3- Bom', '4 - Pobre', '5- Ruim']),
   highBp(
       key: 'high_bp',
       title: 'Pressão Arterial',
       description: 'Você possui pressão alta?',
-      image: 'assets/images/report.png',
+      image: 'assets/images/icons/high_bp_icon.png',
       list: []),
   highChol(
       key: 'high_chol',
       title: 'Colesterol',
       description: 'Você possui colesterol alto?',
-      image: 'assets/images/report.png',
+      image: 'assets/images/icons/high_chol_icon.png',
       list: []),
   bmi(
       key: 'bmi',
       title: 'IMC',
       description: 'Índice de Massa Corpórea',
-      image: 'assets/images/report.png',
+      image: 'assets/images/icons/bmi_icon.png',
       list: []),
   income(
       key: 'income',
@@ -36,14 +36,14 @@ enum SurveyContentEnum {
       title: 'Dificuldade para Andar',
       description:
           'Você tem sérias dificuldades para caminhar ou subir escadas?',
-      image: 'assets/images/report.png',
+      image: 'assets/images/icons/diff_walk_icon.png',
       list: []),
   physHlth(
       key: 'phys_hlth',
       title: 'Saúde Física',
       description:
           'Por quantos dias nos últimos 30, você ficou com algum problema físico?',
-      image: 'assets/images/report.png',
+      image: 'assets/images/icons/phys_hlth_icon.png',
       list: [
         'Entre: 1 - 6 dias ',
         'Entre: 7 - 11 dias',
@@ -56,7 +56,7 @@ enum SurveyContentEnum {
       key: 'education',
       title: 'Educação',
       description: 'Qual o seu grau de escolaridade?',
-      image: 'assets/images/report.png',
+      image: 'assets/images/icons/education_icon.png',
       list: [
         '1- Nunca Frequentou a Escola ',
         '2- Ensino Fundamental',
@@ -70,13 +70,13 @@ enum SurveyContentEnum {
       title: 'Doença Cardíaca',
       description:
           'Você tem doença arterial coronariana ou já teve infarto do miocárdio (ataque cardíaco)?',
-      image: 'assets/images/report.png',
+      image: 'assets/images/icons/heart_attack_icon.png',
       list: []),
   physActivity(
       key: 'phys_activity',
       title: 'Atividade Física',
       description: 'Você fez atividade física nos últimos 30 dias?',
-      image: 'assets/images/report.png',
+      image: 'assets/images/icons/phys_activity_icon.png',
       list: []),
   mentHlth(
       key: 'ment_hlth',

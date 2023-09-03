@@ -36,9 +36,21 @@ class _ThirdPageScreenState extends State<ThirdPageScreen> {
           ]),
       child: Column(
         children: [
-          Text(
-            SurveyContentEnum.physHlth.description,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  SurveyContentEnum.physHlth.description,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              Image.asset(
+                SurveyContentEnum.physHlth.image,
+                height: 30.0,
+                width: 30.0,
+              )
+            ],
           ),
           SurveyDropDownButton(
               content: SurveyContentEnum.physHlth,
@@ -65,9 +77,21 @@ class _ThirdPageScreenState extends State<ThirdPageScreen> {
           ]),
       child: Column(
         children: [
-          Text(
-            SurveyContentEnum.education.description,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  SurveyContentEnum.education.description,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              Image.asset(
+                SurveyContentEnum.education.image,
+                height: 30.0,
+                width: 30.0,
+              )
+            ],
           ),
           SurveyDropDownButton(
             content: SurveyContentEnum.education,

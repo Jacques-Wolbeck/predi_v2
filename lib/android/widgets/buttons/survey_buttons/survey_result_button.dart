@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:predi_v2/android/widgets/commons/app_screen_args.dart';
 import 'package:predi_v2/shared/controllers/firebase/firebase_db.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
 import 'package:predi_v2/shared/models/patients/survey_model.dart';
@@ -32,7 +33,9 @@ class _SurveyResultButtonState extends State<SurveyResultButton> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        showDialog(
+        Navigator.pushNamed(context, '/survey_screen',
+            arguments: DefaultScreenArguments(patient: widget.patient));
+        /*showDialog(
             context: context,
             builder: (context) {
               return AlertDialog(
@@ -62,7 +65,7 @@ class _SurveyResultButtonState extends State<SurveyResultButton> {
                       child: const Text('Sair'))
                 ],
               );
-            });
+            });*/
       },
       style: ElevatedButton.styleFrom(
         elevation: 3.0,

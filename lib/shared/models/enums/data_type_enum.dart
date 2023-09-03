@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 enum DataTypeEnum {
   rate(primaryTitle: 'Taxas', secondaryTitle: 'Taxa'),
   measure(primaryTitle: 'Medidas', secondaryTitle: 'Medida'),
@@ -30,7 +32,8 @@ enum DataTypeEnum {
   bmi(
       primaryTitle: 'IMC',
       secondaryTitle: 'Índice de Massa Corpórea',
-      measurementUnit: 'kg/m'),
+      measurementUnit: 'kg/m',
+      icon: 'assets/images/icons/bmi_icon.png'),
   circumference(
       primaryTitle: 'Circunferência',
       secondaryTitle: 'Circunferência abdominal',
@@ -43,11 +46,13 @@ enum DataTypeEnum {
   final String? measurementUnit;
   final double? minValue;
   final double? maxValue;
+  final String? icon;
 
   const DataTypeEnum(
       {required this.primaryTitle,
       required this.secondaryTitle,
       this.measurementUnit,
       this.minValue,
-      this.maxValue});
+      this.maxValue,
+      this.icon});
 }

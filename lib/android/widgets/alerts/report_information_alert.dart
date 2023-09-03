@@ -33,10 +33,12 @@ class ReportInformationAlert extends StatelessWidget {
                     ),
                   ),
             ),
-            Icon(
-              Icons.feed_outlined,
+            const SizedBox(height: 8.0),
+            Image.asset(
+              'assets/images/icons/report_icon.png',
+              height: 45.0,
+              width: 45.0,
               color: Theme.of(context).colorScheme.onPrimary,
-              size: 40.0,
             )
           ],
         ),
