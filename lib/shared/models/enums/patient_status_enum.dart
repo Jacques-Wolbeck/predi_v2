@@ -1,6 +1,6 @@
 enum PatientStatusEnum {
   noData('Sem Dados',
-      "É necessário cadastrar todas as taxas, para que possamos realizar o diagnóstico, isso pode ser feito no botão abaixo 'Atualize suas taxas'"),
+      "É necessário cadastrar todas as taxas e medidas, para que possamos realizar o diagnóstico, isso pode ser feito no botão abaixo 'Atualize suas (taxas ou medidas)'"),
   diabetes('Diabetes!',
       'Há alto risco de diabetes, recomenda-se ir a um médico especialista para acompanhamento.'),
   preDiabetes('Pré-Diabetes',

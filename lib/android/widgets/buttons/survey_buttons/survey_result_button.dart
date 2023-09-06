@@ -27,6 +27,7 @@ class _SurveyResultButtonState extends State<SurveyResultButton> {
   void _getSurveyData() async {
     surveyData = await FirebaseDb.instance.getLastSurvey(widget.patient);
     surveyData!.bmi = widget.patient.bmi!.toInt();
+    surveyData!.sex = widget.patient.gender == "Masculino" ? 1 : 0;
   }
 
   @override

@@ -23,12 +23,13 @@ class _SurveyScreenState extends State<SurveyScreen> {
   final Map<String, int> patientSurvey = {
     'high_bp': 0,
     'high_chol': 0,
-    'heart_disease_or_attack': 0,
     'gen_hlth': 0,
-    'diffwalk': 0,
     'phys_activity': 0,
     'phys_hlth': 0,
     'education': 0,
+    'fruits': 0,
+    'smoker': 0,
+    'veggies': 0,
   };
   int currentIndex = 0;
 

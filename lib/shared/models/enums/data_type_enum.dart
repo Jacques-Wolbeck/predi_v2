@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 enum DataTypeEnum {
   rate(primaryTitle: 'Taxas', secondaryTitle: 'Taxa'),
   measure(primaryTitle: 'Medidas', secondaryTitle: 'Medida'),

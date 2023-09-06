@@ -14,7 +14,7 @@ class SecondPageScreen extends StatefulWidget {
 
 class _SecondPageScreenState extends State<SecondPageScreen> {
   final List<bool> _selectedPhysActivityOption = <bool>[false, true];
-  final List<bool> _selectedDiffWalkOption = <bool>[false, true];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -86,39 +86,20 @@ class _SecondPageScreenState extends State<SecondPageScreen> {
             children: [
               Expanded(
                 child: Text(
-                  SurveyContentEnum.diffWalk.description,
+                  SurveyContentEnum.physHlth.description,
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
               Image.asset(
-                SurveyContentEnum.diffWalk.image,
+                SurveyContentEnum.physHlth.image,
                 height: 30.0,
                 width: 30.0,
-                color: Colors.black,
               )
             ],
           ),
-          const SizedBox(height: 16.0),
-          SurveyBinaryButton(
-            selectedOption: _selectedDiffWalkOption,
-            onPressed: (index) {
-              setState(() {
-                for (int i = 0; i < _selectedDiffWalkOption.length; i++) {
-                  if (i == index) {
-                    _selectedDiffWalkOption[i] = true;
-                  } else {
-                    _selectedDiffWalkOption[i] = false;
-                  }
-                }
-              });
-              if (_selectedDiffWalkOption[0]) {
-                widget.updateSurvey(SurveyContentEnum.diffWalk, 1);
-              } else {
-                widget.updateSurvey(SurveyContentEnum.diffWalk, 0);
-              }
-            },
-            children: const [Text('Sim'), Text('Não')],
-          )
+          SurveyDropDownButton(
+              content: SurveyContentEnum.physHlth,
+              updateSurvey: widget.updateSurvey)
         ],
       ),
     );

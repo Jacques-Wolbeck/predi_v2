@@ -90,7 +90,26 @@ enum SurveyContentEnum {
       title: 'Verificação de Colesterol',
       description: 'Você verificou seu colesterol nos últimos 5 anos?',
       image: 'assets/images/report.png',
-      list: []);
+      list: []),
+  smoker(
+      key: 'smoker',
+      title: 'Consumo de Cigarro',
+      description: 'Você já fumou pelos menos 100 cigarros durante sua vida?',
+      image: 'assets/images/icons/smoker_icon.png',
+      list: []),
+  fruits(
+      key: 'fruits',
+      title: 'Frutas',
+      description: 'Você consome frutas uma ou mais vezes por dia?',
+      image: 'assets/images/icons/fruits_icon.png',
+      list: []),
+  veggies(
+      key: 'veggies',
+      title: 'Vegetais',
+      description: 'Você consome vegetais uma ou mais vezes por dia?',
+      image: 'assets/images/icons/veggies_icon.png',
+      list: []),
+  ;
 
   final String key;
   final String title;

@@ -14,7 +14,7 @@ class FirstPageScreen extends StatefulWidget {
 class _FirstPageScreenState extends State<FirstPageScreen> {
   final List<bool> _selectedBpOption = <bool>[false, true];
   final List<bool> _selectedCholOption = <bool>[false, true];
-  final List<bool> _selectedHeartDiseaseOption = <bool>[false, true];
+  final List<bool> _selectedSmokerOption = <bool>[false, true];
 
   @override
   Widget build(BuildContext context) {
@@ -161,12 +161,12 @@ class _FirstPageScreenState extends State<FirstPageScreen> {
             children: [
               Expanded(
                 child: Text(
-                  SurveyContentEnum.heartDiseaseorAttack.description,
+                  SurveyContentEnum.smoker.description,
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
               Image.asset(
-                SurveyContentEnum.heartDiseaseorAttack.image,
+                SurveyContentEnum.smoker.image,
                 height: 30.0,
                 width: 30.0,
               )
@@ -174,21 +174,21 @@ class _FirstPageScreenState extends State<FirstPageScreen> {
           ),
           const SizedBox(height: 16.0),
           SurveyBinaryButton(
-            selectedOption: _selectedHeartDiseaseOption,
+            selectedOption: _selectedSmokerOption,
             onPressed: (index) {
               setState(() {
-                for (int i = 0; i < _selectedHeartDiseaseOption.length; i++) {
+                for (int i = 0; i < _selectedSmokerOption.length; i++) {
                   if (i == index) {
-                    _selectedHeartDiseaseOption[i] = true;
+                    _selectedSmokerOption[i] = true;
                   } else {
-                    _selectedHeartDiseaseOption[i] = false;
+                    _selectedSmokerOption[i] = false;
                   }
                 }
               });
-              if (_selectedHeartDiseaseOption[0]) {
-                widget.updateSurvey(SurveyContentEnum.heartDiseaseorAttack, 1);
+              if (_selectedSmokerOption[0]) {
+                widget.updateSurvey(SurveyContentEnum.smoker, 1);
               } else {
-                widget.updateSurvey(SurveyContentEnum.heartDiseaseorAttack, 0);
+                widget.updateSurvey(SurveyContentEnum.smoker, 0);
               }
             },
             children: const [Text('Sim'), Text('Não')],

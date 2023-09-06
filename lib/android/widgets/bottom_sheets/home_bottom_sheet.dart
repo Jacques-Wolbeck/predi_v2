@@ -39,6 +39,12 @@ class HomeBottomSheet extends StatelessWidget {
               ),
               const Divider(),
               _listTiles(
+                  context, 'Editar informações extras', Icons.info_outline, () {
+                Navigator.pushNamed(context, '/survey_screen',
+                    arguments: DefaultScreenArguments(patient: patient));
+              }),
+              const Divider(),
+              _listTiles(
                 context,
                 "Sair",
                 Icons.exit_to_app,

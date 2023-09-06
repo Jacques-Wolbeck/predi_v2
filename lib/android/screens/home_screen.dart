@@ -101,7 +101,17 @@ class _HomeScreenState extends State<HomeScreen> {
             flex: 1,
             child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: SurveyResultButton(patient: widget.patient)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                        onPressed: () => null,
+                        child: const Text('Consumo de Água')),
+                    ElevatedButton(
+                        onPressed: () => null,
+                        child: const Text('Dicas de Saúde'))
+                  ],
+                )),
           ),
           const PreferredSize(
             preferredSize: Size.fromHeight(50.0),

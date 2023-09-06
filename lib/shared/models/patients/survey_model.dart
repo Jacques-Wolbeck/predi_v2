@@ -8,45 +8,49 @@ class SurveyModel {
   int? genHlth;
   int? highBP;
   int? highChol;
-  int? diffWalk;
   int? physHlth;
   int? education;
-  int? heartDiseaseorAttack;
   int? physActivity;
+  int? smoker;
+  int? fruits;
+  int? veggies;
+  int? sex;
 
-  SurveyModel({
-    this.uid,
-    this.date,
-    this.bmi,
-    this.age,
-    this.genHlth,
-    this.highBP,
-    this.highChol,
-    this.diffWalk,
-    this.physHlth,
-    this.education,
-    this.heartDiseaseorAttack,
-    this.physActivity,
-  });
+  SurveyModel(
+      {this.uid,
+      this.date,
+      this.bmi,
+      this.age,
+      this.genHlth,
+      this.highBP,
+      this.highChol,
+      this.physHlth,
+      this.education,
+      this.physActivity,
+      this.fruits,
+      this.smoker,
+      this.veggies,
+      this.sex});
 
   factory SurveyModel.fromJSON(Map<String, dynamic> survey) {
     if (survey['date_survey'] is Timestamp) {
       survey['date_survey'] = survey['date_survey'].toDate();
     }
     return SurveyModel(
-      uid: survey['uid'],
-      date: survey['date_survey'],
-      bmi: survey['bmi'],
-      age: survey['age'],
-      genHlth: survey['gen_hlth'],
-      highBP: survey['high_bp'],
-      highChol: survey['high_chol'],
-      diffWalk: survey['diffwalk'],
-      physHlth: survey['phys_hlth'],
-      physActivity: survey['phys_activity'],
-      education: survey['education'],
-      heartDiseaseorAttack: survey['heart_disease_or_attack'],
-    );
+        uid: survey['uid'],
+        date: survey['date_survey'],
+        bmi: survey['bmi'],
+        age: survey['age'],
+        genHlth: survey['gen_hlth'],
+        highBP: survey['high_bp'],
+        highChol: survey['high_chol'],
+        physHlth: survey['phys_hlth'],
+        physActivity: survey['phys_activity'],
+        education: survey['education'],
+        smoker: survey['smoker'],
+        fruits: survey['fruits'],
+        veggies: survey['veggies'],
+        sex: survey['sex']);
   }
   Map<String, dynamic> toJSON({bool isPredict = false}) {
     if (isPredict) {
@@ -55,12 +59,14 @@ class SurveyModel {
         "high_bp": highBP,
         "high_chol": highChol,
         "bmi": bmi,
-        "diffwalk": diffWalk,
         "age": age,
         "phys_hlth": physHlth,
         "education": education,
-        "heart_disease_or_attack": heartDiseaseorAttack,
-        "phys_activity": physActivity
+        "phys_activity": physActivity,
+        "fruits": fruits,
+        "veggies": veggies,
+        "smoker": smoker,
+        "sex": sex
       };
     } else {
       final json = <String, dynamic>{};
@@ -71,11 +77,14 @@ class SurveyModel {
       json.putIfAbsent('gen_hlth', () => genHlth);
       json.putIfAbsent('high_bp', () => highBP);
       json.putIfAbsent('high_chol', () => highChol);
-      json.putIfAbsent('diffwalk', () => diffWalk);
       json.putIfAbsent('phys_hlth', () => physHlth);
       json.putIfAbsent('phys_activity', () => physActivity);
       json.putIfAbsent('education', () => education);
-      json.putIfAbsent('heart_disease_or_attack', () => heartDiseaseorAttack);
+      json.putIfAbsent('smoker', () => smoker);
+      json.putIfAbsent('fruits', () => fruits);
+      json.putIfAbsent('veggies', () => veggies);
+      json.putIfAbsent('sex', () => sex);
+
       return json;
     }
   }

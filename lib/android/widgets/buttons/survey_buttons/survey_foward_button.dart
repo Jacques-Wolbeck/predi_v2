@@ -43,22 +43,21 @@ class _SurveyFowardButtonState extends State<SurveyFowardButton> {
           final state = context.read<AuthBloc>().state;
           if (state is Authenticated) {
             final patientSurveyModel = SurveyModel(
-              age: _getAge(state.patient),
-              date: DateTime.now(),
-              highBP: widget.patientSurvey['high_bp'],
-              highChol: widget.patientSurvey['high_chol'],
-              heartDiseaseorAttack:
-                  widget.patientSurvey['heart_disease_or_attack'],
-              genHlth: widget.patientSurvey['gen_hlth'] == 0
-                  ? 1
-                  : widget.patientSurvey['gen_hlth'],
-              diffWalk: widget.patientSurvey['diffwalk'],
-              physActivity: widget.patientSurvey['phys_activity'],
-              physHlth: widget.patientSurvey['phys_hlth'],
-              education: widget.patientSurvey['education'] == 0
-                  ? 1
-                  : widget.patientSurvey['education'],
-            );
+                age: _getAge(state.patient),
+                date: DateTime.now(),
+                highBP: widget.patientSurvey['high_bp'],
+                highChol: widget.patientSurvey['high_chol'],
+                genHlth: widget.patientSurvey['gen_hlth'] == 0
+                    ? 1
+                    : widget.patientSurvey['gen_hlth'],
+                physActivity: widget.patientSurvey['phys_activity'],
+                physHlth: widget.patientSurvey['phys_hlth'],
+                education: widget.patientSurvey['education'] == 0
+                    ? 1
+                    : widget.patientSurvey['education'],
+                fruits: widget.patientSurvey['fruits'],
+                veggies: widget.patientSurvey['veggies'],
+                smoker: widget.patientSurvey['veggies']);
 
             //debugPrint('-------> ${widget.patientSurvey}');
             context.read<DataBloc>().add(AddDataRequested(
