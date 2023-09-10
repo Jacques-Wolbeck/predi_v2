@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:predi_v2/shared/blocs/authentication/auth_state.dart';
 import 'package:predi_v2/shared/blocs/data/data_event.dart';
 import 'package:predi_v2/shared/models/enums/data_type_enum.dart';
+import 'package:predi_v2/shared/models/patients/patient_model.dart';
 import 'package:predi_v2/shared/models/patients/rate_model.dart';
 
 import '../../../../shared/blocs/authentication/auth_bloc.dart';
@@ -12,8 +13,9 @@ import '../../../../shared/blocs/patient/patient_event.dart';
 
 class RatesButton extends StatelessWidget {
   final GlobalKey<FormState> formKey;
+  final PatientModel patient;
 
-  const RatesButton({super.key, required this.formKey});
+  const RatesButton({super.key, required this.formKey, required this.patient});
 
   @override
   Widget build(BuildContext context) {
@@ -26,19 +28,19 @@ class RatesButton extends StatelessWidget {
             formKey.currentState!.reset();
             final state = context.read<AuthBloc>().state;
             if (state is Authenticated) {
-              var updatedPatient = state.patient.copyWith(cholesterol: 0.00);
+              //var updatedPatient = patient.copyWith(cholesterol: 0.00);
               context
                   .read<PatientBloc>()
-                  .add(UpdatePatientRequested(patient: updatedPatient));
+                  .add(UpdatePatientRequested(patient: patient));
               final newRate = RateModel(
                   date: DateTime.now(),
-                  cholesterol: updatedPatient.cholesterol,
-                  fastingGlucose: updatedPatient.fastingGlucose,
-                  glucose75g: updatedPatient.glucose75g,
-                  glycatedHemoglobin: updatedPatient.glycatedHemoglobin);
+                  cholesterol: patient.cholesterol,
+                  fastingGlucose: patient.fastingGlucose,
+                  glucose75g: patient.glucose75g,
+                  glycatedHemoglobin: patient.glycatedHemoglobin);
 
               context.read<DataBloc>().add(AddDataRequested(
-                  patient: updatedPatient,
+                  patient: patient,
                   dataType: DataTypeEnum.rate,
                   data: newRate));
             }

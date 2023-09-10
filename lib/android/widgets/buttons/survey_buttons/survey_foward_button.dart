@@ -57,7 +57,7 @@ class _SurveyFowardButtonState extends State<SurveyFowardButton> {
                     : widget.patientSurvey['education'],
                 fruits: widget.patientSurvey['fruits'],
                 veggies: widget.patientSurvey['veggies'],
-                smoker: widget.patientSurvey['veggies']);
+                smoker: widget.patientSurvey['smoker']);
 
             //debugPrint('-------> ${widget.patientSurvey}');
             context.read<DataBloc>().add(AddDataRequested(

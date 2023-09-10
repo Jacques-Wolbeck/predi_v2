@@ -121,7 +121,7 @@ class _RatesScreenState extends State<RatesScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                RatesButton(formKey: _formKey),
+                RatesButton(formKey: _formKey, patient: widget.patient),
                 ElevatedButton(
                     onPressed: () {
                       glycatedFocus.unfocus();

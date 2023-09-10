@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:predi_v2/android/screens/consultations/consultations_screen.dart';
 import 'package:predi_v2/android/screens/home_screen.dart';
 import 'package:predi_v2/android/screens/login_screen.dart';
-import 'package:predi_v2/android/screens/machine_learning/survey_screen.dart';
+import 'package:predi_v2/android/screens/report_detail/report_detail_screen.dart';
+import 'package:predi_v2/android/screens/survey/survey_screen.dart';
 import 'package:predi_v2/android/screens/measurements/measurements_list_screen.dart';
 import 'package:predi_v2/android/screens/measurements/measurements_screen.dart';
 import 'package:predi_v2/android/screens/rates/rates_list_screen.dart';
@@ -76,6 +77,14 @@ Route onGenerateRoute(RouteSettings settings) {
       return CustomPageRoute(
           child: SurveyScreen(
             patient: args.patient,
+          ),
+          settings: settings);
+    case '/report_detail_screen':
+      final args = settings.arguments as ReportDetailScreenArguments;
+      return CustomPageRoute(
+          child: ReportDetailScreen(
+            patient: args.patient,
+            surveyData: args.survey,
           ),
           settings: settings);
     case '/register_screen':

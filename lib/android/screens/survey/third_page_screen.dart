@@ -18,7 +18,7 @@ class _ThirdPageScreenState extends State<ThirdPageScreen> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [_firstQuestion(), _secondQuestion()],
+      children: [_firstQuestion(), _secondQuestion(), _thirdQuestion()],
     );
   }
 

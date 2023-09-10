@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:predi_v2/android/screens/machine_learning/first_page_screen.dart';
-import 'package:predi_v2/android/screens/machine_learning/second_page_screen.dart';
-import 'package:predi_v2/android/screens/machine_learning/third_page_screen.dart';
+import 'package:predi_v2/android/screens/survey/first_page_screen.dart';
+import 'package:predi_v2/android/screens/survey/second_page_screen.dart';
+import 'package:predi_v2/android/screens/survey/third_page_screen.dart';
 import 'package:predi_v2/android/widgets/buttons/survey_buttons/survey_foward_button.dart';
 import 'package:predi_v2/shared/models/enums/survey_content_enum.dart';
 

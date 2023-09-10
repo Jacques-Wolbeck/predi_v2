@@ -87,90 +87,89 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _body() {
     return SafeArea(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Flexible(
-            flex: 5,
-            child: AppReportInformation(
-              patient: widget.patient,
-            ),
-          ),
-          Flexible(
-            flex: 1,
-            child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                        onPressed: () => null,
-                        child: const Text('Consumo de Água')),
-                    ElevatedButton(
-                        onPressed: () => null,
-                        child: const Text('Dicas de Saúde'))
+      child: BlocBuilder<PatientBloc, PatientState>(
+        builder: (context, state) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Flexible(
+                flex: 5,
+                child: AppReportInformation(
+                  patient: widget.patient,
+                ),
+              ),
+              Flexible(
+                flex: 1,
+                child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                            onPressed: () => null,
+                            child: const Text('Consumo de Água')),
+                        ElevatedButton(
+                            onPressed: () => null,
+                            child: const Text('Dicas de Saúde'))
+                      ],
+                    )),
+              ),
+              const PreferredSize(
+                preferredSize: Size.fromHeight(50.0),
+                child: TabBar(
+                  tabs: [
+                    Tab(text: 'Taxas', icon: Icon(Icons.opacity)),
+                    Tab(text: 'Medidas', icon: Icon(Icons.straighten)),
+                    Tab(text: 'Consultas', icon: Icon(Icons.calendar_month)),
                   ],
-                )),
-          ),
-          const PreferredSize(
-            preferredSize: Size.fromHeight(50.0),
-            child: TabBar(
-              tabs: [
-                Tab(text: 'Taxas', icon: Icon(Icons.opacity)),
-                Tab(text: 'Medidas', icon: Icon(Icons.straighten)),
-                Tab(text: 'Consultas', icon: Icon(Icons.calendar_month)),
-              ],
-            ),
-          ),
-          Flexible(
-            flex: 5,
-            child: BlocBuilder<PatientBloc, PatientState>(
-              builder: (context, state) {
-                if (state is Loading) {
-                  return const Center(
-                    child: AppProgressIndicator(),
-                  );
-                }
-                if (state is InitialState) {
-                  return TabBarView(
-                    children: [
-                      Center(
-                        child: RatesAndMeasuresTab(
-                            patient: widget.patient,
-                            dataType: DataTypeEnum.rate),
-                      ),
-                      Center(
-                        child: RatesAndMeasuresTab(
-                            patient: widget.patient,
-                            dataType: DataTypeEnum.measure),
-                      ),
-                      Center(child: ConsultationsTab(patient: widget.patient)),
-                    ],
-                  );
-                }
-                if (state is Updated) {
-                  var patient = state.patient;
-                  return TabBarView(
-                    children: [
-                      Center(
-                        child: RatesAndMeasuresTab(
-                            patient: patient, dataType: DataTypeEnum.rate),
-                      ),
-                      Center(
-                        child: RatesAndMeasuresTab(
-                            patient: patient, dataType: DataTypeEnum.measure),
-                      ),
-                      Center(child: ConsultationsTab(patient: widget.patient)),
-                    ],
-                  );
-                }
-                return const Center(child: Text('Erro desconhecido'));
-              },
-            ),
-          )
-        ],
+                ),
+              ),
+              Flexible(flex: 5, child: _dataState(state))
+            ],
+          );
+        },
       ),
     );
+  }
+
+  Widget _dataState(PatientState state) {
+    if (state is Loading) {
+      return const Center(
+        child: AppProgressIndicator(),
+      );
+    }
+    if (state is InitialState) {
+      return TabBarView(
+        children: [
+          Center(
+            child: RatesAndMeasuresTab(
+                patient: widget.patient, dataType: DataTypeEnum.rate),
+          ),
+          Center(
+            child: RatesAndMeasuresTab(
+                patient: widget.patient, dataType: DataTypeEnum.measure),
+          ),
+          Center(child: ConsultationsTab(patient: widget.patient)),
+        ],
+      );
+    }
+    if (state is Updated) {
+      var patient = state.patient;
+      return TabBarView(
+        children: [
+          Center(
+            child: RatesAndMeasuresTab(
+                patient: patient, dataType: DataTypeEnum.rate),
+          ),
+          Center(
+            child: RatesAndMeasuresTab(
+                patient: patient, dataType: DataTypeEnum.measure),
+          ),
+          Center(child: ConsultationsTab(patient: widget.patient)),
+        ],
+      );
+    }
+    return const Center(child: Text('Erro desconhecido'));
   }
 }
