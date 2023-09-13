@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../shared/models/enums/survey_content_enum.dart';
-import '../../widgets/buttons/survey_buttons/survey_binary_button.dart';
 import '../../widgets/buttons/survey_buttons/survey_drop_down_button.dart';
 
 class SecondPageScreen extends StatefulWidget {
@@ -13,8 +12,6 @@ class SecondPageScreen extends StatefulWidget {
 }
 
 class _SecondPageScreenState extends State<SecondPageScreen> {
-  final List<bool> _selectedPhysActivityOption = <bool>[false, true];
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -138,26 +135,9 @@ class _SecondPageScreenState extends State<SecondPageScreen> {
               )
             ],
           ),
-          const SizedBox(height: 16.0),
-          SurveyBinaryButton(
-              selectedOption: _selectedPhysActivityOption,
-              onPressed: (index) {
-                setState(() {
-                  for (int i = 0; i < _selectedPhysActivityOption.length; i++) {
-                    if (i == index) {
-                      _selectedPhysActivityOption[i] = true;
-                    } else {
-                      _selectedPhysActivityOption[i] = false;
-                    }
-                  }
-                });
-                if (_selectedPhysActivityOption[0]) {
-                  widget.updateSurvey(SurveyContentEnum.physActivity, 1);
-                } else {
-                  widget.updateSurvey(SurveyContentEnum.physActivity, 0);
-                }
-              },
-              children: const [Text('Sim'), Text('Não')])
+          SurveyDropDownButton(
+              content: SurveyContentEnum.physActivity,
+              updateSurvey: widget.updateSurvey)
         ],
       ),
     );

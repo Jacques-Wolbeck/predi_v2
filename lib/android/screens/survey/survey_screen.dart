@@ -207,6 +207,26 @@ class _SurveyScreenState extends State<SurveyScreen> {
         }
         patientSurvey.update(content.key, (value) => newValue);
         break;
+      case 'phys_activity':
+        if (newValue == content.list[0]) {
+          newValue = 0;
+          widget.patient.physicalActivitylevel = content.list[0];
+        } else if (newValue == content.list[1]) {
+          newValue = 0;
+          widget.patient.physicalActivitylevel = content.list[1];
+        } else if (newValue == content.list[2]) {
+          newValue = 1;
+          widget.patient.physicalActivitylevel = content.list[2];
+        } else if (newValue == content.list[3]) {
+          newValue = 1;
+          widget.patient.physicalActivitylevel = content.list[3];
+        } else {
+          newValue = 1;
+          widget.patient.physicalActivitylevel = content.list[4];
+        }
+
+        patientSurvey.update(content.key, (value) => newValue);
+        break;
       default:
         patientSurvey.update(content.key, (value) => newValue);
     }

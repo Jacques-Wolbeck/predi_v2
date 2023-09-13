@@ -75,9 +75,15 @@ enum SurveyContentEnum {
   physActivity(
       key: 'phys_activity',
       title: 'Atividade Física',
-      description: 'Você fez atividade física nos últimos 30 dias?',
+      description: 'Qual a sua frequência de atividade física semanal?',
       image: 'assets/images/icons/phys_activity_icon.png',
-      list: []),
+      list: [
+        'Sedentário',
+        'Levemente Ativo (1-2 dias por semana)',
+        'Moderadamente ativo (3-4 dias por semana)',
+        'Altamente ativo (5-6 dias por semana)',
+        'Extremamente ativo (Diariamente e até 2 vezes por dia)'
+      ]),
   mentHlth(
       key: 'ment_hlth',
       title: 'Saúde Mental',
