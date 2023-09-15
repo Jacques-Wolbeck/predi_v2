@@ -120,7 +120,8 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                    child: const Text('Detalhes'))
+                    child: const Text('Detalhes',
+                        style: TextStyle(fontWeight: FontWeight.bold)))
               ],
             ),
             const SizedBox(height: 16.0),

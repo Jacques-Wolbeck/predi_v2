@@ -77,9 +77,8 @@ class _ConsultationsTabState extends State<ConsultationsTab> {
               borderRadius: BorderRadius.circular(8.0),
             ),
           ),
-          child: Text(
-            'Cadastrar ${DataTypeEnum.consultation.primaryTitle}',
-          ),
+          child: Text('Cadastrar ${DataTypeEnum.consultation.primaryTitle}',
+              style: const TextStyle(fontWeight: FontWeight.bold)),
         )
       ],
     );

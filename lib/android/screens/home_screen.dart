@@ -104,15 +104,51 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        ElevatedButton(
+                        Tooltip(
+                          message: 'Ingestão de água',
+                          child: ElevatedButton(
                             onPressed: () => Navigator.pushNamed(
-                                context, '/water_intake_screen',
-                                arguments: DefaultScreenArguments(
-                                    patient: widget.patient)),
-                            child: const Text('Consumo de Água')),
-                        ElevatedButton(
+                              context,
+                              '/water_intake_screen',
+                              arguments: DefaultScreenArguments(
+                                  patient: widget.patient),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              elevation: 3.0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Image.asset(
+                                'assets/images/icons/bottle_water_icon.png',
+                                height: 50.0,
+                                width: 50.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Tooltip(
+                          message: 'Dieta',
+                          child: ElevatedButton(
                             onPressed: () => null,
-                            child: const Text('Dicas de Saúde'))
+                            style: ElevatedButton.styleFrom(
+                              elevation: 3.0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Image.asset(
+                                'assets/images/icons/food_icon.png',
+                                height: 50.0,
+                                width: 50.0,
+                              ),
+                            ),
+                          ),
+                        )
                       ],
                     )),
               ),

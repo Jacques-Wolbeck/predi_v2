@@ -18,6 +18,7 @@ class PatientModel {
   double? cholesterol;
   bool? isSurveyCompleted;
   String? physicalActivitylevel;
+  double? waterIntakeValue;
 
   PatientModel(
       {this.uid,
@@ -35,6 +36,7 @@ class PatientModel {
       this.height,
       this.weight,
       this.physicalActivitylevel,
+      this.waterIntakeValue,
       this.isSurveyCompleted = false});
 
   factory PatientModel.fromJSON(Map<String, dynamic> patient) {
@@ -58,6 +60,7 @@ class PatientModel {
         glycatedHemoglobin: patient['hemoglobinaGlicolisada'],
         cholesterol: patient['colesterol'],
         physicalActivitylevel: patient['nivelAtivicadeFisica'],
+        waterIntakeValue: patient['nivelConsumoAgua'],
         isSurveyCompleted: patient['questionario']);
   }
 
@@ -78,6 +81,7 @@ class PatientModel {
     json.putIfAbsent('hemoglobinaGlicolisada', () => glycatedHemoglobin);
     json.putIfAbsent('colesterol', () => cholesterol);
     json.putIfAbsent('nivelAtivicadeFisica', () => physicalActivitylevel);
+    json.putIfAbsent('nivelConsumoAgua', () => waterIntakeValue);
     json.putIfAbsent('questionario', () => isSurveyCompleted);
 
     return json;
@@ -98,6 +102,7 @@ class PatientModel {
     double? glucose75g,
     double? glycatedHemoglobin,
     String? physicalActivitylevel,
+    double? waterIntakeValue,
     double? cholesterol,
   }) {
     return PatientModel(
@@ -114,6 +119,7 @@ class PatientModel {
         glucose75g: glucose75g ?? this.glucose75g,
         glycatedHemoglobin: glycatedHemoglobin ?? this.glycatedHemoglobin,
         cholesterol: cholesterol ?? this.cholesterol,
+        waterIntakeValue: waterIntakeValue ?? this.waterIntakeValue,
         physicalActivitylevel:
             physicalActivitylevel ?? this.physicalActivitylevel);
   }

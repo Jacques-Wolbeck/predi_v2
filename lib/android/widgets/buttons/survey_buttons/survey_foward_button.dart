@@ -81,8 +81,8 @@ class _SurveyFowardButtonState extends State<SurveyFowardButton> {
         ),
       ),
       child: Text(
-        widget.currentIndex == 2 ? "Finalizar questionário" : "Próximo",
-      ),
+          widget.currentIndex == 2 ? "Finalizar questionário" : "Próximo",
+          style: const TextStyle(fontWeight: FontWeight.bold)),
     );
   }
 

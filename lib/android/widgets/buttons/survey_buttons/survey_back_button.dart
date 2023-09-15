@@ -38,9 +38,8 @@ class _SurveyBackButtonState extends State<SurveyBackButton> {
                 borderRadius: BorderRadius.circular(8.0),
               ),
             ),
-            child: const Text(
-              "Voltar",
-            ),
+            child: const Text("Voltar",
+                style: TextStyle(fontWeight: FontWeight.bold)),
           )
         : const SizedBox.shrink();
   }

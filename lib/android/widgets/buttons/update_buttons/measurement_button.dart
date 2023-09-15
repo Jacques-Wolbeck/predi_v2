@@ -51,9 +51,8 @@ class MeasurementButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(8.0),
           ),
         ),
-        child: const Text(
-          "Atualizar",
-        ),
+        child: const Text("Atualizar",
+            style: TextStyle(fontWeight: FontWeight.bold)),
       ),
     );
   }

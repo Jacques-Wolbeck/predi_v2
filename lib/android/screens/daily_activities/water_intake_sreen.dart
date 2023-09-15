@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/number_symbols_data.dart';
 import 'package:predi_v2/android/widgets/fields/water_intake_field.dart';
+import 'package:predi_v2/shared/blocs/patient/patient_bloc.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
+
+import '../../../shared/blocs/patient/patient_event.dart';
 
 class WaterIntakeScreen extends StatefulWidget {
   final PatientModel patient;
@@ -17,16 +21,17 @@ class _WaterIntakeScreenState extends State<WaterIntakeScreen>
   late AnimationController _controller;
   final _formFocus = FocusNode();
   final _formKey = GlobalKey<FormState>();
-  double _currentLevel = 0;
+  late double _currentLevel;
   double _fillLevel = 0;
   late double _maxFillLevel;
 
   @override
   void initState() {
     super.initState();
+    _currentLevel = widget.patient.waterIntakeValue ?? 0.0;
     _maxFillLevel = (widget.patient.weight! * 30);
     _controller = AnimationController(
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 5),
       vsync: this,
     );
 
@@ -131,6 +136,9 @@ class _WaterIntakeScreenState extends State<WaterIntakeScreen>
                         _formKey.currentState!.reset();
                         _controller.forward(
                             from: (_currentLevel / _maxFillLevel));
+                        widget.patient.waterIntakeValue = _currentLevel;
+                        context.read<PatientBloc>().add(
+                            UpdatePatientRequested(patient: widget.patient));
                       }
                     },
                     style: OutlinedButton.styleFrom(
@@ -139,16 +147,22 @@ class _WaterIntakeScreenState extends State<WaterIntakeScreen>
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         minimumSize: Size(size.width * .2, 45.0)),
-                    child: const Text('Adicionar'),
+                    child: const Text('Adicionar',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
                   ),
                   const SizedBox(width: 8.0),
                   OutlinedButton(
                     onPressed: () {
                       _controller.forward(
                           from: (_currentLevel / _maxFillLevel));
+
                       setState(() {
-                        _currentLevel = 0;
-                      }); // Inicie a animação novamente
+                        _currentLevel = 0.0;
+                      });
+                      widget.patient.waterIntakeValue = _currentLevel;
+                      context
+                          .read<PatientBloc>()
+                          .add(UpdatePatientRequested(patient: widget.patient));
                     },
                     style: OutlinedButton.styleFrom(
                         elevation: 3.0,
@@ -156,7 +170,10 @@ class _WaterIntakeScreenState extends State<WaterIntakeScreen>
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         minimumSize: Size(size.width * .2, 45.0)),
-                    child: const Text('Esvaziar'),
+                    child: const Text(
+                      'Esvaziar',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               ),
