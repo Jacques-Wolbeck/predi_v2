@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:predi_v2/android/screens/consultations/consultations_screen.dart';
+import 'package:predi_v2/android/screens/daily_activities/water_intake_sreen.dart';
 import 'package:predi_v2/android/screens/home_screen.dart';
 import 'package:predi_v2/android/screens/login_screen.dart';
 import 'package:predi_v2/android/screens/report_detail/report_detail_screen.dart';
@@ -85,6 +86,13 @@ Route onGenerateRoute(RouteSettings settings) {
           child: ReportDetailScreen(
             patient: args.patient,
             surveyData: args.survey,
+          ),
+          settings: settings);
+    case '/water_intake_screen':
+      final args = settings.arguments as DefaultScreenArguments;
+      return CustomPageRoute(
+          child: WaterIntakeScreen(
+            patient: args.patient,
           ),
           settings: settings);
     case '/register_screen':

@@ -4,9 +4,6 @@ import 'package:predi_v2/shared/controllers/firebase/firebase_db.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
 import 'package:predi_v2/shared/models/patients/survey_model.dart';
 
-import '../../../../shared/services/prediabetes_api_service.dart';
-import '../../commons/app_progress_indicator.dart';
-
 class SurveyResultButton extends StatefulWidget {
   final PatientModel patient;
   const SurveyResultButton({super.key, required this.patient});

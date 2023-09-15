@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:predi_v2/android/widgets/bottom_sheets/home_bottom_sheet.dart';
 import 'package:predi_v2/android/widgets/alerts/simple_alert.dart';
-import 'package:predi_v2/android/widgets/buttons/survey_buttons/survey_result_button.dart';
 import 'package:predi_v2/android/widgets/commons/app_report_information.dart';
 import 'package:predi_v2/android/widgets/commons/app_screen_args.dart';
 import 'package:predi_v2/android/widgets/tabs/rates_measures_tab.dart';
@@ -11,7 +10,6 @@ import 'package:predi_v2/shared/models/patients/patient_model.dart';
 
 import '../../shared/blocs/patient/patient_bloc.dart';
 import '../../shared/models/enums/data_type_enum.dart';
-import '../../shared/services/prediabetes_api_service.dart';
 import '../widgets/commons/app_progress_indicator.dart';
 import '../widgets/commons/app_snack_bar.dart';
 import '../widgets/tabs/consultations_tab.dart';
@@ -107,7 +105,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         ElevatedButton(
-                            onPressed: () => null,
+                            onPressed: () => Navigator.pushNamed(
+                                context, '/water_intake_screen',
+                                arguments: DefaultScreenArguments(
+                                    patient: widget.patient)),
                             child: const Text('Consumo de Água')),
                         ElevatedButton(
                             onPressed: () => null,

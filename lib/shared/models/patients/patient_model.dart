@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:predi_v2/shared/models/enums/survey_content_enum.dart';
 
 class PatientModel {
