@@ -132,7 +132,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         Tooltip(
                           message: 'Dieta',
                           child: ElevatedButton(
-                            onPressed: () => null,
+                            onPressed: () => Navigator.pushNamed(
+                              context,
+                              '/diet_screen',
+                              arguments: DefaultScreenArguments(
+                                  patient: widget.patient),
+                            ),
                             style: ElevatedButton.styleFrom(
                               elevation: 3.0,
                               shape: RoundedRectangleBorder(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/number_symbols_data.dart';
 import 'package:predi_v2/android/widgets/fields/water_intake_field.dart';
 import 'package:predi_v2/shared/blocs/patient/patient_bloc.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
