@@ -1,28 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:predi_v2/shared/controllers/firebase/firebase_db.dart';
 import 'package:predi_v2/shared/models/enums/patient_status_enum.dart';
 import 'package:predi_v2/shared/models/patients/patient_model.dart';
+import 'package:predi_v2/shared/models/patients/survey_model.dart';
 
 import '../alerts/report_information_alert.dart';
 
-class AppReportInformation extends StatelessWidget {
+class AppReportInformation extends StatefulWidget {
   final PatientModel patient;
   const AppReportInformation({super.key, required this.patient});
+
+  @override
+  State<AppReportInformation> createState() => _AppReportInformationState();
+}
+
+class _AppReportInformationState extends State<AppReportInformation> {
+  late final SurveyModel? surveyData;
+
+  @override
+  void initState() {
+    _getSurveyData();
+    super.initState();
+  }
+
+  void _getSurveyData() async {
+    surveyData = await FirebaseDb.instance.getLastSurvey(widget.patient);
+    surveyData!.bmi = widget.patient.bmi!.toInt();
+    surveyData!.sex = widget.patient.gender == "Masculino" ? 1 : 0;
+  }
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
       tooltip: 'Gerar Relatório',
+      iconSize: MediaQuery.of(context).size.height * .25,
+      color: Theme.of(context).colorScheme.primary,
       icon: Icon(
         Icons.favorite_border,
         shadows: <Shadow>[
           Shadow(
               color: Theme.of(context).colorScheme.shadow,
-              blurRadius: 2.0,
-              offset: const Offset(1.0, 1.0))
+              blurRadius: 1.5,
+              offset: const Offset(2.0, -1.0))
         ],
       ),
-      iconSize: MediaQuery.of(context).size.height * .25,
-      color: Theme.of(context).colorScheme.secondary,
       onPressed: () {
         showDialog(
             context: context,
@@ -30,8 +51,9 @@ class AppReportInformation extends StatelessWidget {
             builder: (context) {
               PatientStatusEnum patientEnum = _statusCalculation();
               return ReportInformationAlert(
-                title: patientEnum.status,
-                content: patientEnum.content,
+                patient: widget.patient,
+                patientEnum: patientEnum,
+                surveyData: surveyData,
               );
             });
       },
@@ -39,18 +61,19 @@ class AppReportInformation extends StatelessWidget {
   }
 
   PatientStatusEnum _statusCalculation() {
-    if (patient.fastingGlucose != null &&
-        patient.glucose75g != null &&
-        patient.glycatedHemoglobin != null) {
-      if (patient.fastingGlucose! < 100.0) {
+    if (widget.patient.fastingGlucose != null &&
+        widget.patient.glucose75g != null &&
+        widget.patient.glycatedHemoglobin != null &&
+        widget.patient.weight != null) {
+      if (widget.patient.fastingGlucose! < 100.0) {
         return PatientStatusEnum.goodFastingGlucose;
-      } else if (patient.fastingGlucose! >= 100.0 &&
-          patient.fastingGlucose! <= 125.0) {
-        if (patient.glucose75g! <= 199.0) {
-          if (patient.glycatedHemoglobin! < 5.7) {
+      } else if (widget.patient.fastingGlucose! >= 100.0 &&
+          widget.patient.fastingGlucose! <= 125.0) {
+        if (widget.patient.glucose75g! <= 199.0) {
+          if (widget.patient.glycatedHemoglobin! < 5.7) {
             return PatientStatusEnum.alteredFastingGlucose;
-          } else if (patient.glycatedHemoglobin! >= 5.7 &&
-              patient.glycatedHemoglobin! <= 6.4) {
+          } else if (widget.patient.glycatedHemoglobin! >= 5.7 &&
+              widget.patient.glycatedHemoglobin! <= 6.4) {
             return PatientStatusEnum.preDiabetes;
           }
           return PatientStatusEnum.diabetes;

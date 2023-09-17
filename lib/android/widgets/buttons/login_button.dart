@@ -31,7 +31,7 @@ class LoginButton extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),
             ),
-            minimumSize: const Size(double.infinity, 45.0)),
+            minimumSize: Size(MediaQuery.of(context).size.width * .4, 45.0)),
         child: const Text(
           "Entrar",
           style: TextStyle(fontWeight: FontWeight.bold),

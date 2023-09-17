@@ -65,6 +65,7 @@ class RatesAndMeasuresTab extends StatelessWidget {
             ),
             child: Text(
               'Atualize suas ${dataType.primaryTitle}',
+              style: const TextStyle(fontWeight: FontWeight.bold),
             )),
       ],
     );

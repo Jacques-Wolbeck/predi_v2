@@ -121,7 +121,7 @@ class _RatesScreenState extends State<RatesScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                RatesButton(formKey: _formKey),
+                RatesButton(formKey: _formKey, patient: widget.patient),
                 ElevatedButton(
                     onPressed: () {
                       glycatedFocus.unfocus();
@@ -137,7 +137,8 @@ class _RatesScreenState extends State<RatesScreen> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                    child: const Text('Detalhes'))
+                    child: const Text('Detalhes',
+                        style: TextStyle(fontWeight: FontWeight.bold)))
               ],
             ),
             const SizedBox(height: 16.0),

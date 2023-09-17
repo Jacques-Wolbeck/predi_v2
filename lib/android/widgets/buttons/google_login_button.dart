@@ -18,8 +18,7 @@ class GoogleLoginButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
           ),
-          maximumSize: const Size(double.infinity, 45.0),
-          //minimumSize: const Size(300, 45.0),
+          maximumSize: Size(MediaQuery.of(context).size.width * .6, 45.0),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

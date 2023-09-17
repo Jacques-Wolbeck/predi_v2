@@ -5,6 +5,7 @@ import 'package:predi_v2/shared/models/patients/patient_model.dart';
 import '../../models/patients/consultation_model.dart';
 import '../../models/patients/measurement_model.dart';
 import '../../models/patients/rate_model.dart';
+import '../../models/patients/survey_model.dart';
 import 'firebase_errors.dart';
 
 class FirebaseDb {
@@ -64,12 +65,24 @@ class FirebaseDb {
             .toList());
   }
 
+  Future<SurveyModel?> getLastSurvey(PatientModel patient) async {
+    try {
+      var snapshot = await _getRef(patient, DataTypeEnum.survey).get();
+      var doc = snapshot.docs.last;
+      return SurveyModel.fromJSON(doc.data() as Map<String, dynamic>);
+    } catch (error) {
+      throw const FormattedException('Questionário incompleto.');
+    }
+  }
+
   Object _getOrderBy(DataTypeEnum dataType) {
     switch (dataType) {
       case (DataTypeEnum.rate):
         return 'dateTaxas';
       case (DataTypeEnum.measure):
         return 'dateMedida';
+      case (DataTypeEnum.survey):
+        return 'dateSurvey';
       default:
         return 'date';
     }
@@ -81,6 +94,8 @@ class FirebaseDb {
         return RateModel.fromJSON(doc.data() as Map<String, dynamic>);
       case (DataTypeEnum.measure):
         return MeasurementModel.fromJSON(doc.data() as Map<String, dynamic>);
+      case DataTypeEnum.survey:
+        return SurveyModel.fromJSON(doc.data() as Map<String, dynamic>);
       default:
         return ConsultationModel.fromJSON(doc.data() as Map<String, dynamic>);
     }

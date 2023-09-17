@@ -2,6 +2,7 @@ enum DataTypeEnum {
   rate(primaryTitle: 'Taxas', secondaryTitle: 'Taxa'),
   measure(primaryTitle: 'Medidas', secondaryTitle: 'Medida'),
   consultation(primaryTitle: 'Consultas', secondaryTitle: 'Consulta'),
+  survey(primaryTitle: 'Survey', secondaryTitle: 'Informações Extras'),
   glycatedHemoglobin(
       primaryTitle: 'Hb1A1C',
       secondaryTitle: 'Hemoglobina glicada',
@@ -29,7 +30,8 @@ enum DataTypeEnum {
   bmi(
       primaryTitle: 'IMC',
       secondaryTitle: 'Índice de Massa Corpórea',
-      measurementUnit: 'kg/m'),
+      measurementUnit: 'kg/m',
+      icon: 'assets/images/icons/bmi_icon.png'),
   circumference(
       primaryTitle: 'Circunferência',
       secondaryTitle: 'Circunferência abdominal',
@@ -42,11 +44,13 @@ enum DataTypeEnum {
   final String? measurementUnit;
   final double? minValue;
   final double? maxValue;
+  final String? icon;
 
   const DataTypeEnum(
       {required this.primaryTitle,
       required this.secondaryTitle,
       this.measurementUnit,
       this.minValue,
-      this.maxValue});
+      this.maxValue,
+      this.icon});
 }

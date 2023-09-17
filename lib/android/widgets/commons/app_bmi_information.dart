@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:predi_v2/android/widgets/alerts/simple_alert.dart';
+import 'package:predi_v2/shared/models/patients/patient_model.dart';
 
 import '../../../shared/blocs/authentication/auth_bloc.dart';
 import '../../../shared/blocs/authentication/auth_state.dart';
@@ -8,7 +9,8 @@ import '../../../shared/blocs/patient/patient_bloc.dart';
 import '../../../shared/blocs/patient/patient_event.dart';
 
 class AppBmiInformation extends StatelessWidget {
-  const AppBmiInformation({super.key});
+  final PatientModel patient;
+  const AppBmiInformation({super.key, required this.patient});
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +32,14 @@ class AppBmiInformation extends StatelessWidget {
       onTap: () {
         final state = context.read<AuthBloc>().state;
         if (state is Authenticated) {
-          if (state.patient.weight != null && state.patient.height != null) {
-            final double bmi = state.patient.calculateBmi();
-            final double minIdealWeight = state.patient.getMinIdealBmi();
-            final double maxIdealWeight = state.patient.getMaxIdealBmi();
-            final String condition = state.patient.getBmiCondition(bmi);
+          if (patient.weight != null && patient.height != null) {
+            final double bmi = patient.calculateBmi();
+            final double minIdealWeight = patient.getMinIdealBmi();
+            final double maxIdealWeight = patient.getMaxIdealBmi();
+            final String condition = patient.getBmiCondition(bmi);
 
-            var updatedPatient = state.patient
-                .copyWith(bmi: double.parse(bmi.toStringAsPrecision(4)));
+            var updatedPatient =
+                patient.copyWith(bmi: double.parse(bmi.toStringAsPrecision(4)));
             context
                 .read<PatientBloc>()
                 .add(UpdatePatientRequested(patient: updatedPatient));
@@ -126,11 +128,12 @@ class AppBmiInformation extends StatelessWidget {
                   ),
                 ),
           ),
+          const SizedBox(height: 8.0),
           Image.asset(
-            'assets/images/icons/imc_icon.png',
+            'assets/images/icons/bmi_icon.png',
             color: Theme.of(context).colorScheme.onPrimary,
-            height: 60.0,
-            width: 60.0,
+            height: 45.0,
+            width: 45.0,
           )
         ],
       ),

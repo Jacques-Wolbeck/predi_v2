@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:predi_v2/shared/models/patients/patient_model.dart';
 
 import '../../../../shared/blocs/authentication/auth_bloc.dart';
 import '../../../../shared/blocs/authentication/auth_state.dart';
@@ -12,8 +13,10 @@ import '../../../../shared/models/patients/measurement_model.dart';
 
 class MeasurementButton extends StatelessWidget {
   final GlobalKey<FormState> formKey;
+  final PatientModel patient;
 
-  const MeasurementButton({super.key, required this.formKey});
+  const MeasurementButton(
+      {super.key, required this.formKey, required this.patient});
 
   @override
   Widget build(BuildContext context) {
@@ -28,15 +31,15 @@ class MeasurementButton extends StatelessWidget {
             if (state is Authenticated) {
               context
                   .read<PatientBloc>()
-                  .add(UpdatePatientRequested(patient: state.patient));
+                  .add(UpdatePatientRequested(patient: patient));
               final newMeasure = MeasurementModel(
                 date: DateTime.now(),
-                weight: state.patient.weight,
-                circumference: state.patient.circumference,
+                weight: patient.weight,
+                circumference: patient.circumference,
               );
 
               context.read<DataBloc>().add(AddDataRequested(
-                  patient: state.patient,
+                  patient: patient,
                   dataType: DataTypeEnum.measure,
                   data: newMeasure));
             }
@@ -48,9 +51,8 @@ class MeasurementButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(8.0),
           ),
         ),
-        child: const Text(
-          "Atualizar",
-        ),
+        child: const Text("Atualizar",
+            style: TextStyle(fontWeight: FontWeight.bold)),
       ),
     );
   }

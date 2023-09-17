@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:predi_v2/android/screens/machine_learning/first_page_screen.dart';
-import 'package:predi_v2/android/screens/machine_learning/second_page_screen.dart';
-import 'package:predi_v2/android/screens/machine_learning/third_page_screen.dart';
+import 'package:predi_v2/android/screens/survey/first_page_screen.dart';
+import 'package:predi_v2/android/screens/survey/second_page_screen.dart';
+import 'package:predi_v2/android/screens/survey/third_page_screen.dart';
 import 'package:predi_v2/android/widgets/buttons/survey_buttons/survey_foward_button.dart';
 import 'package:predi_v2/shared/models/enums/survey_content_enum.dart';
 
@@ -21,14 +21,15 @@ class SurveyScreen extends StatefulWidget {
 class _SurveyScreenState extends State<SurveyScreen> {
   final _pageController = PageController(initialPage: 0);
   final Map<String, int> patientSurvey = {
-    'highBp': 0,
-    'highChol': 0,
-    'heartDiseaseorAttack': 0,
-    'genHlth': 0,
-    'diffWalk': 0,
-    'physActivity': 0,
-    'physHlth': 0,
+    'high_bp': 0,
+    'high_chol': 0,
+    'gen_hlth': 0,
+    'phys_activity': 0,
+    'phys_hlth': 0,
     'education': 0,
+    'fruits': 0,
+    'smoker': 0,
+    'veggies': 0,
   };
   int currentIndex = 0;
 
@@ -102,7 +103,16 @@ class _SurveyScreenState extends State<SurveyScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text('Informações Extras'),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Text(
+                      'Informações Extras',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize:
+                              Theme.of(context).textTheme.bodyLarge!.fontSize),
+                    ),
+                  ),
                   Expanded(
                     child: Container(
                       height: MediaQuery.of(context).size.height * .6,
@@ -125,7 +135,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * .05,
+                    height: MediaQuery.of(context).size.height * .02,
                   ),
                   Container(
                     alignment: Alignment.center,
@@ -167,7 +177,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
         }
         patientSurvey.update(content.key, (value) => newValue);
         break;
-      case 'genHlth':
+      case 'gen_hlth':
         if (newValue == content.list[0]) {
           newValue = 1;
         } else if (newValue == content.list[1]) {
@@ -181,7 +191,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
         }
         patientSurvey.update(content.key, (value) => newValue);
         break;
-      case 'physHlth':
+      case 'phys_hlth':
         if (newValue == content.list[0]) {
           newValue = 4;
         } else if (newValue == content.list[1]) {
@@ -195,6 +205,26 @@ class _SurveyScreenState extends State<SurveyScreen> {
         } else {
           newValue = 28;
         }
+        patientSurvey.update(content.key, (value) => newValue);
+        break;
+      case 'phys_activity':
+        if (newValue == content.list[0]) {
+          newValue = 0;
+          widget.patient.physicalActivitylevel = content.list[0];
+        } else if (newValue == content.list[1]) {
+          newValue = 0;
+          widget.patient.physicalActivitylevel = content.list[1];
+        } else if (newValue == content.list[2]) {
+          newValue = 1;
+          widget.patient.physicalActivitylevel = content.list[2];
+        } else if (newValue == content.list[3]) {
+          newValue = 1;
+          widget.patient.physicalActivitylevel = content.list[3];
+        } else {
+          newValue = 1;
+          widget.patient.physicalActivitylevel = content.list[4];
+        }
+
         patientSurvey.update(content.key, (value) => newValue);
         break;
       default:

@@ -102,7 +102,10 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                MeasurementButton(formKey: _formKey),
+                MeasurementButton(
+                  formKey: _formKey,
+                  patient: widget.patient,
+                ),
                 ElevatedButton(
                     onPressed: () {
                       weightFocus.unfocus();
@@ -117,11 +120,14 @@ class _MeasurementsScreenState extends State<MeasurementsScreen> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                    child: const Text('Detalhes'))
+                    child: const Text('Detalhes',
+                        style: TextStyle(fontWeight: FontWeight.bold)))
               ],
             ),
             const SizedBox(height: 16.0),
-            const AppBmiInformation(),
+            AppBmiInformation(
+              patient: widget.patient,
+            ),
             const Divider(),
             Expanded(
               child: TabBarView(

@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:predi_v2/android/widgets/buttons/survey_buttons/survey_binary_button.dart';
+import 'package:predi_v2/android/widgets/buttons/survey_buttons/survey_drop_down_button.dart';
 
 import '../../../shared/models/enums/survey_content_enum.dart';
 
-class FirstPageScreen extends StatefulWidget {
+class ThirdPageScreen extends StatefulWidget {
   final Function(SurveyContentEnum, dynamic) updateSurvey;
-  const FirstPageScreen({super.key, required this.updateSurvey});
+  const ThirdPageScreen({super.key, required this.updateSurvey});
 
   @override
-  State<FirstPageScreen> createState() => _FirstPageScreenState();
+  State<ThirdPageScreen> createState() => _ThirdPageScreenState();
 }
 
-class _FirstPageScreenState extends State<FirstPageScreen> {
-  final List<bool> _selectedBpOption = <bool>[false, true];
-  final List<bool> _selectedCholOption = <bool>[false, true];
-  final List<bool> _selectedHeartDiseaseOption = <bool>[false, true];
-
+class _ThirdPageScreenState extends State<ThirdPageScreen> {
+  final List<bool> _selectedFruitsOption = <bool>[false, true];
+  final List<bool> _selectedVeggiesOption = <bool>[false, true];
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -40,27 +39,40 @@ class _FirstPageScreenState extends State<FirstPageScreen> {
           ]),
       child: Column(
         children: [
-          Text(
-            SurveyContentEnum.highBp.description,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  SurveyContentEnum.fruits.description,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              Image.asset(
+                SurveyContentEnum.fruits.image,
+                height: 30.0,
+                width: 30.0,
+                color: Colors.black,
+              )
+            ],
           ),
           const SizedBox(height: 16.0),
           SurveyBinaryButton(
-            selectedOption: _selectedBpOption,
+            selectedOption: _selectedFruitsOption,
             onPressed: (index) {
               setState(() {
-                for (int i = 0; i < _selectedBpOption.length; i++) {
+                for (int i = 0; i < _selectedFruitsOption.length; i++) {
                   if (i == index) {
-                    _selectedBpOption[i] = true;
+                    _selectedFruitsOption[i] = true;
                   } else {
-                    _selectedBpOption[i] = false;
+                    _selectedFruitsOption[i] = false;
                   }
                 }
               });
-              if (_selectedBpOption[0]) {
-                widget.updateSurvey(SurveyContentEnum.highBp, 1);
+              if (_selectedFruitsOption[0]) {
+                widget.updateSurvey(SurveyContentEnum.fruits, 1);
               } else {
-                widget.updateSurvey(SurveyContentEnum.highBp, 0);
+                widget.updateSurvey(SurveyContentEnum.fruits, 0);
               }
             },
             children: const [Text('Sim'), Text('Não')],
@@ -87,27 +99,40 @@ class _FirstPageScreenState extends State<FirstPageScreen> {
           ]),
       child: Column(
         children: [
-          Text(
-            SurveyContentEnum.highChol.description,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  SurveyContentEnum.veggies.description,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              Image.asset(
+                SurveyContentEnum.veggies.image,
+                height: 30.0,
+                width: 30.0,
+                color: Colors.black,
+              )
+            ],
           ),
           const SizedBox(height: 16.0),
           SurveyBinaryButton(
-            selectedOption: _selectedCholOption,
+            selectedOption: _selectedVeggiesOption,
             onPressed: (index) {
               setState(() {
-                for (int i = 0; i < _selectedCholOption.length; i++) {
+                for (int i = 0; i < _selectedVeggiesOption.length; i++) {
                   if (i == index) {
-                    _selectedCholOption[i] = true;
+                    _selectedVeggiesOption[i] = true;
                   } else {
-                    _selectedCholOption[i] = false;
+                    _selectedVeggiesOption[i] = false;
                   }
                 }
               });
-              if (_selectedCholOption[0]) {
-                widget.updateSurvey(SurveyContentEnum.highChol, 1);
+              if (_selectedVeggiesOption[0]) {
+                widget.updateSurvey(SurveyContentEnum.veggies, 1);
               } else {
-                widget.updateSurvey(SurveyContentEnum.highChol, 0);
+                widget.updateSurvey(SurveyContentEnum.veggies, 0);
               }
             },
             children: const [Text('Sim'), Text('Não')],
@@ -134,31 +159,26 @@ class _FirstPageScreenState extends State<FirstPageScreen> {
           ]),
       child: Column(
         children: [
-          Text(
-            SurveyContentEnum.heartDiseaseorAttack.description,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  SurveyContentEnum.education.description,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              Image.asset(
+                SurveyContentEnum.education.image,
+                height: 30.0,
+                width: 30.0,
+              )
+            ],
           ),
-          const SizedBox(height: 16.0),
-          SurveyBinaryButton(
-            selectedOption: _selectedHeartDiseaseOption,
-            onPressed: (index) {
-              setState(() {
-                for (int i = 0; i < _selectedHeartDiseaseOption.length; i++) {
-                  if (i == index) {
-                    _selectedHeartDiseaseOption[i] = true;
-                  } else {
-                    _selectedHeartDiseaseOption[i] = false;
-                  }
-                }
-              });
-              if (_selectedHeartDiseaseOption[0]) {
-                widget.updateSurvey(SurveyContentEnum.heartDiseaseorAttack, 1);
-              } else {
-                widget.updateSurvey(SurveyContentEnum.heartDiseaseorAttack, 0);
-              }
-            },
-            children: const [Text('Sim'), Text('Não')],
-          )
+          SurveyDropDownButton(
+            content: SurveyContentEnum.education,
+            updateSurvey: widget.updateSurvey,
+          ),
         ],
       ),
     );

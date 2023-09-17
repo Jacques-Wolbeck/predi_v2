@@ -1,48 +1,96 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class SurveyModel {
-  final int? genHlth;
-  final int? highBP;
-  final int? highChol;
-  final int? bmi;
-  final int? income;
-  final int? diffWalk;
-  final int? age;
-  final int? physHlth;
-  final int? education;
-  final int? heartDiseaseorAttack;
-  final int? physActivity;
-  final int? mentHlth;
-  late final int? cholCheck;
+  String? uid;
+  DateTime? date;
+  int? bmi;
+  int? age;
+  int? genHlth;
+  int? highBP;
+  int? highChol;
+  int? physHlth;
+  int? education;
+  int? physActivity;
+  int? smoker;
+  int? fruits;
+  int? veggies;
+  int? sex;
 
   SurveyModel(
-      {this.genHlth,
+      {this.uid,
+      this.date,
+      this.bmi,
+      this.age,
+      this.genHlth,
       this.highBP,
       this.highChol,
-      this.bmi,
-      this.income,
-      this.diffWalk,
-      this.age,
       this.physHlth,
       this.education,
-      this.heartDiseaseorAttack,
       this.physActivity,
-      this.mentHlth,
-      this.cholCheck});
+      this.fruits,
+      this.smoker,
+      this.veggies,
+      this.sex});
 
-  Map<String, dynamic> toJson() {
-    return {
-      "gen_hlth": genHlth.toString(),
-      "high_bp": highBP.toString(),
-      "high_chol": highChol.toString(),
-      "bmi": bmi.toString(),
-      "income": income.toString(),
-      "diffwalk": diffWalk.toString(),
-      "age": age.toString(),
-      "phys_hlth": physHlth.toString(),
-      "education": education.toString(),
-      "heart_disease_or_attack": heartDiseaseorAttack.toString(),
-      "phys_activity": physActivity.toString(),
-      "men_hlth": mentHlth.toString(),
-      "chol_check": cholCheck.toString()
-    };
+  factory SurveyModel.fromJSON(Map<String, dynamic> survey) {
+    if (survey['date_survey'] is Timestamp) {
+      survey['date_survey'] = survey['date_survey'].toDate();
+    }
+    return SurveyModel(
+        uid: survey['uid'],
+        date: survey['date_survey'],
+        bmi: survey['bmi'],
+        age: survey['age'],
+        genHlth: survey['gen_hlth'],
+        highBP: survey['high_bp'],
+        highChol: survey['high_chol'],
+        physHlth: survey['phys_hlth'],
+        physActivity: survey['phys_activity'],
+        education: survey['education'],
+        smoker: survey['smoker'],
+        fruits: survey['fruits'],
+        veggies: survey['veggies'],
+        sex: survey['sex']);
+  }
+  Map<String, dynamic> toJSON({bool isPredict = false}) {
+    if (isPredict) {
+      return {
+        "gen_hlth": genHlth,
+        "high_bp": highBP,
+        "high_chol": highChol,
+        "bmi": bmi,
+        "age": age,
+        "phys_hlth": physHlth,
+        "education": education,
+        "phys_activity": physActivity,
+        "fruits": fruits,
+        "veggies": veggies,
+        "smoker": smoker,
+        "sex": sex
+      };
+    } else {
+      final json = <String, dynamic>{};
+      json.putIfAbsent('uid', () => uid);
+      json.putIfAbsent('date_survey', () => date);
+      json.putIfAbsent('bmi', () => bmi);
+      json.putIfAbsent('age', () => age);
+      json.putIfAbsent('gen_hlth', () => genHlth);
+      json.putIfAbsent('high_bp', () => highBP);
+      json.putIfAbsent('high_chol', () => highChol);
+      json.putIfAbsent('phys_hlth', () => physHlth);
+      json.putIfAbsent('phys_activity', () => physActivity);
+      json.putIfAbsent('education', () => education);
+      json.putIfAbsent('smoker', () => smoker);
+      json.putIfAbsent('fruits', () => fruits);
+      json.putIfAbsent('veggies', () => veggies);
+      json.putIfAbsent('sex', () => sex);
+
+      return json;
+    }
+  }
+
+  @override
+  String toString() {
+    return 'uid $uid / date $date';
   }
 }
