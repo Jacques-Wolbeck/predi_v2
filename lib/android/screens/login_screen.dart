@@ -93,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return SafeArea(
       child: Center(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(32.0),
           child: Column(
             children: [
               const AppTitle(),

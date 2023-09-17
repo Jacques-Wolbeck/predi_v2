@@ -33,17 +33,17 @@ class _AppReportInformationState extends State<AppReportInformation> {
   Widget build(BuildContext context) {
     return IconButton(
       tooltip: 'Gerar Relatório',
+      iconSize: MediaQuery.of(context).size.height * .25,
+      color: Theme.of(context).colorScheme.primary,
       icon: Icon(
         Icons.favorite_border,
         shadows: <Shadow>[
           Shadow(
               color: Theme.of(context).colorScheme.shadow,
-              blurRadius: 2.0,
-              offset: const Offset(1.0, 1.0))
+              blurRadius: 1.5,
+              offset: const Offset(2.0, -1.0))
         ],
       ),
-      iconSize: MediaQuery.of(context).size.height * .25,
-      color: Theme.of(context).colorScheme.secondary,
       onPressed: () {
         showDialog(
             context: context,

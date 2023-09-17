@@ -51,7 +51,8 @@ class PersonalDataButton extends StatelessWidget {
             ),
             minimumSize: const Size(double.infinity, 45.0)),
         child: const Text(
-          "ATUALIZAR",
+          "Atualizar",
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
     );

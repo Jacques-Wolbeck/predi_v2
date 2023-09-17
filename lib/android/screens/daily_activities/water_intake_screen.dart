@@ -113,8 +113,8 @@ class _WaterIntakeScreenState extends State<WaterIntakeScreen>
               const SizedBox(height: 16.0),
               _cupContainer(),
               const SizedBox(height: 16.0),
-              SizedBox(
-                width: 250.0,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 45.0),
                 child: Form(
                   key: _formKey,
                   child: WaterIntakeField(
@@ -125,56 +125,58 @@ class _WaterIntakeScreenState extends State<WaterIntakeScreen>
                   ),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  OutlinedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        _formKey.currentState!.save();
-                        _formKey.currentState!.reset();
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 45.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    OutlinedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          _formKey.currentState!.save();
+                          _formKey.currentState!.reset();
+                          _controller.forward(
+                              from: (_currentLevel / _maxFillLevel));
+                          widget.patient.waterIntakeValue = _currentLevel;
+                          context.read<PatientBloc>().add(
+                              UpdatePatientRequested(patient: widget.patient));
+                        }
+                      },
+                      style: OutlinedButton.styleFrom(
+                          elevation: 3.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          minimumSize: Size(size.width * .2, 45.0)),
+                      child: const Text('Adicionar',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                    ),
+                    const SizedBox(width: 8.0),
+                    OutlinedButton(
+                      onPressed: () {
                         _controller.forward(
                             from: (_currentLevel / _maxFillLevel));
+
+                        setState(() {
+                          _currentLevel = 0.0;
+                        });
                         widget.patient.waterIntakeValue = _currentLevel;
                         context.read<PatientBloc>().add(
                             UpdatePatientRequested(patient: widget.patient));
-                      }
-                    },
-                    style: OutlinedButton.styleFrom(
-                        elevation: 3.0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        minimumSize: Size(size.width * .2, 45.0)),
-                    child: const Text('Adicionar',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                  ),
-                  const SizedBox(width: 8.0),
-                  OutlinedButton(
-                    onPressed: () {
-                      _controller.forward(
-                          from: (_currentLevel / _maxFillLevel));
-
-                      setState(() {
-                        _currentLevel = 0.0;
-                      });
-                      widget.patient.waterIntakeValue = _currentLevel;
-                      context
-                          .read<PatientBloc>()
-                          .add(UpdatePatientRequested(patient: widget.patient));
-                    },
-                    style: OutlinedButton.styleFrom(
-                        elevation: 3.0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        minimumSize: Size(size.width * .2, 45.0)),
-                    child: const Text(
-                      'Esvaziar',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      },
+                      style: OutlinedButton.styleFrom(
+                          elevation: 3.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          minimumSize: Size(size.width * .2, 45.0)),
+                      child: const Text(
+                        'Esvaziar',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
@@ -188,23 +190,33 @@ class _WaterIntakeScreenState extends State<WaterIntakeScreen>
       children: [
         Container(
           width: 160,
-          height: 300,
+          height: 280,
           decoration: BoxDecoration(
-            color: Colors.grey.withOpacity(.2),
+            color: Colors.grey.withOpacity(.1),
             border: const Border(
               right: BorderSide(width: 1.0),
               left: BorderSide(width: 1.0),
               bottom: BorderSide(width: 1.0),
             ),
           ),
-          child: Center(
-            child: Text(
-              '${(_currentLevel).toStringAsFixed(2)}mL - ${((_currentLevel / _maxFillLevel) * 100).toStringAsFixed(2)}%',
-              textScaleFactor: 1.1,
-              style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontWeight: FontWeight.bold),
-            ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '${(_currentLevel).toStringAsFixed(2)}mL',
+                textScaleFactor: 1.1,
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.secondary,
+                    fontWeight: FontWeight.bold),
+              ),
+              Text(
+                '${((_currentLevel / _maxFillLevel) * 100).toStringAsFixed(2)}%',
+                textScaleFactor: 1.1,
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.bold),
+              ),
+            ],
           ),
         ),
         Positioned(
@@ -215,12 +227,12 @@ class _WaterIntakeScreenState extends State<WaterIntakeScreen>
             clipper: CupClipper(_fillLevel),
             child: Container(
               width: 160,
-              height: 300 * (_currentLevel / _maxFillLevel),
+              height: 280 * (_currentLevel / _maxFillLevel),
               decoration: BoxDecoration(
                 color: const Color(0xff3B6ABA).withOpacity(.4),
                 borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(10.0),
-                  topRight: Radius.circular(10.0),
+                  topLeft: Radius.circular(12.0),
+                  topRight: Radius.circular(12.0),
                 ),
               ),
             ),
