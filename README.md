@@ -1,6 +1,6 @@
 # predi_v2
 
-A new Flutter project.
+Sistema inteligente baseado em conhecimento para acompanhamento de pré-diabéticos.
 
 ## Getting Started
 
