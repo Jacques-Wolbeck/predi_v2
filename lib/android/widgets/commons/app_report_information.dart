@@ -25,7 +25,12 @@ class _AppReportInformationState extends State<AppReportInformation> {
 
   void _getSurveyData() async {
     surveyData = await FirebaseDb.instance.getLastSurvey(widget.patient);
-    surveyData!.bmi = widget.patient.bmi!.toInt();
+    if (widget.patient.bmi == null) {
+      surveyData!.bmi = 0;
+    } else {
+      surveyData!.bmi = widget.patient.bmi!.toInt();
+    }
+
     surveyData!.sex = widget.patient.gender == "Masculino" ? 1 : 0;
   }
 

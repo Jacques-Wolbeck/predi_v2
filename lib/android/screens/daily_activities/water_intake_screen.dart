@@ -128,7 +128,7 @@ class _WaterIntakeScreenState extends State<WaterIntakeScreen>
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 45.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     OutlinedButton(
                       onPressed: () {

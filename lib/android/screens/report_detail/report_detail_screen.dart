@@ -94,8 +94,9 @@ class ReportDetailScreen extends StatelessWidget {
                           children: [
                             Text(
                                 'Procurar um profissional de saúde para auxiliá-lo na sua adequação de peso, pois você se encontra em um estágio de ${patient.getBmiCondition(patient.bmi!)}. Seu IMC é de ${patient.bmi.toString()}, estima-se que seu peso ideal se encontra na faixa entre ${patient.getMinIdealBmi().toStringAsPrecision(4)} kg e ${patient.getMaxIdealBmi().toStringAsPrecision(4)} kg.'),
+                            const Divider(),
                             Text(
-                                'Sua taxa metabólica basal é de: ${patient.calculateBasalMetabolicRate().toString()} Kcal. Portanto, para a perda de peso é necessário adotar uma dieta onde se consuma menos calorias que seu gasto energético, incentivando o organismo a obter energia através da queima da gordura acumulada.')
+                                'Sua taxa metabólica basal é de: ${patient.calculateBasalMetabolicRate().toStringAsFixed(2)} Kcal. Portanto, para a perda de peso é necessário adotar uma dieta onde se consuma menos calorias que seu gasto energético, incentivando o organismo a obter energia através da queima da gordura acumulada.')
                           ],
                         ),
                       ),

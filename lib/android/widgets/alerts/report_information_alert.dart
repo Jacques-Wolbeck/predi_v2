@@ -27,8 +27,17 @@ class _ReportInformationAlertState extends State<ReportInformationAlert> {
     return FutureBuilder(
         future: PrediabetesApiService.instance.predict(widget.surveyData!),
         builder: (context, snapshot) {
-          if (snapshot.hasData ||
-              widget.patientEnum == PatientStatusEnum.noData) {
+          if (widget.patientEnum == PatientStatusEnum.noData) {
+            return _alertDialog(
+                widget.patientEnum.status,
+                Text(
+                  widget.patientEnum.content,
+                  //snapshot.data!.prediction.toString(),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(),
+                ),
+                0);
+          } else if (snapshot.hasData) {
             return _alertDialog(
                 widget.patientEnum.status,
                 Text(

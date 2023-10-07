@@ -93,7 +93,7 @@ class _RatesScreenState extends State<RatesScreen> {
                 children: [
                   _rateTextForm(
                       DataTypeEnum.glycatedHemoglobin,
-                      '4.0',
+                      '5.0',
                       glycatedFocus,
                       fastingFocus,
                       (value) => widget.patient.glycatedHemoglobin =
@@ -109,7 +109,7 @@ class _RatesScreenState extends State<RatesScreen> {
                   const SizedBox(width: 4.0),
                   _rateTextForm(
                       DataTypeEnum.glucose75g,
-                      '90.0',
+                      '120.0',
                       glucose75Focus,
                       null,
                       (value) =>

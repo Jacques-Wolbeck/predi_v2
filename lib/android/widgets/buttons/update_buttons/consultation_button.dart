@@ -42,6 +42,7 @@ class ConsultationButton extends StatelessWidget {
         ),
         child: const Text(
           "Adicionar Consulta",
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
     );

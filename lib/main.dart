@@ -16,3 +16,7 @@ void main() async {
 
   runApp(const MyMaterialApp());
 }
+
+
+//TODO tem um bug onde apos iniciar um usuario pelo gmail, o app n salva a situacao do questionario respondido
+//TODO outro problema esta ao iniciar um novo usuario e ele nao possui IMC, o relatorio da problema
